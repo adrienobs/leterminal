@@ -7,6 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./eco.css">
+<link rel="stylesheet" href="./presentation.css">
+<style>
+/* Badges de l'édition (À la une / Live) — repris du composant Badge du design system */
+.pr-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-sm);border:1px solid}
+.pr-badge--accent{color:var(--accent);background:var(--accent-glow-soft);border-color:var(--accent-glow)}
+.pr-badge--neutral{color:var(--neutral);background:rgba(232,194,104,.1);border-color:rgba(232,194,104,.35)}
+.pr-badge--up{color:var(--bull);background:rgba(74,222,156,.1);border-color:rgba(74,222,156,.35)}
+.pr-badge--down{color:var(--bear);background:rgba(240,100,122,.1);border-color:rgba(240,100,122,.35)}
+.pr-badge .lt-dot{width:6px;height:6px;border-radius:999px;background:currentColor;box-shadow:none}
+/* squelette de chargement pour les cartes dynamiques */
+.pr-skel{position:relative;overflow:hidden;background:var(--bg-elevated);border-radius:6px}
+.pr-skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(127,184,232,.08),transparent);animation:prShimmer 1.4s ease infinite}
+@keyframes prShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+</style>
 </head>
 <body class="eco-page">
 <div class="glow" aria-hidden="true"></div>
@@ -186,8 +200,10 @@
   </div>
 </section>
 </main>
+
 <div class="backdrop" id="navBackdrop" aria-hidden="true"></div>
 <script src="./eco.js"></script>
+<script src="./appshell.js"></script>
 <script src="./menu.js"></script>
 </body>
 </html>

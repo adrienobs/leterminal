@@ -7,6 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./eco.css">
+<link rel="stylesheet" href="./presentation.css">
+<style>
+.pr-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-sm);border:1px solid}
+.pr-badge--accent{color:var(--accent);background:var(--accent-glow-soft);border-color:var(--accent-glow)}
+.pr-badge--neutral{color:var(--neutral);background:rgba(232,194,104,.1);border-color:rgba(232,194,104,.35)}
+.pr-badge--up{color:var(--bull);background:rgba(74,222,156,.1);border-color:rgba(74,222,156,.35)}
+.pr-badge--down{color:var(--bear);background:rgba(240,100,122,.1);border-color:rgba(240,100,122,.35)}
+.pr-badge .lt-dot{width:6px;height:6px;border-radius:999px;background:currentColor;box-shadow:none}
+.pr-skel{position:relative;overflow:hidden;background:var(--bg-elevated);border-radius:6px}
+.pr-skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(127,184,232,.08),transparent);animation:prShimmer 1.4s ease infinite}
+@keyframes prShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+</style>
 </head>
 <body class="eco-page">
 <div class="glow" aria-hidden="true"></div>
@@ -106,11 +118,7 @@
   </div>
 </div>
 <main class="wrap">
-<section class="pagehead" aria-label="Marchés">
-  <p class="pagehead__eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7.5 14.5l3.2-3.4 2.6 2 4.7-5.6"/><path d="M16 7.5h4v4"/></svg> <span data-en="Read · Markets">Lecture · Marchés</span></p>
-  <h1 class="pagehead__title" data-en="Markets">Marchés</h1>
-  <p class="pagehead__lead" data-en="Rates, credit, strategy: the cross-asset market read from research houses.">Taux, crédit, stratégies : la lecture marché transversale des maisons de recherche.</p>
-</section>
+<div class="pr">
 
 <section id="r-marches" class="block" aria-label="Marchés">
   <div class="grid">
@@ -144,8 +152,13 @@
   </a>
 </article>
 
-  </div>
-</section>
+  <section class="pr-sel" id="prTopSec" style="display:none">
+    <div class="pr-head">
+      <span class="pr-eyebrow"><span class="lt-dot"></span> <span data-en="The selection">La sélection</span> · <span id="prTopCount" data-en="3 high-impact">3 à fort impact</span></span>
+      <h2 class="pr-head__title" data-en="The 3 to watch">Les 3 à suivre</h2>
+    </div>
+    <div class="pr-sel__grid" id="prTopGrid"></div>
+  </section>
 
 <section class="prose" aria-label="Pourquoi cette page">
   <span class="prose__kicker" data-en="About this page">À propos de cette page</span>
@@ -153,18 +166,37 @@
   <p data-en="This page collects cross-asset market analyses: the rate path, credit, allocation and strategies published by research houses. A read that connects the news to price moves.">Cette page réunit les analyses transversales de marché : trajectoire des taux, crédit, allocation et stratégies publiées par les maisons de recherche. Une lecture pour relier l'actu aux mouvements de prix.</p>
 </section>
 
-<section class="block eco-archives" aria-label="Annonces précédentes">
-  <header class="block__head">
-    <h2 class="block__title" data-en='<span class="block__dot">●</span> Earlier announcements'><span class="block__dot">●</span> Annonces précédentes</h2>
-    <span class="block__sub" data-en="Coming soon">Bientôt disponibles</span>
-  </header>
-  <div class="eco-empty" data-en="Older announcements will be archived here as new editions are published. Come back soon.">
-    Les annonces plus anciennes seront archivées ici au fil des prochaines éditions. Revenez bientôt.
-  </div>
-</section>
+  <section class="pr-mission">
+    <div>
+      <div class="pr-head">
+        <span class="pr-eyebrow"><span class="lt-dot"></span> <span data-en="About · Marchés">À propos · Marchés</span></span>
+        <h2 class="pr-head__title" data-en="The essentials, without the noise">L'essentiel, sans le bruit</h2>
+      </div>
+      <div class="pr-mission__prose">
+        <p class="pr-lead" data-en="Economic news moves fast — and so does the noise: alarmist headlines, articles that repeat each other, rumours. Here, the news is gathered, de-duplicated and dated, then the most relevant story is surfaced at the top.">L'info éco va vite — et le bruit avec : titres alarmistes, articles qui se répètent, rumeurs. Ici, l'actualité est rassemblée, dédupliquée et datée, puis l'annonce la plus pertinente est mise en avant tout en haut.</p>
+        <p data-en="Every item is summarized, timestamped and linked back to its original source — always credited. One screen to grasp what matters.">Chaque annonce est résumée, horodatée et reliée à sa source d'origine — toujours créditée. Un seul écran pour saisir ce qui compte.</p>
+      </div>
+    </div>
+    <div class="pr-benefits">
+      <div class="pr-benefit"><span class="pr-benefit__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg></span><div><h4 data-en="The best story up top">La meilleure en haut</h4><p data-en="The most relevant announcement is featured as the front-page story.">L'annonce la plus pertinente est mise en avant en « à la une ».</p></div></div>
+      <div class="pr-benefit"><span class="pr-benefit__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h4 data-en="Live, dated">En direct, daté</h4><p data-en="Aggregated continuously, newest first, each item timestamped.">Agrégé en continu, du plus récent au plus ancien, chaque annonce horodatée.</p></div></div>
+      <div class="pr-benefit"><span class="pr-benefit__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h4 data-en="Credited sources">Sources créditées</h4><p data-en="Every announcement links back to the original article. You read the real source.">Chaque annonce mène à l'article d'origine. Tu lis la vraie source.</p></div></div>
+    </div>
+  </section>
+
+  <section class="pr-sel" id="prPrevSec" style="display:none">
+    <div class="pr-head">
+      <span class="pr-eyebrow"><span class="lt-dot"></span> <span data-en="Markets">Marchés</span> · <span id="prPrevCount" data-en="archive">archive</span></span>
+      <h2 class="pr-head__title" data-en="Earlier announcements">Annonces précédentes</h2>
+    </div>
+    <div class="pr-prevlist" id="prPrevList"></div>
+  </section>
+
+</div>
 </main>
 <div class="backdrop" id="navBackdrop" aria-hidden="true"></div>
 <script src="./eco.js"></script>
+<script src="./appshell.js"></script>
 <script src="./menu.js"></script>
 </body>
 </html>

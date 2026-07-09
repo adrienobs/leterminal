@@ -33,6 +33,10 @@
       { icon: '🪙', label: 'Crypto',          href: './eco-crypto.html' },
     ] },
     { id: 'bubble.html',      icon: ICONS.bubble,     label: 'Bubble Map',          href: './bubble.html' },
+    { id: 'patrimoine.html',  icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>`, label: 'Patrimoine', href: './patrimoine-presentation.html', children: [
+      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>`, label: 'Présentation', href: './patrimoine-presentation.html' },
+      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>`, label: 'Portefeuille', href: './patrimoine.html' },
+    ] },
     { id: 'calculateur.html', icon: ICONS.calc,       label: 'Calculateur de Pips', href: './calculateur.html' },
   ];
 
@@ -44,7 +48,7 @@
 
     .lt-side-menu {
       position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
-      background: #0D0D1A; border-right: 1px solid rgba(255,255,255,.08);
+      background: #0B0E13; border-right: 1px solid rgba(255,255,255,.08);
       z-index: 999; transform: translateX(-100%);
       transition: transform .35s cubic-bezier(.2,0,.1,1);
       display: flex; flex-direction: column; overflow: hidden;
@@ -65,16 +69,16 @@
       flex-shrink: 0;
     }
     .lt-menu-brand {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 16px; font-weight: 800; color: #F0EEFF;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px; font-weight: 800; color: #EEF2F7;
     }
-    .lt-menu-brand span { color: #38B6FF; }
+    .lt-menu-brand span { color: #BFDCF5; }
     .lt-menu-close {
-      background: transparent; border: none; color: #5A5570;
+      background: transparent; border: none; color: #3A414C;
       font-size: 20px; cursor: pointer; line-height: 1;
       padding: 4px 6px; border-radius: 6px; transition: all .2s;
     }
-    .lt-menu-close:hover { color: #F0EEFF; background: rgba(255,255,255,.06); }
+    .lt-menu-close:hover { color: #EEF2F7; background: rgba(255,255,255,.06); }
 
     .lt-menu-nav { padding: 12px; flex: 1; display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
 
@@ -82,32 +86,32 @@
       display: flex; align-items: center; gap: 12px;
       padding: 11px 14px; border-radius: 10px;
       cursor: pointer; transition: all .2s;
-      text-decoration: none; color: #9B96B8;
-      font-family: 'Bricolage Grotesque', sans-serif;
+      text-decoration: none; color: #7E8794;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 14px; font-weight: 600;
       border: none; background: transparent; width: 100%; text-align: left;
     }
-    .lt-nav-item:hover { background: rgba(0,149,255,.1); color: #38B6FF; }
+    .lt-nav-item:hover { background: rgba(127,184,232,.1); color: #BFDCF5; }
     .lt-nav-item.active {
-      background: rgba(0,149,255,.15); color: #38B6FF;
-      border: 1px solid rgba(0,149,255,.25);
+      background: rgba(127,184,232,.15); color: #BFDCF5;
+      border: 1px solid rgba(127,184,232,.25);
     }
     .lt-nav-item.soon { opacity: .45; cursor: not-allowed; pointer-events: none; }
     .lt-nav-item.pro-locked { opacity: .55; cursor: pointer; }
-    .lt-nav-item.pro-locked:hover { background: rgba(255,180,0,.08); color: #FFB300; }
+    .lt-nav-item.pro-locked:hover { background: rgba(255,180,0,.08); color: #E8C268; }
     .lt-nav-pro-badge {
       margin-left: auto; font-size: 9px; font-weight: 700;
-      letter-spacing: .08em; color: #FFB300;
+      letter-spacing: .08em; color: #E8C268;
       background: rgba(255,180,0,.1); border: 1px solid rgba(255,180,0,.25);
-      border-radius: 50px; padding: 2px 7px;
+      border-radius: 50px; padding: 3px 8px;
     }
     .lt-subnav-item.pro-locked { opacity: .55; cursor: pointer; }
-    .lt-subnav-item.pro-locked:hover { color: #FFB300; }
+    .lt-subnav-item.pro-locked:hover { color: #E8C268; }
     .lt-nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: .7; }
     .lt-nav-item:hover .lt-nav-icon, .lt-nav-item.active .lt-nav-icon { opacity: 1; }
     .lt-nav-soon {
       margin-left: auto; font-size: 9px; font-weight: 700;
-      letter-spacing: .1em; color: #5A5570;
+      letter-spacing: .1em; color: #3A414C;
       background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
       border-radius: 50px; padding: 2px 8px;
     }
@@ -119,11 +123,11 @@
     .lt-nav-row .lt-nav-item { flex: 1; }
     .lt-nav-caret {
       background: transparent; border: none; cursor: pointer;
-      color: #9B96B8; padding: 8px; border-radius: 8px;
+      color: #7E8794; padding: 8px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       transition: all .2s; flex-shrink: 0;
     }
-    .lt-nav-caret:hover { background: rgba(0,149,255,.1); color: #38B6FF; }
+    .lt-nav-caret:hover { background: rgba(127,184,232,.1); color: #BFDCF5; }
     .lt-nav-caret svg { transition: transform .25s cubic-bezier(.2,0,.1,1); }
     .lt-nav-caret:hover svg { transform: rotate(-180deg); }
     .lt-nav-caret.open svg { transform: rotate(180deg); }
@@ -133,13 +137,13 @@
       display: grid; grid-template-rows: 0fr;
       transition: grid-template-rows .3s cubic-bezier(.2,0,.1,1);
       margin-left: 14px; padding-left: 12px;
-      border-left: 1px solid rgba(0,149,255,.18);
+      border-left: 1px solid rgba(127,184,232,.18);
     }
     .lt-subnav > div { overflow: hidden; }
     .lt-subnav.open { grid-template-rows: 1fr; }
     .lt-subnav--deep {
       margin-left: 10px; padding-left: 10px;
-      border-left: 1px solid rgba(0,149,255,.1);
+      border-left: 1px solid rgba(127,184,232,.1);
     }
     .lt-subnav-group { display: flex; flex-direction: column; }
     .lt-subnav-row { display: flex; align-items: center; }
@@ -148,24 +152,34 @@
     .lt-subnav-item--deep { padding: 7px 10px; font-size: 12px; opacity: .85; }
 
     /* ── USER BAR ── */
-    #ltUserBar { display: flex; align-items: center; gap: 8px; }
-    .lt-ub-pro { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(250,204,21,.12); border: 1px solid rgba(250,204,21,.3); border-radius: 50px; color: #FACC15; font-family: 'Bricolage Grotesque', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
-    .lt-ub-chip { display: flex; align-items: center; gap: 6px; padding: 4px 12px 4px 4px; border-radius: 50px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); }
-    .lt-ub-avatar { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#0095FF,#38B6FF); display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-size: 12px; font-weight: 700; color: #fff; }
-    .lt-ub-name { font-family: 'Bricolage Grotesque', sans-serif; font-size: 12px; font-weight: 600; color: #F0EEFF; }
-    .lt-ub-logout { padding: 5px 13px; background: transparent; border: 1px solid rgba(248,113,113,.3); border-radius: 50px; color: #F87171; font-family: 'Bricolage Grotesque', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s; }
-    .lt-ub-logout:hover { background: rgba(248,113,113,.1); }
+    #ltUserBar { display: flex; align-items: center; gap: 8px; position: relative; }
+    .lt-ub-pro { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(232,194,104,.12); border: 1px solid rgba(232,194,104,.3); border-radius: 6px; color: #E8C268; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+    .lt-ub-chip { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); cursor: pointer; transition: all .2s; }
+    .lt-ub-chip:hover { border-color: rgba(127,184,232,.45); background: rgba(127,184,232,.08); }
+    .lt-ub-avatar { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#7FB8E8,#BFDCF5); display: flex; align-items: center; justify-content: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 700; color: #07090C; flex-shrink: 0; }
+    .lt-ub-name { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #F2F4F7; }
+    .lt-ub-caret { color: #7E8794; display: flex; transition: transform .2s; }
+    .lt-ub-chip.open .lt-ub-caret { transform: rotate(180deg); }
+    .lt-ub-menu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; background: rgba(16,20,27,.98); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; box-shadow: 0 24px 60px rgba(0,0,0,.6); padding: 8px; z-index: 100001; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all .18s ease; }
+    .lt-ub-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lt-ub-menu__mail { padding: 8px 10px 10px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 12px; color: #7E8794; word-break: break-all; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 6px; }
+    .lt-ub-menu__badge { display: block; margin-top: 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #7FB8E8; }
+    .lt-ub-logout { width: 100%; text-align: left; padding: 9px 10px; background: transparent; border: none; border-radius: 6px; color: #F0647A; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 8px; }
+    .lt-ub-logout:hover { background: rgba(240,100,122,.12); }
+    .lt-ub-link { width: 100%; text-align: left; padding: 9px 10px; background: transparent; border: none; border-radius: 6px; color: #F2F4F7; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 4px; }
+    .lt-ub-link:hover { background: rgba(127,184,232,.12); color: #BFDCF5; }
+    .lt-ub-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; display: block; }
 
     .lt-subnav-item {
       display: flex; align-items: center; gap: 10px;
       padding: 9px 12px; border-radius: 8px;
-      text-decoration: none; color: #9B96B8;
-      font-family: 'Bricolage Grotesque', sans-serif;
+      text-decoration: none; color: #7E8794;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 13px; font-weight: 600;
       transition: all .2s;
     }
-    .lt-subnav-item:hover { background: rgba(0,149,255,.1); color: #38B6FF; }
-    .lt-subnav-item.active { background: rgba(0,149,255,.12); color: #38B6FF; }
+    .lt-subnav-item:hover { background: rgba(127,184,232,.1); color: #BFDCF5; }
+    .lt-subnav-item.active { background: rgba(127,184,232,.12); color: #BFDCF5; }
     .lt-subnav-item .lt-subnav-ic { font-size: 14px; line-height: 1; flex-shrink: 0; width: 18px; text-align: center; }
 
     /* ── 3e niveau (catégories d'Édition du jour) ── */
@@ -176,26 +190,26 @@
     .lt-nav-caret.lt-caret-sm svg { width: 12px; height: 12px; }
     .lt-subnav--deep {
       margin-left: 9px; padding-left: 10px;
-      border-left: 1px solid rgba(0,149,255,.12);
+      border-left: 1px solid rgba(127,184,232,.12);
     }
     .lt-subnav--deep .lt-subnav-item {
-      font-size: 12.5px; font-weight: 500; padding: 7px 10px; color: #847FA0;
+      font-size: 12.5px; font-weight: 500; padding: 7px 10px; color: #7E8794;
     }
-    .lt-subnav--deep .lt-subnav-item:hover { color: #38B6FF; }
+    .lt-subnav--deep .lt-subnav-item:hover { color: #BFDCF5; }
 
     .lt-menu-footer {
       padding: 12px; border-top: 1px solid rgba(255,255,255,.06); flex-shrink: 0;
     }
     .lt-user-info {
       display: none; padding: 10px 14px; border-radius: 10px;
-      background: rgba(0,149,255,.06); border: 1px solid rgba(0,149,255,.15);
+      background: rgba(127,184,232,.06); border: 1px solid rgba(127,184,232,.15);
       margin-bottom: 8px;
     }
     .lt-user-info.show { display: block; }
-    .lt-user-email { font-size: 12px; font-weight: 600; color: #9B96B8; margin-bottom: 6px; }
-    .lt-user-label { font-size: 10px; color: #5A5570; letter-spacing: .1em; margin-bottom: 4px; }
+    .lt-user-email { font-size: 12px; font-weight: 600; color: #7E8794; margin-bottom: 6px; }
+    .lt-user-label { font-size: 10px; color: #3A414C; letter-spacing: .1em; margin-bottom: 4px; }
     .lt-logout-btn {
-      background: transparent; border: none; color: #F87171;
+      background: transparent; border: none; color: #F0647A;
       font-size: 11px; cursor: pointer; padding: 0;
       font-family: 'Inter', sans-serif; transition: opacity .2s;
     }
@@ -206,10 +220,10 @@
       background: transparent; border: none; cursor: pointer;
       padding: 6px; border-radius: 8px; transition: background .2s;
     }
-    .lt-hamburger:hover { background: rgba(0,149,255,.1); }
+    .lt-hamburger:hover { background: rgba(127,184,232,.1); }
     .lt-hamburger span {
       display: block; width: 20px; height: 2px;
-      background: #9B96B8; border-radius: 2px;
+      background: #7E8794; border-radius: 2px;
     }
 
     /* ── LANGUE TOGGLE ── */
@@ -220,13 +234,13 @@
     }
     .lt-lang-btn {
       flex: 1; background: transparent; border: none; cursor: pointer;
-      padding: 6px 0; font-family: 'Bricolage Grotesque', sans-serif;
+      padding: 6px 0; font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 11px; font-weight: 700; letter-spacing: .08em;
-      color: #5A5570; transition: all .2s;
+      color: #3A414C; transition: all .2s;
     }
-    .lt-lang-btn:hover { color: #9B96B8; }
+    .lt-lang-btn:hover { color: #7E8794; }
     .lt-lang-btn.active {
-      background: rgba(0,149,255,.2); color: #38B6FF;
+      background: rgba(127,184,232,.2); color: #BFDCF5;
     }
   `;
   document.head.appendChild(style);
@@ -264,7 +278,7 @@
     var isActive = page === p.id || (page === '' && p.id === 'index.html') || treeActive(p);
     var cls = 'lt-nav-item' + (isActive ? ' active' : '') + (p.soon ? ' soon' : '');
     var soon = p.soon ? '<span class="lt-nav-soon">Bientôt</span>' : '';
-    var proBadge = isLocked ? '<span class="lt-nav-pro-badge">⭐ PRO</span>' : '';
+    var proBadge = isLocked ? '<span class="lt-nav-pro-badge"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> PRO</span>' : '';
     var href = isLocked ? './index.html?paywall=1' : p.href;
 
     if(p.children && p.children.length) {
@@ -287,7 +301,7 @@
     <div class="lt-menu-overlay" id="ltMenuOverlay" onclick="ltCloseMenu()"></div>
     <div class="lt-side-menu" id="ltSideMenu">
       <div class="lt-menu-header">
-        <div class="lt-menu-brand"><img src="./logo.jpg.webp" alt="Le Terminal" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(56,182,255,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Hub</span></div>
+        <div class="lt-menu-brand"><img src="./logo.jpg.webp" alt="Le Terminal" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(127,184,232,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Hub</span></div>
         <button class="lt-menu-close" onclick="ltCloseMenu()">✕</button>
       </div>
       <nav class="lt-menu-nav">
@@ -300,7 +314,7 @@
           <button class="lt-logout-btn" onclick="ltLogout()">Se déconnecter</button>
         </div>
         <a class="lt-nav-item" id="ltLoginItem" href="#" onclick="ltOpenLogin();return false;">
-          <span class="lt-nav-icon">👤</span> Connexion / Inscription
+          <span class="lt-nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Connexion / Inscription
         </a>
         <div class="lt-lang-toggle">
           <button class="lt-lang-btn" id="ltLangFR" onclick="ltSetLang('fr')">FR</button>
@@ -310,22 +324,37 @@
     </div>
   `;
 
-  var container = document.createElement('div');
-  container.innerHTML = menuHTML;
-  document.body.appendChild(container);
+  // L'ancien drawer « Le Terminal Hub » ne doit JAMAIS s'afficher sur les pages
+  // dotées de la nouvelle barre latérale (appshell.js). On ne l'injecte que sur
+  // les pages sans appshell (ex. index.html, legal.html) pour préserver leur nav.
+  var _hasAppshell = !!document.querySelector('script[src*="appshell.js"]');
+  if (!_hasAppshell) {
+    var container = document.createElement('div');
+    container.innerHTML = menuHTML;
+    document.body.appendChild(container);
+  }
 
   // ── FUNCTIONS ──
+  // Le bouton FR/EN bascule la langue (pastilles .lt-nav__pill).
+  window.ltToggleLang = function() {
+    var cur = (localStorage.getItem('lt_lang') === 'en') ? 'en' : 'fr';
+    var next = cur === 'en' ? 'fr' : 'en';
+    ltSetLang(next);
+    Array.prototype.forEach.call(document.querySelectorAll('.lt-nav__pill'), function(p){
+      if(p.id !== 'langToggle') p.textContent = next.toUpperCase();
+    });
+  };
+  // Le menu latéral (drawer « Le Terminal Hub ») s'ouvre via le bouton ☰ —
+  // utile notamment sur les vues Historique/Perfs qui recouvrent la barre latérale.
   window.ltOpenMenu = function() {
     var menu = document.getElementById('ltSideMenu');
-    if(menu.classList.contains('open')) {
-      ltCloseMenu();
-    } else {
-      menu.classList.add('open');
-      document.body.classList.add('lt-menu-open');
-    }
+    if(!menu) { return; }
+    if(menu.classList.contains('open')) { ltCloseMenu(); }
+    else { menu.classList.add('open'); document.body.classList.add('lt-menu-open'); }
   };
   window.ltCloseMenu = function() {
-    document.getElementById('ltSideMenu').classList.remove('open');
+    var m = document.getElementById('ltSideMenu');
+    if(m) m.classList.remove('open');
     document.body.classList.remove('lt-menu-open');
   };
 
@@ -356,7 +385,7 @@
       if(loginItem) loginItem.style.display = 'flex';
       var lb = document.getElementById('loginBtn');
       var uc = document.getElementById('userChip');
-      if(lb) lb.style.display = '';
+      if(lb) lb.style.display = 'inline-flex';
       if(uc) { uc.classList.remove('show'); uc.style.display = ''; }
       var lo = document.getElementById('logoutBtn');
       if(lo) lo.style.display = 'none';
@@ -373,10 +402,41 @@
     if(!token || !email) { bar.innerHTML = ''; return; }
     var initial = email.charAt(0).toUpperCase();
     var username = email.split('@')[0];
+    var pseudo = localStorage.getItem('lt_pseudo') || '';
+    var avatar = localStorage.getItem('lt_avatar') || '';
+    var displayName = pseudo || username;
+    var avatarInner = avatar ? '<img src="' + avatar + '" alt="">' : initial;
+    var caret = '<span class="lt-ub-caret"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>';
+    // Chip rectangulaire (même DA que les boutons) + menu déroulant avec profil + déconnexion
     bar.innerHTML =
-      (isPro ? '<div class="lt-ub-pro"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> PRO</div>' : '') +
-      '<div class="lt-ub-chip"><div class="lt-ub-avatar">' + initial + '</div><span class="lt-ub-name">' + username + '</span></div>' +
-      '<button class="lt-ub-logout" onclick="ltGlobalLogout()">Déconnexion</button>';
+      '<div class="lt-ub-chip" id="ltUbChip" title="' + email + (isPro ? ' · Premium' : '') + '">' +
+        '<div class="lt-ub-avatar">' + avatarInner + '</div>' +
+        '<span class="lt-ub-name">' + displayName + '</span>' + caret +
+      '</div>' +
+      '<div class="lt-ub-menu" id="ltUbMenu">' +
+        '<div class="lt-ub-menu__mail">' + email + (isPro ? '<span class="lt-ub-menu__badge">Premium</span>' : '') + '</div>' +
+        '<a class="lt-ub-link" href="./profil.html">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
+          '<span data-en="My profile">Mon profil</span></a>' +
+        '<button type="button" class="lt-ub-logout" onclick="ltGlobalLogout()">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
+          'Se déconnecter</button>' +
+      '</div>';
+
+    var chip = document.getElementById('ltUbChip');
+    var menu = document.getElementById('ltUbMenu');
+    if(chip && menu) {
+      chip.addEventListener('click', function(e){
+        e.stopPropagation();
+        menu.classList.toggle('show');
+        chip.classList.toggle('open');
+      });
+      // Ferme le menu si on clique ailleurs
+      document.addEventListener('click', function(){
+        menu.classList.remove('show');
+        chip.classList.remove('open');
+      });
+    }
   }
 
   function _ltClearAllAccountData() {
@@ -452,14 +512,135 @@
   }
   setTimeout(window.ltOpenEcoTabFromHash, 300);
 
+  // ── AUTH MODAL GLOBAL ──
+  var _ltSbUrl = '';
+  fetch('/api/config').then(function(r){return r.json();}).then(function(d){_ltSbUrl=d.supabaseUrl||'';}).catch(function(){});
+
+  function ltInjectAuthModal() {
+    if(document.getElementById('ltAuthOverlay')) return;
+    var style = document.createElement('style');
+    style.textContent = [
+      '#ltAuthOverlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(7,9,12,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:20px}',
+      '#ltAuthOverlay.show{display:flex;animation:ltFadeUp .3s cubic-bezier(0.16,1,0.3,1)}',
+      '@keyframes ltFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}',
+      '#ltAuthBox{max-width:400px;width:100%;background:var(--bg-elevated,#161B24);border:1px solid var(--border-subtle,#1C212A);border-radius:var(--r-lg,10px);padding:32px;position:relative;text-align:center;box-shadow:0 32px 64px rgba(0,0,0,.6),0 0 0 1px rgba(127,184,232,.06)}',
+      '.lta-close{position:absolute;top:14px;right:16px;background:transparent;border:none;color:var(--text-muted,#7E8794);font-size:20px;cursor:pointer;line-height:1;transition:color .15s}',
+      '.lta-close:hover{color:var(--text-title,#F2F4F7)}',
+      '.lta-title{font-family:var(--font-display,"Anton"),sans-serif;font-size:26px;font-weight:400;letter-spacing:.02em;text-transform:uppercase;color:var(--text-title,#F2F4F7);margin-bottom:6px}',
+      '.lta-sub{font-size:13px;color:var(--text-muted,#7E8794);margin-bottom:20px}',
+      '.lta-tabs{display:flex;gap:4px;margin-bottom:20px;border:1px solid var(--border-subtle,#1C212A);border-radius:var(--r-md,6px);padding:3px}',
+      '.lta-tab{flex:1;padding:9px;background:transparent;border:none;border-radius:var(--r-sm,4px);color:var(--text-muted,#7E8794);font-family:var(--font-text,"Inter"),sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}',
+      '.lta-tab.on{background:var(--accent-glow-soft,rgba(127,184,232,.12));color:var(--accent-bright,#BFDCF5)}',
+      '.lta-google{width:100%;padding:11px;background:var(--bg-base,#07090C);border:1px solid var(--border-subtle,#1C212A);border-radius:var(--r-sm,4px);color:var(--text-body,#C3CAD4);font-family:var(--font-text,"Inter"),sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:14px}',
+      '.lta-google:hover{border-color:var(--accent,#7FB8E8);color:var(--text-title,#F2F4F7)}',
+      '.lta-sep{display:flex;align-items:center;gap:10px;color:var(--text-muted,#7E8794);font-size:11px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.1em}',
+      '.lta-sep::before,.lta-sep::after{content:"";flex:1;height:1px;background:var(--border-subtle,#1C212A)}',
+      '.lta-field{text-align:left;margin-bottom:12px}',
+      '.lta-field label{display:block;font-family:var(--font-mono,"JetBrains Mono"),monospace;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--text-muted,#7E8794);margin-bottom:6px}',
+      '.lta-field input{width:100%;padding:11px 14px;background:var(--bg-base,#07090C);border:1px solid var(--border-subtle,#1C212A);border-radius:var(--r-sm,4px);color:var(--text-title,#F2F4F7);font-family:var(--font-text,"Inter"),sans-serif;font-size:14px;box-sizing:border-box;outline:none;transition:border-color .2s,background .2s}',
+      '.lta-field input:focus{border-color:var(--accent,#7FB8E8);background:var(--accent-glow-soft,rgba(127,184,232,.12))}',
+      '.lta-submit{width:100%;padding:13px;background:var(--accent,#7FB8E8);border:1px solid transparent;border-radius:var(--r-sm,4px);color:#07090C;font-family:var(--font-text,"Inter"),sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;margin-top:4px;box-shadow:0 0 0 1px var(--accent-glow,rgba(127,184,232,.35)),0 8px 28px var(--accent-glow,rgba(127,184,232,.35));transition:background .15s,transform .15s}',
+      '.lta-submit:hover{background:var(--accent-bright,#BFDCF5);transform:translateY(-1px)}',
+      '.lta-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}',
+      '.lta-error{font-size:12px;color:var(--bear,#F0647A);margin-top:10px;min-height:18px}'
+    ].join('');
+    document.head.appendChild(style);
+
+    var div = document.createElement('div');
+    div.id = 'ltAuthOverlay';
+    div.innerHTML = [
+      '<div id="ltAuthBox">',
+      '<button type="button" class="lta-close" onclick="ltCloseAuthModal()">✕</button>',
+      '<div class="lta-title">Bienvenue</div>',
+      '<div class="lta-sub">Connecte-toi pour accéder à tous les outils</div>',
+      '<div class="lta-tabs">',
+      '<button type="button" class="lta-tab on" id="ltTabLogin" onclick="ltSwitchAuthTab(\'login\')">Connexion</button>',
+      '<button type="button" class="lta-tab" id="ltTabSignup" onclick="ltSwitchAuthTab(\'signup\')">Créer un compte</button>',
+      '</div>',
+      '<button type="button" class="lta-google" onclick="ltDoGoogleAuth()">',
+      '<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>',
+      'Continuer avec Google',
+      '</button>',
+      '<div class="lta-sep">ou</div>',
+      '<div class="lta-field"><label>EMAIL</label><input type="email" id="ltAuthEmail" placeholder="ton@email.com" autocomplete="username"></div>',
+      '<div class="lta-field"><label>MOT DE PASSE</label><input type="password" id="ltAuthPassword" placeholder="••••••••" autocomplete="current-password"></div>',
+      '<button type="button" class="lta-submit" id="ltAuthSubmit" onclick="ltDoAuth()"><span id="ltAuthTxt">Se connecter</span></button>',
+      '<div class="lta-error" id="ltAuthError"></div>',
+      '</div>'
+    ].join('');
+    document.body.appendChild(div);
+    div.addEventListener('click', function(e){ if(e.target === div) ltCloseAuthModal(); });
+  }
+
+  var _ltAuthMode = 'login';
+
+  window.ltSwitchAuthTab = function(mode) {
+    _ltAuthMode = mode;
+    var tl = document.getElementById('ltTabLogin');
+    var ts = document.getElementById('ltTabSignup');
+    var txt = document.getElementById('ltAuthTxt');
+    if(tl) tl.classList.toggle('on', mode === 'login');
+    if(ts) ts.classList.toggle('on', mode === 'signup');
+    if(txt) txt.textContent = mode === 'login' ? 'Se connecter' : 'Créer mon compte';
+    var err = document.getElementById('ltAuthError');
+    if(err) err.textContent = '';
+  };
+
+  window.ltCloseAuthModal = function() {
+    var el = document.getElementById('ltAuthOverlay');
+    if(el) el.classList.remove('show');
+  };
+
+  window.ltDoGoogleAuth = function() {
+    if(!_ltSbUrl) { setTimeout(ltDoGoogleAuth, 500); return; }
+    window.location.href = _ltSbUrl + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(window.location.origin + '/index.html');
+  };
+
+  window.ltDoAuth = async function() {
+    var email = (document.getElementById('ltAuthEmail') || {}).value || '';
+    var password = (document.getElementById('ltAuthPassword') || {}).value || '';
+    var errEl = document.getElementById('ltAuthError');
+    var btn = document.getElementById('ltAuthSubmit');
+    var txt = document.getElementById('ltAuthTxt');
+    if(!email || !password) { if(errEl) errEl.textContent = 'Remplis tous les champs'; return; }
+    if(btn) btn.disabled = true;
+    if(txt) txt.textContent = _ltAuthMode === 'login' ? 'Connexion…' : 'Création…';
+    try {
+      var res = await fetch('/api/auth', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:_ltAuthMode, email:email.trim(), password:password})});
+      var data = await res.json();
+      if(data.access_token) {
+        localStorage.setItem('ta_token', data.access_token);
+        localStorage.setItem('ta_email', (data.user && data.user.email) || email.trim());
+        ltCloseAuthModal();
+        ltSyncUser();
+        if(typeof updateUserUI === 'function') updateUserUI();
+        // Check pro then redirect to app if on landing page
+        fetch('/api/check-pro', {method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+data.access_token}})
+          .then(function(r){return r.json();}).then(function(d){
+            if(d.is_pro) localStorage.setItem('lt_pro','1');
+            ltRenderUserBar();
+          }).catch(function(){});
+      } else if(data.id) {
+        if(errEl) { errEl.style.color='#4ADE9C'; errEl.textContent='Compte créé ! Vérifie ton email.'; }
+      } else {
+        if(errEl) { errEl.style.color='#F0647A'; errEl.textContent = data.error_description || data.msg || data.message || 'Erreur'; }
+      }
+    } catch(e) {
+      if(errEl) { errEl.style.color='#F0647A'; errEl.textContent = 'Erreur réseau'; }
+    }
+    if(btn) btn.disabled = false;
+    if(txt) txt.textContent = _ltAuthMode === 'login' ? 'Se connecter' : 'Créer mon compte';
+  };
+
   window.ltOpenLogin = function() {
     ltCloseMenu();
-    // If page has openAuth, use it; otherwise redirect to index
-    if(typeof openAuth === 'function') {
+    if(typeof openAuth === 'function' && !document.getElementById('ltAuthOverlay')) {
       openAuth();
-    } else {
-      window.location.href = './index.html';
+      return;
     }
+    ltInjectAuthModal();
+    var el = document.getElementById('ltAuthOverlay');
+    if(el) { el.classList.add('show'); ltSwitchAuthTab('login'); }
   };
 
   // ── SYSTÈME I18N GLOBAL ──
@@ -564,12 +745,23 @@
     }
   };
 
+  // Système « data-en » universel (inline) : le FR reste dans le HTML, l'anglais
+  // dans l'attribut data-en. Fonctionne sur TOUTE page incluant menu.js. Sur les
+  // pages éco, eco.js gère déjà data-en → on évite le doublon via le garde.
+  function ltApplyDataEn(en) {
+    document.querySelectorAll('[data-en]').forEach(function(el) {
+      if (el.getAttribute('data-fr') === null) el.setAttribute('data-fr', el.innerHTML);
+      el.innerHTML = en ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+    });
+  }
+
   function ltApplyI18n(l) {
     var t = LT_TRANSLATIONS[l] || LT_TRANSLATIONS['fr'];
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
       if(t[key] !== undefined) el.textContent = t[key];
     });
+    if (typeof window.ecoApplyLang !== 'function') ltApplyDataEn(l === 'en');
     // Boutons login/logout dans topbar (sans data-i18n)
     var lb = document.getElementById('loginBtn');
     var lo = document.getElementById('logoutBtn');
@@ -607,6 +799,8 @@
     }
     // ── Recharge les cartes dynamiques éco si présentes ──
     if (typeof window.ecoReloadNews === 'function') window.ecoReloadNews();
+    // ── Re-localise le calendrier éco (titres FR/EN) si présent ──
+    if (typeof window.ecoCalRelang === 'function') window.ecoCalRelang();
   };
 
   var _currentLang = localStorage.getItem('lt_lang') || 'fr';
@@ -619,6 +813,7 @@
   }
 
   // Init - run immediately and after checkSession completes
+  window.ltRenderUserBar = ltRenderUserBar;
   ltSyncUser();
   ltRenderUserBar();
   // Re-render after page auth logic runs (e.g. checkSession async)
@@ -631,14 +826,19 @@
   // Re-sync when localStorage changes (cross-tab)
   window.addEventListener('storage', ltSyncUser);
 
-  // ── CURSEUR PERSONNALISÉ (toutes les pages) ──
+  // ── CURSEUR POINT DORÉ NÉON (toutes les pages) ──
   (function(){
+    // Désactivé : un seul curseur optimisé (#lt-c, transform + rAF, dans cursor.js / appshell.js)
+    // gère désormais tout le site. L'ancien curseur mix-blend-mode (lourd au repaint) est retiré.
+    return;
     if(window.matchMedia('(pointer: coarse)').matches) return; // mobile : skip
 
     // CSS
     var cs = document.createElement('style');
     cs.textContent = [
       '* { cursor: none !important; }',
+      // mix-blend-mode:difference → le curseur s'inverse par rapport au fond,
+      // donc toujours parfaitement visible (sombre, clair, image, graphique…).
       '#lt-cur-dot {',
         'position:fixed;top:0;left:0;z-index:99999;pointer-events:none;',
         'width:4px;height:4px;border-radius:50%;',
@@ -650,23 +850,18 @@
         'will-change:transform;',
       '}',
       '#lt-cur-ring {',
-        'position:fixed;top:0;left:0;z-index:99998;pointer-events:none;',
-        'width:20px;height:20px;border-radius:50%;',
-        'border:1px solid rgba(56,182,255,.5);',
-        'box-shadow:0 0 5px 1px rgba(56,182,255,.15);',
+        'position:fixed;top:0;left:0;z-index:2147483646;pointer-events:none;',
+        'width:26px;height:26px;border-radius:50%;',
+        'border:2px solid #ffffff;mix-blend-mode:difference;',
         'transform:translate(-50%,-50%);',
         'transition:width .25s,height .25s,border-color .25s;',
         'will-change:transform;',
       '}',
       'body.lt-cur-hover #lt-cur-dot {',
-        'width:6px;height:6px;',
-        'background:#A78BFA;',
-        'box-shadow:0 0 7px 2px #A78BFA,0 0 14px 4px rgba(167,139,250,.4);',
+        'width:12px;height:12px;',
       '}',
       'body.lt-cur-hover #lt-cur-ring {',
-        'width:28px;height:28px;',
-        'border-color:rgba(167,139,250,.55);',
-        'box-shadow:0 0 8px 1px rgba(167,139,250,.2);',
+        'width:36px;height:36px;border-width:2.5px;',
       '}',
       '@media (pointer:coarse){#lt-cur-dot,#lt-cur-ring{display:none!important}*{cursor:auto!important}}'
     ].join('');
@@ -719,6 +914,10 @@
     function enterIframe(){ document.body.classList.add('lt-in-iframe'); }
     function leaveIframe(){ document.body.classList.remove('lt-in-iframe'); }
 
+    // On masque le curseur custom UNIQUEMENT quand le pointeur quitte réellement
+    // la fenêtre/le document (ex: entre dans un iframe TradingView) — jamais sur
+    // simple immobilité. Détection via mouseleave document + blur de la fenêtre
+    // (un iframe qui prend le focus déclenche un blur du parent).
     document.addEventListener('mouseleave', enterIframe);
     document.addEventListener('mouseenter', leaveIframe);
     // Fallback polling : si pas de mousemove pendant 200ms → dans un iframe

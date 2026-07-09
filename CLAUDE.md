@@ -2,6 +2,43 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Design System — « Cinematic Luxury » (À SUIVRE pour tout travail UI)
+
+Toute création/modification d'interface DOIT respecter le design system « Cinematic Luxury » du client.
+La référence complète (tokens, guidelines, composants, UI kits) est versionnée dans **`design-system-ref/`** :
+- `design-system-ref/readme.md` — la bible (ton, palette, typo, animation, layout). **À lire avant tout travail UI.**
+- `design-system-ref/tokens/` — valeurs exactes (`colors.css`, `fonts.css`, `typography.css`, `spacing.css`).
+- `design-system-ref/guidelines/` — fiches spécimen (couleurs, type, espacement, marque).
+- `design-system-ref/components/` & `design-system-ref/ui_kits/` — composants React + kits HTML/CSS de référence (dont `ui_kits/app/presentation.css` pour la page Présentation éco).
+
+**Essentiel à respecter :**
+- **Esthétique** : salle des marchés privée, à minuit, dans un hangar de jets. Froid, précis, retenu.
+- **Palette** : 4 noirs (`#07090C` → `#161B24`) ; **un seul** accent bleu glacial `#7FB8E8`, employé avec parcimonie (CTA, liens, lueurs). Sémantique marché : haussier `#4ADE9C`, baissier `#F0647A`, neutre `#E8C268`. **Pas de violet, pas de néon, pas de dégradé bleu-mauve.**
+- **Typo** : Anton (display, CAPITALES massives, métal brossé via `background-clip:text`), Inter (texte), JetBrains Mono (TOUS les chiffres, tabulaires). Titres display en CAPITALES ; eyebrows/labels en capitales interlettrées.
+- **Icônes** : SVG trait fin (`stroke-width:1.5`, `fill:none`) uniquement. **JAMAIS d'emoji.**
+- **Copy** : français, ton direct/feutré, on tutoie le trader. Chiffres format français (`68 412,50`).
+- **Rayons nets** (2/4/6/10px), bordures hairline 1px, ombres froides, conteneur 1200px, base d'espacement 4px.
+- **Animation** : ease-out cinématique `cubic-bezier(0.16,1,0.3,1)`, reveals au scroll une seule fois, toujours honorer `prefers-reduced-motion`.
+
+NB : le code de production utilise `design-system.css` + `eco.css` (noms de variables historiques `--v`, `--card`, `--display`…). `design-system-ref/` est la **source de vérité visuelle** : en cas de divergence, s'aligner sur le design system.
+
+### RÈGLE PERMANENTE (obligatoire, sans rappel de l'utilisateur)
+Pour **toute page existante** ET **toute nouvelle page/écran**, présente ou future, se baser **par défaut** sur ce design system — l'utilisateur n'a pas à le redemander. Concrètement :
+- **Avant** de créer/modifier une page : lire `design-system-ref/readme.md` + les tokens, et réutiliser les variables CSS existantes (`design-system.css` / `eco.css`).
+- **Polices** : uniquement Anton (titres display, CAPITALES) / Inter (UI, corps) / JetBrains Mono (chiffres). **Bannir `Bricolage Grotesque`** et toute autre police.
+- **Couleurs** : uniquement la palette ci-dessus (4 noirs + accent `#7FB8E8`/`#5A9BD4`/`#BFDCF5` + sémantiques `#4ADE9C`/`#F0647A`/`#E8C268` + gris steel). **Aucun hex hors-palette** (pas de bleu vif, violet, orange, vert/rouge approximatifs). Seule exception tolérée : un logo de marque tierce (ex. « G » Google).
+- **Zéro emoji** : remplacer par une icône SVG trait fin (`viewBox 0 0 24 24`, `fill:none`, `stroke:currentColor`). Glyphes tolérés : `→ ← ↗ ★ ✓ ✕ ▲ ▼ —`.
+- **Ne jamais casser le fonctionnel** : ne toucher qu'au design (CSS/markup présentationnel), jamais la logique/JS/API/IDs.
+
+### Checklist de conformité (à vérifier après tout changement UI)
+```
+grep -rn "font-family[^;]*Bricolage" *.html *.css *.js   # → vide
+# emoji : scan Python sur [\U0001F000-\U0001FAFF\U00002600-\U000027BF…] hors → ← ★ ✓ ✕ ▲ ▼
+# couleurs : tout #hex doit appartenir à la palette DS (sauf logo Google)
+node --check <fichiers JS / scripts inline>                # syntaxe intacte
+```
+État au 2026-06-14 : tout le site est **conforme** sur typographie + emoji + couleurs. Reste optionnel : normaliser les rayons « pilule » 50px des boutons vers l'échelle nette du DS (2/4/6/10px) — à faire si demandé.
+
 ## Deployment
 
 This project deploys on **Vercel** with no build step — static HTML files are served directly and `api/` functions run as Vercel serverless functions (Node.js).

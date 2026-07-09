@@ -12,6 +12,50 @@ const SYMBOL_MAP = {
   'BRENT': 'BZ=F',
   'BTCUSD': 'BTC-USD', 'BTC': 'BTC-USD',
   'ETHUSD': 'ETH-USD', 'ETH': 'ETH-USD',
+  'SOLUSD': 'SOL-USD', 'SOL': 'SOL-USD',
+  'XRPUSD': 'XRP-USD', 'XRP': 'XRP-USD',
+  'BNBUSD': 'BNB-USD', 'BNB': 'BNB-USD',
+  'DOGEUSD': 'DOGE-USD', 'DOGE': 'DOGE-USD',
+  'ADAUSD': 'ADA-USD', 'ADA': 'ADA-USD',
+  'AVAXUSD': 'AVAX-USD', 'AVAX': 'AVAX-USD',
+  'LINKUSD': 'LINK-USD', 'LINK': 'LINK-USD',
+  'DOTUSD': 'DOT-USD', 'DOT': 'DOT-USD',
+  'LTCUSD': 'LTC-USD', 'LTC': 'LTC-USD',
+  'MATICUSD': 'MATIC-USD', 'MATIC': 'MATIC-USD',
+  // Forex — majeures
+  'EURUSD': 'EURUSD=X', 'GBPUSD': 'GBPUSD=X', 'USDJPY': 'JPY=X',
+  'AUDUSD': 'AUDUSD=X', 'USDCAD': 'CAD=X', 'USDCHF': 'CHF=X', 'NZDUSD': 'NZDUSD=X',
+  // Forex — crosses EUR
+  'EURGBP': 'EURGBP=X', 'EURJPY': 'EURJPY=X', 'EURCHF': 'EURCHF=X', 'EURCAD': 'EURCAD=X',
+  'EURAUD': 'EURAUD=X', 'EURNZD': 'EURNZD=X',
+  // Forex — crosses GBP
+  'GBPJPY': 'GBPJPY=X', 'GBPCHF': 'GBPCHF=X', 'GBPCAD': 'GBPCAD=X', 'GBPAUD': 'GBPAUD=X', 'GBPNZD': 'GBPNZD=X',
+  // Forex — crosses AUD / NZD / CAD / CHF
+  'AUDJPY': 'AUDJPY=X', 'AUDCHF': 'AUDCHF=X', 'AUDCAD': 'AUDCAD=X', 'AUDNZD': 'AUDNZD=X',
+  'NZDJPY': 'NZDJPY=X', 'NZDCHF': 'NZDCHF=X', 'NZDCAD': 'NZDCAD=X',
+  'CADJPY': 'CADJPY=X', 'CADCHF': 'CADCHF=X', 'CHFJPY': 'CHFJPY=X',
+  // Forex — exotiques (USD base → XXX=X)
+  'USDMXN': 'MXN=X', 'USDZAR': 'ZAR=X', 'USDTRY': 'TRY=X', 'USDSGD': 'SGD=X',
+  'USDHKD': 'HKD=X', 'USDNOK': 'NOK=X', 'USDSEK': 'SEK=X', 'USDDKK': 'DKK=X',
+  'USDPLN': 'PLN=X', 'USDHUF': 'HUF=X', 'USDCZK': 'CZK=X', 'USDCNH': 'CNH=X',
+  'USDTHB': 'THB=X', 'USDINR': 'INR=X', 'USDILS': 'ILS=X',
+  'EURTRY': 'EURTRY=X', 'EURPLN': 'EURPLN=X', 'EURSEK': 'EURSEK=X', 'EURNOK': 'EURNOK=X',
+  'EURHUF': 'EURHUF=X', 'EURCZK': 'EURCZK=X', 'EURZAR': 'EURZAR=X',
+  'GBPSEK': 'GBPSEK=X', 'GBPNOK': 'GBPNOK=X',
+  'ZARJPY': 'ZARJPY=X', 'TRYJPY': 'TRYJPY=X', 'NOKJPY': 'NOKJPY=X', 'SEKJPY': 'SEKJPY=X', 'SGDJPY': 'SGDJPY=X',
+  // Indices supplémentaires
+  'JP225': '^N225', 'NIKKEI': '^N225', 'CAC40': '^FCHI', 'FR40': '^FCHI',
+  'HK50': '^HSI', 'AUS200': '^AXJO',
+  // Actions US
+  'NVDA': 'NVDA', 'AAPL': 'AAPL', 'TSLA': 'TSLA', 'MSFT': 'MSFT',
+  'AMZN': 'AMZN', 'META': 'META', 'GOOGL': 'GOOGL', 'AMD': 'AMD', 'NFLX': 'NFLX',
+  // Matières premières supplémentaires
+  'NATGAS': 'NG=F', 'COPPER': 'HG=F', 'PLATINUM': 'PL=F',
+  // Crypto supplémentaires
+  'TRXUSD': 'TRX-USD', 'TRX': 'TRX-USD',
+  'BCHUSD': 'BCH-USD', 'BCH': 'BCH-USD',
+  'XLMUSD': 'XLM-USD', 'XLM': 'XLM-USD',
+  'NEARUSD': 'NEAR-USD', 'NEAR': 'NEAR-USD',
 };
 
 function fetchYahoo(yahooSym) {

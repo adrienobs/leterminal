@@ -118,23 +118,14 @@ body{font-family:var(--font-text);background:var(--bg-void);color:var(--text-tit
     <button class="sz-btn on" onclick="setSz('market_cap_calc',this)">Cap.</button>
     <button class="sz-btn" onclick="setSz('volume',this)">Volume</button>
   </div>
-  <div class="live"><div class="ld"></div>TradingView</div>
-</nav>
 
 <div class="map" id="mapWrap">
   <div class="map-loader" id="mapLoader">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2.5"/><circle cx="6" cy="17" r="1.5"/><circle cx="18" cy="16" r="2"/></svg>
     <div class="map-loader-bar"></div>
   </div>
-</div>
 
-<div class="foot">
-  <div class="leg"><div class="ldc" style="background:#1a9e6e"></div>Forte hausse</div>
-  <div class="leg"><div class="ldc" style="background:#4caf80"></div>Hausse</div>
-  <div class="leg"><div class="ldc" style="background:#888"></div>Neutre</div>
-  <div class="leg"><div class="ldc" style="background:#ef5350"></div>Baisse</div>
-  <div class="leg"><div class="ldc" style="background:#c62828"></div>Forte baisse</div>
-  <div class="src">Données via <a href="https://www.tradingview.com" target="_blank">TradingView</a></div>
+</div>
 </div>
 
 <script>
@@ -207,6 +198,7 @@ window.addEventListener('scroll',function(){var c=document.getElementById('ltChr
 render();
 </script>
 
+<script src="./appshell.js"></script>
 <script src="./menu.js"></script>
 <script>if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(function(){}); }</script>
 </body>

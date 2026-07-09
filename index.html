@@ -3,14 +3,15 @@
 <!-- v3 — design "Le Terminal" (nouveau design system) -->
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Terminal — Hub trading propulsé par l'IA</title>
+<meta name="description" content="Le Terminal — analyse tes setups avec l'IA, tiens ton journal, suis le calendrier éco et maîtrise ton risque. Cinq outils, un seul cockpit.">
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#07090C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Le Terminal">
 <link rel="apple-touch-icon" href="./logo.jpg.webp">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LE TERMINAL — Hub Trading</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
@@ -318,6 +319,8 @@ body::after {
       <div class="section-title" data-i18n="tools-title">Tous les outils dont tu as besoin</div>
       <div class="section-sub" data-i18n="tools-sub">Chaque outil est conçu pour un aspect précis de ton trading. Ensemble, ils forment un écosystème complet.</div>
     </div>
+    <p class="lt-board__lede" data-en="Five tools, one subscription. Each instrument is built for a precise aspect of your trading — together, they form a complete ecosystem.">Cinq outils, un seul abonnement. Chaque instrument est conçu pour un aspect précis de ton trading — ensemble, ils forment un écosystème complet.</p>
+  </div>
 
     <div class="tools-grid-main">
       <a href="./app.html" class="tool-card featured" onclick="return checkFeatureAccess(event)">
@@ -374,7 +377,6 @@ body::after {
       <div class="stat-item"><div class="stat-val">∞</div><div class="stat-lbl" data-i18n="stat-lbl-3">Stratégies</div></div>
       <div class="stat-item"><div class="stat-val" style="color:var(--neutral)">24/7</div><div class="stat-lbl" data-i18n="stat-lbl-4">Disponible</div></div>
     </div>
-  </section>
 
   <!-- ── STRATEGY COMPAT ── -->
   <section class="strategy-section">
@@ -428,11 +430,24 @@ body::after {
         <span data-i18n="tg-sub">Analyses quotidiennes, setups en live et entraide entre traders</span>
         <div class="tg-chips"><span class="tg-chip">Analyses live</span><span class="tg-chip">Setups du jour</span><span class="tg-chip">Entraide</span><span class="tg-chip">Alertes macro</span></div>
       </div>
-      <a href="https://t.me/leterminalfx" target="_blank" class="tg-cta" onclick="event.stopPropagation()" data-i18n="tg-cta">Rejoindre →</a>
-    </a>
-  </section>
+    </div>
 
-</div>
+    <!-- CENTER — Analyzer (front) -->
+    <div class="lt-scr__panel lt-scr__panel--c">
+      <div class="lt-scr__bar"><i></i><i></i><i></i><span>Setup Analyzer</span><em>87/100</em></div>
+      <div class="lt-scr__pbody">
+        <svg class="lt-scr__chart" viewBox="0 0 260 110" preserveAspectRatio="none">
+          <defs><linearGradient id="scrFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(127,184,232,0.3)"/><stop offset="1" stop-color="rgba(127,184,232,0)"/></linearGradient></defs>
+          <line x1="0" y1="28" x2="260" y2="28" stroke="rgba(58,65,76,0.3)"/>
+          <line x1="0" y1="56" x2="260" y2="56" stroke="rgba(58,65,76,0.3)"/>
+          <line x1="0" y1="84" x2="260" y2="84" stroke="rgba(58,65,76,0.3)"/>
+          <path d="M0,86 C40,80 60,64 95,66 C130,68 145,40 185,34 C220,29 240,16 260,12 L260,110 L0,110 Z" fill="url(#scrFill)"/>
+          <path d="M0,86 C40,80 60,64 95,66 C130,68 145,40 185,34 C220,29 240,16 260,12" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="92" y="40" width="46" height="26" fill="none" stroke="rgba(127,184,232,0.5)" stroke-dasharray="3 3"/>
+        </svg>
+        <div class="lt-scr__verdict"><span class="lt-scr__go">GO</span> Order Block H4 · R:R 1:2.6</div>
+      </div>
+    </div>
 
 <!-- ── AUTH MODAL ── -->
 <div class="auth-overlay" id="authOverlay">
@@ -450,7 +465,17 @@ body::after {
     <div class="auth-error" id="authError"></div>
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border-subtle);font-size:11px;color:var(--text-muted)">🔒 Connexion sécurisée · Données synchronisées sur tous les outils</div>
   </div>
-</div>
+</section>
+<!-- PricingBand — bande tarifs compacte (gratuit + PRO). Source: marketing/Pricing.jsx (PricingBand + PlanCard) + pricing.css -->
+<!-- Compact band: annual=true. Free shows first 5 feats; PRO shows first 5 feats + flag + annual save note + 14-day note. -->
+<!-- CTA buttons reproduce the design-system Button (primary/secondary, size lg) via inline styles; hover wired by initPricingButtons(). -->
+<section class="pr-band" id="pricing" data-reveal>
+  <div class="pr-band__head">
+    <span class="lt-eyebrow"><span class="lt-dot"></span> Tarifs</span>
+    <h2 class="pr-band__title">Choisis ton plan</h2>
+    <p class="pr-band__lede">Commence gratuitement avec 5 tokens. Passe en Premium quand tu veux toute la puissance.</p>
+  </div>
+  <div class="pr-grid pr-grid--band">
 
 <!-- WELCOME TOAST -->
 <div id="welcomeMsg" style="display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--bull-glow);border:1px solid rgba(74,222,156,.4);border-radius:var(--r-pill);padding:12px 24px;font-size:14px;font-weight:700;color:var(--bull);z-index:1000;backdrop-filter:blur(12px);box-shadow:var(--shadow-md);white-space:nowrap">
@@ -588,7 +613,7 @@ window.addEventListener('scroll',function(){var c=document.getElementById('ltChr
 
 checkSession();
 </script>
-
+<script src="./home-anim.js"></script>
 <script src="./menu.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}</script>
 </body>
