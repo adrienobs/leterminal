@@ -3,6 +3,13 @@
 
 :root { --chrome-h: 64px; }
 
+/* Verrou anti-défilement horizontal : les lueurs/traînées décoratives débordent
+   volontairement (left:-50%, glows…). Sans clip à la racine, on peut « slider »
+   vers la droite et la barre fixe se décale (elle se cale sur le viewport élargi).
+   `overflow-x: clip` n'crée pas de conteneur de défilement → la barre fixe et le
+   sticky restent intacts (fallback `hidden` pour les vieux Safari). */
+html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; }
+
 .lt-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; }
 .lt-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); display: inline-block; }
 
@@ -59,13 +66,13 @@
   .lt-nav, .lt-chrome.is-scrolled .lt-nav { padding: 12px 20px; }
 }
 @media (max-width: 560px) {
-  /* petit écran : la nav ne garde que la marque + Accès PRO */
+  /* petit écran : marque centrée, hamburger à gauche, profil/connexion à droite.
+     Le bouton Connexion (déconnecté) reste TOUJOURS visible en icône carrée
+     — voir design-system.css (#loginBtn ≤560px). On ne le masque plus. */
   .lt-nav, .lt-chrome.is-scrolled .lt-nav { padding: 10px 14px; }
   .lt-nav__word { letter-spacing: 0.14em; font-size: 12.5px; }
   .lt-nav__pill { display: none; }
   .lt-nav__actions { gap: 8px; }
-  .lt-nav__actions > button:nth-of-type(1) { display: none !important; } /* Connexion (style inline → !important requis) */
-  .lt-nav__actions > button:nth-of-type(2) { padding: 8px 14px !important; font-size: 12px !important; }
 }
 
 /* ---------- LEFT SIDE DOCK (fixed page menu) ---------- */
@@ -89,3 +96,5 @@
   /* le contenu ne doit pas finir sous la barre */
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* ── Thème clair : toutes les surcharges vivent dans home/theme-light.css. ── */

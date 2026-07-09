@@ -5,6 +5,8 @@
 
   // Détecte la page active
   var page = window.location.pathname.split('/').pop() || 'index.html';
+  // URLs propres (cleanUrls) : on rétablit .html pour le matching interne.
+  if (page && page.indexOf('.') === -1) page += '.html';
 
   var ICONS = {
     dashboard: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`,
@@ -13,6 +15,8 @@
     analyzer:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
     bubble:    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2.5"/><circle cx="6" cy="17" r="1.5"/><circle cx="18" cy="16" r="2"/></svg>`,
     calc:      `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/></svg>`,
+    mur:       `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="5" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="3" y="10" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="5" rx="1"/><rect x="3" y="17" width="8" height="4" rx="1"/><rect x="13" y="17" width="8" height="4" rx="1"/></svg>`,
+    profil:    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
   };
 
   var PAGES = [
@@ -33,7 +37,7 @@
       { icon: '🪙', label: 'Crypto',          href: './eco-crypto.html' },
     ] },
     { id: 'bubble.html',      icon: ICONS.bubble,     label: 'Bubble Map',          href: './bubble.html' },
-    { id: 'patrimoine.html',  icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>`, label: 'Patrimoine', href: './patrimoine-presentation.html', children: [
+    { id: 'patrimoine.html',  icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>`, label: 'Patrimoine', href: './patrimoine-presentation.html', pro: true, children: [
       { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>`, label: 'Présentation', href: './patrimoine-presentation.html' },
       { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>`, label: 'Portefeuille', href: './patrimoine.html' },
     ] },
@@ -97,16 +101,18 @@
       border: 1px solid rgba(127,184,232,.25);
     }
     .lt-nav-item.soon { opacity: .45; cursor: not-allowed; pointer-events: none; }
-    .lt-nav-item.pro-locked { opacity: .55; cursor: pointer; }
-    .lt-nav-item.pro-locked:hover { background: rgba(255,180,0,.08); color: #E8C268; }
+    .lt-nav-item.pro-locked { opacity: .35; cursor: not-allowed; pointer-events: none; }
+    .lt-nav-item.pro-locked:hover { background: transparent; }
+    .lt-nav-group.pro-locked-group { opacity: .35; pointer-events: none; }
+    .lt-nav-group.pro-locked-group * { pointer-events: none; }
     .lt-nav-pro-badge {
       margin-left: auto; font-size: 9px; font-weight: 700;
       letter-spacing: .08em; color: #E8C268;
       background: rgba(255,180,0,.1); border: 1px solid rgba(255,180,0,.25);
       border-radius: 50px; padding: 3px 8px;
     }
-    .lt-subnav-item.pro-locked { opacity: .55; cursor: pointer; }
-    .lt-subnav-item.pro-locked:hover { color: #E8C268; }
+    .lt-subnav-item.pro-locked { opacity: .35; cursor: not-allowed; pointer-events: none; }
+    .lt-subnav-item.pro-locked:hover { color: inherit; }
     .lt-nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: .7; }
     .lt-nav-item:hover .lt-nav-icon, .lt-nav-item.active .lt-nav-icon { opacity: 1; }
     .lt-nav-soon {
@@ -153,7 +159,9 @@
 
     /* ── USER BAR ── */
     #ltUserBar { display: flex; align-items: center; gap: 8px; position: relative; }
-    .lt-ub-pro { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(232,194,104,.12); border: 1px solid rgba(232,194,104,.3); border-radius: 6px; color: #E8C268; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+    .lt-ub-tokens { display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; background: rgba(127,184,232,.1); border: 1px solid rgba(127,184,232,.25); border-radius: 6px; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 11px; font-weight: 700; color: #7FB8E8; letter-spacing: .04em; white-space: nowrap; }
+    .lt-ub-tokens--low { background: rgba(240,100,122,.1); border-color: rgba(240,100,122,.25); color: #F0647A; }
+    .lt-ub-tokens--pro { background: rgba(232,194,104,.1); border-color: rgba(232,194,104,.25); color: #E8C268; }
     .lt-ub-chip { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); cursor: pointer; transition: all .2s; }
     .lt-ub-chip:hover { border-color: rgba(127,184,232,.45); background: rgba(127,184,232,.08); }
     .lt-ub-avatar { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#7FB8E8,#BFDCF5); display: flex; align-items: center; justify-content: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 700; color: #07090C; flex-shrink: 0; }
@@ -274,18 +282,137 @@
 
   var isUserPro = localStorage.getItem('lt_pro') === '1';
 
+  // ── SYNCHRONISATION COMPLÈTE DU COMPTE (sans rechargement) ──
+  // Source de vérité unique : rafraîchit le token si besoin, puis récupère EN UNE
+  // FOIS le statut Premium (autoritatif via /api/check-pro : Supabase → activations
+  // en attente → Whop) ET le profil (pseudo, avatar, nom — avec repli sur les
+  // métadonnées Google). Met à jour le cache + l'UI en place. Appelé à la connexion
+  // (email + Google) et au chargement de chaque page → l'utilisateur est toujours à
+  // jour sans devoir cliquer ni recharger.
+  var _ltSyncing = false;
+  function ltSyncAccount() {
+    var tok = localStorage.getItem('ta_token');
+    if (!tok || _ltSyncing) return Promise.resolve();
+    _ltSyncing = true;
+    return ltEnsureSession().then(function(token) {
+      token = token || localStorage.getItem('ta_token');
+      var authH = { 'Authorization': 'Bearer ' + token };
+      var proP = fetch('/api/check-pro', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, authH) })
+        .then(function(r){ return r.json(); }).catch(function(){ return null; });
+      var profP = fetch('/api/profile', { method: 'GET', headers: authH })
+        .then(function(r){ return r.json(); }).catch(function(){ return null; });
+      return Promise.all([proP, profP]).then(function(res) {
+        var d = res[0], p = res[1] || {};
+        // Premium : check-pro fait autorité ; repli sur le profil si check-pro échoue.
+        if (d && !d.token_invalid) {
+          if (d.is_pro) localStorage.setItem('lt_pro', '1');
+          else localStorage.removeItem('lt_pro');
+        } else if (p && p.is_pro) {
+          localStorage.setItem('lt_pro', '1');
+        }
+        // Profil : pseudo / avatar / nom (repli sur Google via auth_name / auth_avatar)
+        var pseudo = p.pseudo || p.auth_name || '';
+        var avatar = p.avatar_url || p.auth_avatar || '';
+        if (pseudo) localStorage.setItem('lt_pseudo', pseudo);
+        if (avatar) localStorage.setItem('lt_avatar', avatar);
+        if (p.first_name) localStorage.setItem('lt_first_name', p.first_name);
+        if (p.last_name)  localStorage.setItem('lt_last_name', p.last_name);
+        if (p.email) localStorage.setItem('ta_email', p.email);
+        // Questionnaire d'onboarding : le compte l'a déjà rempli (serveur) → on
+        // mémorise pour ne plus jamais le reposer.
+        if (p.onboarded_at) { try { localStorage.setItem('lt_onboarded', '1'); } catch(e){} }
+        _ltProfileFetched = true;
+        // UI en place — aucune rechargement de page.
+        ltSyncUser(); ltRenderUserBar();
+        if (window.ltRebuildAppFooter) { try { window.ltRebuildAppFooter(); } catch(e) {} }
+        // Signale aux pages (compte.html…) qu'elles peuvent rafraîchir leur affichage.
+        try {
+          document.dispatchEvent(new CustomEvent('lt:account-synced', { detail: {
+            is_pro: localStorage.getItem('lt_pro') === '1', pseudo: pseudo, avatar: avatar
+          }}));
+        } catch(e) {}
+      });
+    }).catch(function(){}).finally(function(){ _ltSyncing = false; });
+  }
+  window.ltSyncAccount = ltSyncAccount;
+
+  // ── PROGRESSION DU JOUEUR RATTACHÉE AU COMPTE (dashboard/gamification) ──
+  // Temps par outil, objectifs, notes, éco, devise : stockés côté serveur
+  // (/api/stats) → la progression suit le compte, sur tous les appareils, et
+  // ne se réinitialise plus à la déconnexion.
+  function _ltMergeUsage(local, server) {
+    var out = {}, k;
+    for (k in (local || {})) out[k] = local[k];
+    for (k in (server || {})) {
+      var a = out[k] || { ms: 0, visits: 0 }, b = server[k] || {};
+      out[k] = { ms: Math.max(+a.ms || 0, +b.ms || 0), visits: Math.max(+a.visits || 0, +b.visits || 0), last: b.last || a.last || null };
+    }
+    return out;
+  }
+  // Charge la progression du serveur et la fusionne dans le cache local.
+  function ltSyncStats() {
+    var tok = localStorage.getItem('ta_token'); if (!tok) return;
+    fetch('/api/stats', { headers: { 'Authorization': 'Bearer ' + tok } })
+      .then(function (r) { return r.json(); })
+      .then(function (s) {
+        if (!s || typeof s !== 'object') return;
+        var localU = {}; try { localU = JSON.parse(localStorage.getItem('lt_usage') || '{}'); } catch (e) {}
+        try { localStorage.setItem('lt_usage', JSON.stringify(_ltMergeUsage(localU, s.usage || {}))); } catch (e) {}
+        // Clés opaques : si le cache local est vide, on restaure la valeur du compte.
+        [['goals', 'lt_goals'], ['notes', 'jnl_notes'], ['eco_unlocked', 'eco_unlocked'], ['currency', 'jnl_currency']].forEach(function (p) {
+          var sv = s[p[0]]; if (sv === undefined || sv === null) return;
+          var loc = localStorage.getItem(p[1]);
+          if (loc === null || loc === '') { try { localStorage.setItem(p[1], typeof sv === 'string' ? sv : JSON.stringify(sv)); } catch (e) {} }
+        });
+        try { document.dispatchEvent(new CustomEvent('lt:stats-synced')); } catch (e) {}
+      }).catch(function () {});
+  }
+  window.ltSyncStats = ltSyncStats;
+  // Envoie la progression locale au serveur (fusion MAX côté serveur). keepalive
+  // pour que l'envoi aboutisse même au déchargement de la page / à la déconnexion.
+  function ltFlushStats() {
+    var tok = localStorage.getItem('ta_token'); if (!tok) return;
+    var usage = {}; try { usage = JSON.parse(localStorage.getItem('lt_usage') || '{}'); } catch (e) {}
+    var body = {
+      usage: usage,
+      goals: localStorage.getItem('lt_goals'),
+      notes: localStorage.getItem('jnl_notes'),
+      eco_unlocked: localStorage.getItem('eco_unlocked'),
+      currency: localStorage.getItem('jnl_currency')
+    };
+    try {
+      fetch('/api/stats', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok }, body: JSON.stringify(body), keepalive: true })
+        .then(function (r) { return r.json(); })
+        .then(function (s) { if (s && s.usage) { try { localStorage.setItem('lt_usage', JSON.stringify(s.usage)); } catch (e) {} } })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  window.ltFlushStats = ltFlushStats;
+  // Sauvegarde en continu : au masquage/déchargement de la page + périodiquement.
+  document.addEventListener('visibilitychange', function () { if (document.hidden) ltFlushStats(); });
+  window.addEventListener('pagehide', ltFlushStats);
+  setInterval(ltFlushStats, 60000);
+
+  // Synchronisation serveur au chargement — Premium + profil + progression.
+  var _verifyToken = localStorage.getItem('ta_token');
+  if (_verifyToken) {
+    ltSyncAccount();
+    ltSyncStats();
+  }
+
   var navItems = PAGES.map(function(p) {
     var isActive = page === p.id || (page === '' && p.id === 'index.html') || treeActive(p);
     var cls = 'lt-nav-item' + (isActive ? ' active' : '') + (p.soon ? ' soon' : '');
     var soon = p.soon ? '<span class="lt-nav-soon">Bientôt</span>' : '';
     var proBadge = isLocked ? '<span class="lt-nav-pro-badge"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> PRO</span>' : '';
-    var href = isLocked ? './index.html?paywall=1' : p.href;
+    var tag = isLocked ? 'span' : 'a';
+    var hrefAttr = isLocked ? '' : ' href="' + p.href + '"';
 
     if(p.children && p.children.length) {
       var subItems = p.children.map(function(c) { return renderSub(c, 0, isLocked); }).join('');
-      return '<div class="lt-nav-group">' +
+      return '<div class="lt-nav-group' + (isLocked ? ' pro-locked-group' : '') + '">' +
                '<div class="lt-nav-row">' +
-                 '<a class="' + cls + '" href="' + href + '"><span class="lt-nav-icon">' + p.icon + '</span>' + p.label + proBadge + '</a>' +
+                 '<' + tag + ' class="' + cls + '"' + hrefAttr + '><span class="lt-nav-icon">' + p.icon + '</span>' + p.label + proBadge + '</' + tag + '>' +
                  '<button class="lt-nav-caret" type="button" aria-label="Déplier" onclick="ltToggleSub(event,this)">' + CARET + '</button>' +
                '</div>' +
                '<div class="lt-subnav"><div>' + subItems + '</div></div>' +
@@ -294,14 +421,14 @@
     if(p.soon) {
       return '<div class="' + cls + '"><span class="lt-nav-icon">' + p.icon + '</span>' + p.label + soon + '</div>';
     }
-    return '<a class="' + cls + '" href="' + href + '"><span class="lt-nav-icon">' + p.icon + '</span>' + p.label + soon + proBadge + '</a>';
+    return '<' + tag + ' class="' + cls + '"' + hrefAttr + '><span class="lt-nav-icon">' + p.icon + '</span>' + p.label + soon + proBadge + '</' + tag + '>';
   }).join('');
 
   var menuHTML = `
     <div class="lt-menu-overlay" id="ltMenuOverlay" onclick="ltCloseMenu()"></div>
     <div class="lt-side-menu" id="ltSideMenu">
       <div class="lt-menu-header">
-        <div class="lt-menu-brand"><img src="./logo.jpg.webp" alt="Le Terminal" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(127,184,232,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Hub</span></div>
+        <div class="lt-menu-brand"><img src="./logo-nav.webp" alt="Le Terminal" style="width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid rgba(127,184,232,.3);margin-right:8px;vertical-align:middle;">Le Terminal <span>Hub</span></div>
         <button class="lt-menu-close" onclick="ltCloseMenu()">✕</button>
       </div>
       <nav class="lt-menu-nav">
@@ -311,6 +438,10 @@
         <div class="lt-user-info" id="ltUserInfo">
           <div class="lt-user-label">CONNECTÉ</div>
           <div class="lt-user-email" id="ltUserEmail">—</div>
+          <a href="./compte.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:4px;border-radius:6px;color:#F2F4F7;text-decoration:none;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Mon compte
+          </a>
           <button class="lt-logout-btn" onclick="ltLogout()">Se déconnecter</button>
         </div>
         <a class="lt-nav-item" id="ltLoginItem" href="#" onclick="ltOpenLogin();return false;">
@@ -358,6 +489,51 @@
     document.body.classList.remove('lt-menu-open');
   };
 
+  // ── SESSION (persistance + rafraîchissement du token) ──
+  // Stocke la session Supabase : token d'accès + refresh token + horodatage d'expiration.
+  // Le refresh token permet de rester connecté au-delà de ~1h sans devoir se reconnecter,
+  // quel que soit l'appareil.
+  function ltStoreSession(data, email) {
+    if(!data || !data.access_token) return;
+    localStorage.setItem('ta_token', data.access_token);
+    if(data.refresh_token) localStorage.setItem('ta_refresh', data.refresh_token);
+    // expires_in en secondes (défaut Supabase : 3600). On mémorise l'instant d'expiration absolu.
+    var ttl = parseInt(data.expires_in, 10);
+    if(!ttl || isNaN(ttl)) ttl = 3600;
+    localStorage.setItem('ta_exp', String(Date.now() + ttl * 1000));
+    if(email) localStorage.setItem('ta_email', email);
+    else if(data.user && data.user.email) localStorage.setItem('ta_email', data.user.email);
+  }
+  window.ltStoreSession = ltStoreSession;
+
+  // Rafraîchit le token d'accès s'il est expiré (ou sur le point de l'être) via le refresh token.
+  // Renvoie une promesse résolue avec le token courant (rafraîchi si possible).
+  // En cas d'échec réseau, on conserve le token existant (pas de déconnexion brutale).
+  var _ltRefreshing = null;
+  function ltEnsureSession() {
+    var token = localStorage.getItem('ta_token') || '';
+    if(!token) return Promise.resolve('');
+    // Refresh mutualisé global (single-flight) : si le garde-fou de app.html a
+    // défini window.ltRefreshToken, on l'utilise pour qu'il n'y ait JAMAIS deux
+    // refresh concurrents sur le même refresh token Supabase (usage unique).
+    if(typeof window.ltRefreshToken === 'function') return window.ltRefreshToken(false);
+    var refresh = localStorage.getItem('ta_refresh') || '';
+    var exp = parseInt(localStorage.getItem('ta_exp') || '0', 10);
+    // Marge de 60s : on rafraîchit un peu avant l'expiration réelle.
+    if(!refresh || (exp && Date.now() < exp - 60000)) return Promise.resolve(token);
+    if(_ltRefreshing) return _ltRefreshing;
+    _ltRefreshing = fetch('/api/auth', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'refresh', refresh_token:refresh})})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.access_token) { ltStoreSession(d); return d.access_token; }
+        return token; // refresh refusé → on garde le token existant, le check-pro tranchera
+      })
+      .catch(function(){ return token; })
+      .finally(function(){ _ltRefreshing = null; });
+    return _ltRefreshing;
+  }
+  window.ltEnsureSession = ltEnsureSession;
+
   // Sync user state from localStorage
   function ltSyncUser() {
     var email = localStorage.getItem('ta_email') || '';
@@ -400,6 +576,10 @@
     var token = localStorage.getItem('ta_token') || '';
     var isPro = localStorage.getItem('lt_pro') === '1';
     if(!token || !email) { bar.innerHTML = ''; return; }
+    // Quand connecté : s'assurer que la barre est visible et masquer le bouton loginBtn
+    bar.style.display = 'inline-flex';
+    var lb = document.getElementById('loginBtn');
+    if(lb) lb.style.display = 'none';
     var initial = email.charAt(0).toUpperCase();
     var username = email.split('@')[0];
     var pseudo = localStorage.getItem('lt_pseudo') || '';
@@ -409,15 +589,21 @@
     var caret = '<span class="lt-ub-caret"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>';
     // Chip rectangulaire (même DA que les boutons) + menu déroulant avec profil + déconnexion
     bar.innerHTML =
-      '<div class="lt-ub-chip" id="ltUbChip" title="' + email + (isPro ? ' · Premium' : '') + '">' +
+      '<span id="ltTokenBadge" style="display:none" class="lt-ub-tokens"></span>' +
+      '<div class="lt-ub-chip" id="ltUbChip" title="' + email + '">' +
         '<div class="lt-ub-avatar">' + avatarInner + '</div>' +
         '<span class="lt-ub-name">' + displayName + '</span>' + caret +
       '</div>' +
       '<div class="lt-ub-menu" id="ltUbMenu">' +
-        '<div class="lt-ub-menu__mail">' + email + (isPro ? '<span class="lt-ub-menu__badge">Premium</span>' : '') + '</div>' +
-        '<a class="lt-ub-link" href="./profil.html">' +
+        '<div class="lt-ub-menu__mail">' + email + '</div>' +
+        '<div id="ltUbStatusBadge" style="margin:6px 10px 10px;padding:6px 10px;border-radius:6px;font-family:Inter,system-ui,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;' + (isPro ? 'background:rgba(232,194,104,.12);border:1px solid rgba(232,194,104,.3);color:#E8C268' : 'background:rgba(127,184,232,.07);border:1px solid rgba(127,184,232,.18);color:#7FB8E8') + '">' +
+          (isPro
+            ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Premium'
+            : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg> Version gratuite') +
+        '</div>' +
+        '<a class="lt-ub-link" href="./compte.html" style="display:flex;align-items:center;gap:8px;padding:9px 10px;color:#F2F4F7;text-decoration:none;border-radius:6px;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;margin-bottom:4px;">' +
           '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
-          '<span data-en="My profile">Mon profil</span></a>' +
+          '<span>Mon compte</span></a>' +
         '<button type="button" class="lt-ub-logout" onclick="ltGlobalLogout()">' +
           '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
           'Se déconnecter</button>' +
@@ -437,22 +623,60 @@
         chip.classList.remove('open');
       });
     }
+
   }
 
   function _ltClearAllAccountData() {
+    // Sauvegarde la progression sur le compte AVANT d'effacer le token (sinon perdu).
+    try { if (window.ltFlushStats) window.ltFlushStats(); } catch (e) {}
     localStorage.removeItem('ta_token');
+    localStorage.removeItem('ta_refresh');
+    localStorage.removeItem('ta_exp');
     localStorage.removeItem('ta_email');
     localStorage.removeItem('ta_user_id');
     localStorage.removeItem('lt_pro');
     localStorage.removeItem('lt_history');
     localStorage.removeItem('lt_deleted');
     localStorage.removeItem('jnl_trades');
+    localStorage.removeItem('lt_pseudo');
+    localStorage.removeItem('lt_avatar');
+    // Flags d'onboarding : on les efface pour qu'un AUTRE compte soit réévalué
+    // contre le serveur (un questionnaire par compte, pas par appareil).
+    localStorage.removeItem('lt_survey');
+    localStorage.removeItem('lt_onboarded');
+    // Progression (temps par outil, objectifs…) : effacée en local car rattachée
+    // au COMPTE (serveur) ; rechargée au prochain login. Évite le mélange entre
+    // deux comptes sur le même navigateur.
+    localStorage.removeItem('lt_usage');
+    localStorage.removeItem('lt_goals');
+    localStorage.removeItem('jnl_notes');
+    localStorage.removeItem('eco_unlocked');
+    localStorage.removeItem('jnl_currency');
   }
 
   window.ltGlobalLogout = function() {
     _ltClearAllAccountData();
     if(typeof doLogout === 'function') { doLogout(); } else { window.location.href = './index.html'; }
   };
+
+  // Charge le profil (pseudo + avatar) depuis le serveur si absent du cache
+  var _ltProfileFetched = false;
+  function _ltFetchProfile() {
+    if(_ltProfileFetched) return;
+    var tok = localStorage.getItem('ta_token');
+    if(!tok) return;
+    // Ne refetch que si pseudo ou avatar manquant
+    if(localStorage.getItem('lt_pseudo') && localStorage.getItem('lt_avatar')) return;
+    _ltProfileFetched = true;
+    fetch('/api/profile', { method: 'GET', headers: { 'Authorization': 'Bearer ' + tok } })
+      .then(function(r){ return r.json(); })
+      .then(function(p){
+        if(p.pseudo){ localStorage.setItem('lt_pseudo', p.pseudo); }
+        if(p.avatar_url){ localStorage.setItem('lt_avatar', p.avatar_url); }
+        if(p.pseudo || p.avatar_url){ ltRenderUserBar(); ltSyncUser(); }
+      })
+      .catch(function(){});
+  }
 
   // Run sync after DOM is ready and after any checkSession finishes
   // Override updateUserUI on each page to also call ltSyncUser
@@ -461,6 +685,7 @@
     if(typeof _origUpdateUI === 'function') _origUpdateUI();
     ltSyncUser();
     ltRenderUserBar();
+    _ltFetchProfile();
   };
 
   window.ltLogout = function() {
@@ -552,7 +777,7 @@
       '<div id="ltAuthBox">',
       '<button type="button" class="lta-close" onclick="ltCloseAuthModal()">✕</button>',
       '<div class="lta-title">Bienvenue</div>',
-      '<div class="lta-sub">Connecte-toi pour accéder à tous les outils</div>',
+      '<div class="lta-sub">Connectez-vous pour accéder à tous les outils</div>',
       '<div class="lta-tabs">',
       '<button type="button" class="lta-tab on" id="ltTabLogin" onclick="ltSwitchAuthTab(\'login\')">Connexion</button>',
       '<button type="button" class="lta-tab" id="ltTabSignup" onclick="ltSwitchAuthTab(\'signup\')">Créer un compte</button>',
@@ -562,7 +787,7 @@
       'Continuer avec Google',
       '</button>',
       '<div class="lta-sep">ou</div>',
-      '<div class="lta-field"><label>EMAIL</label><input type="email" id="ltAuthEmail" placeholder="ton@email.com" autocomplete="username"></div>',
+      '<div class="lta-field"><label>EMAIL</label><input type="email" id="ltAuthEmail" placeholder="vous@email.com" autocomplete="username"></div>',
       '<div class="lta-field"><label>MOT DE PASSE</label><input type="password" id="ltAuthPassword" placeholder="••••••••" autocomplete="current-password"></div>',
       '<button type="button" class="lta-submit" id="ltAuthSubmit" onclick="ltDoAuth()"><span id="ltAuthTxt">Se connecter</span></button>',
       '<div class="lta-error" id="ltAuthError"></div>',
@@ -593,7 +818,9 @@
 
   window.ltDoGoogleAuth = function() {
     if(!_ltSbUrl) { setTimeout(ltDoGoogleAuth, 500); return; }
-    window.location.href = _ltSbUrl + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(window.location.origin + '/index.html');
+    // Après Google → revient sur la page courante (ou la destination en attente)
+    var dest = sessionStorage.getItem('lt_gate_redirect') || window.location.href.split('#')[0];
+    window.location.href = _ltSbUrl + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(dest);
   };
 
   window.ltDoAuth = async function() {
@@ -602,26 +829,20 @@
     var errEl = document.getElementById('ltAuthError');
     var btn = document.getElementById('ltAuthSubmit');
     var txt = document.getElementById('ltAuthTxt');
-    if(!email || !password) { if(errEl) errEl.textContent = 'Remplis tous les champs'; return; }
+    if(!email || !password) { if(errEl) errEl.textContent = 'Remplissez tous les champs'; return; }
     if(btn) btn.disabled = true;
     if(txt) txt.textContent = _ltAuthMode === 'login' ? 'Connexion…' : 'Création…';
     try {
       var res = await fetch('/api/auth', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:_ltAuthMode, email:email.trim(), password:password})});
       var data = await res.json();
       if(data.access_token) {
-        localStorage.setItem('ta_token', data.access_token);
-        localStorage.setItem('ta_email', (data.user && data.user.email) || email.trim());
+        ltStoreSession(data, (data.user && data.user.email) || email.trim());
         ltCloseAuthModal();
         ltSyncUser();
-        if(typeof updateUserUI === 'function') updateUserUI();
-        // Check pro then redirect to app if on landing page
-        fetch('/api/check-pro', {method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+data.access_token}})
-          .then(function(r){return r.json();}).then(function(d){
-            if(d.is_pro) localStorage.setItem('lt_pro','1');
-            ltRenderUserBar();
-          }).catch(function(){});
+        // Synchronisation complète (Premium + profil) sans rechargement.
+        ltSyncAccount().then(function(){ if(typeof updateUserUI === 'function') updateUserUI(); });
       } else if(data.id) {
-        if(errEl) { errEl.style.color='#4ADE9C'; errEl.textContent='Compte créé ! Vérifie ton email.'; }
+        if(errEl) { errEl.style.color='#4ADE9C'; errEl.textContent='Compte créé ! Vérifiez votre email.'; }
       } else {
         if(errEl) { errEl.style.color='#F0647A'; errEl.textContent = data.error_description || data.msg || data.message || 'Erreur'; }
       }
@@ -648,9 +869,9 @@
     fr: {
       // index.html — hero
       'hero-pill':        'Plateforme active · Mis à jour quotidiennement',
-      'hero-title-1':     'Ton hub trading',
+      'hero-title-1':     'Votre hub trading',
       'hero-title-2':     'propulsé par l\'IA.',
-      'hero-sub':         'Analyse tes setups en quelques secondes, tiens ton journal, consulte le calendrier économique et maîtrise ta gestion du risque. Tout en un seul endroit.',
+      'hero-sub':         'Analysez vos setups en quelques secondes, tenez votre journal, consultez le calendrier économique et maîtrisez votre gestion du risque. Tout en un seul endroit.',
       'hero-cta':         'Voir les outils',
       'chip-1':           'Feedback instantané',
       'chip-2':           'Toutes stratégies',
@@ -658,30 +879,30 @@
       'chip-4':           '100% sécurisé · Données privées',
       // index.html — sections
       'tools-eyebrow':    'Arsenal complet',
-      'tools-title':      'Tous les outils dont tu as besoin',
-      'tools-sub':        'Chaque outil est conçu pour un aspect précis de ton trading. Ensemble, ils forment un écosystème complet.',
+      'tools-title':      'Tous les outils dont vous avez besoin',
+      'tools-sub':        'Chaque outil est conçu pour un aspect précis de votre trading. Ensemble, ils forment un écosystème complet.',
       'strat-eyebrow':    'Suite complète',
       'strat-title':      'Tous les outils, une seule plateforme.',
-      'strat-desc':       'Du Setup Analyzer à la gestion du risque, en passant par la veille macro et le journal de trading — chaque outil est conçu pour t\'aider à performer, pas juste à t\'informer.',
+      'strat-desc':       'Du Setup Analyzer à la gestion du risque, en passant par la veille macro et le journal de trading — chaque outil est conçu pour vous aider à performer, pas juste à vous informer.',
       'process-eyebrow':  'Comment ça marche',
       'process-title':    'Une analyse complète en 4 étapes',
-      'step1-num':'Étape 01','step1-title':'Upload ton chart','step1-desc':'Capture d\'écran de ton setup depuis TradingView ou ta plateforme. Glisse-dépose ou colle directement.',
-      'step2-num':'Étape 02','step2-title':'L\'IA analyse','step2-desc':'Claude Opus scanne la structure, les zones clés, le contexte macro et les confluences de ta stratégie.',
+      'step1-num':'Étape 01','step1-title':'Uploadez votre chart','step1-desc':'Capture d\'écran de votre setup depuis TradingView ou votre plateforme. Glissez-déposez ou collez directement.',
+      'step2-num':'Étape 02','step2-title':'L\'IA analyse','step2-desc':'Claude Opus scanne la structure, les zones clés, le contexte macro et les confluences de votre stratégie.',
       'step3-num':'Étape 03','step3-title':'Score & feedback','step3-desc':'Score /100, forces, faiblesses, niveaux de prix précis et verdict GO / ATTENDRE / NO-GO.',
-      'step4-num':'Étape 04','step4-title':'Sauvegarde & suivi','step4-desc':'Chaque analyse est archivée. Enregistre le résultat du trade et analyse tes stats dans le journal.',
+      'step4-num':'Étape 04','step4-title':'Sauvegarde & suivi','step4-desc':'Chaque analyse est archivée. Enregistrez le résultat du trade et analysez vos stats dans le journal.',
       'tg-title':         'Rejoindre la communauté Telegram',
       'tg-sub':           'Analyses quotidiennes, setups en live et entraide entre traders',
       'tg-cta':           'Rejoindre →',
       'stat-lbl-1':'Outils actifs','stat-lbl-2':'Claude Opus','stat-lbl-3':'Stratégies','stat-lbl-4':'Disponible',
       // tool cards
-      'tool-analyzer-name':'Setup Analyzer','tool-analyzer-desc':'Score IA de ton setup, compatible avec toutes les stratégies (ICT, SMC, Price Action…). Feedback instantané et annotations sur ton graphique.',
-      'tool-journal-name':'Journal de Trading','tool-journal-desc':'Calendrier de tes trades, suivi P&L, screenshots, notes et analyse IA de tes patterns de performance.',
+      'tool-analyzer-name':'Setup Analyzer','tool-analyzer-desc':'Score IA de votre setup, compatible avec toutes les stratégies (ICT, SMC, Price Action…). Feedback instantané et annotations sur votre graphique.',
+      'tool-journal-name':'Journal de Trading','tool-journal-desc':'Calendrier de vos trades, suivi P&L, screenshots, notes et analyse IA de vos patterns de performance.',
       'tool-eco-name':'Calendrier Éco','tool-eco-desc':'Tous les événements macroéconomiques clés — NFP, CPI, FOMC — organisés par région et impact attendu.',
-      'tool-bubble-name':'Bubble Map','tool-bubble-desc':'Visualise les flux de capitaux entre actifs en temps réel — crypto, forex, indices et matières premières.',
+      'tool-bubble-name':'Bubble Map','tool-bubble-desc':'Visualisez les flux de capitaux entre actifs en temps réel — crypto, forex, indices et matières premières.',
       'tool-calc-name':'Calculateur de Pips','tool-calc-desc':'Taille de position, valeur du pip, risque en devise et R:R optimal. Long/Short avec validation automatique.',
       // calculateur.html
       'calc-title':       'Calculateur de Pips',
-      'calc-sub':         'Calcule ta taille de position et ton risque en quelques secondes.',
+      'calc-sub':         'Calculez votre taille de position et votre risque en quelques secondes.',
       'calc-pair-label':  'Paire / Instrument',
       'calc-account-label':'Solde du compte',
       'calc-risk-label':  'Risque par trade',
@@ -812,10 +1033,57 @@
     ltApplyI18n(_currentLang);
   }
 
+  // ── Sous-menus au survol dans le menu « Outils » (chrome desktop) ──
+  // Au survol d'un outil (Journal, Setup Analyzer, Calendrier, Patrimoine), un
+  // flyout propose « Présentation » + l'accès direct à l'outil. Injecté en JS pour
+  // s'appliquer sur toutes les pages sans toucher au HTML dupliqué de la nav.
+  function ltEnhanceToolsDropdown() {
+    var menu = document.querySelector('.lt-nav__menu');
+    if (!menu || menu.getAttribute('data-sub') === '1') return;
+    // Clés par nom de page propre (sans .html) ; cibles des liens en URLs propres.
+    var SUBS = {
+      'journal-presentation':    [['Présentation','Overview','/journal-presentation'], ['Ouvrir le journal','Open the journal','/journal']],
+      'analyzer-presentation':   [['Présentation','Overview','/analyzer-presentation'], ["Ouvrir l'analyseur",'Open the analyzer','/app']],
+      'calendrier-presentation': [['Présentation','Overview','/calendrier-presentation'], ['Ouvrir le calendrier','Open the calendar','/calendrier'], ['Édition du jour','Daily edition','/eco-edition']],
+      'patrimoine-presentation': [['Présentation','Overview','/patrimoine-presentation'], ['Portefeuille','Portfolio','/patrimoine']]
+    };
+    if (!document.getElementById('ltNavSubCss')) {
+      var st = document.createElement('style'); st.id = 'ltNavSubCss';
+      st.textContent =
+        '.lt-nav__subwrap{position:relative}'
+        + '.lt-nav__menuitem.has-sub .lt-nav__menutop::after{content:"\\203A";margin-left:8px;color:var(--text-muted);font-size:15px;line-height:1}'
+        + '.lt-nav__submenu{position:absolute;top:-8px;left:100%;margin-left:6px;min-width:232px;padding:8px;background:rgba(12,15,20,0.98);border:1px solid var(--border-subtle);border-radius:var(--r-lg,12px);box-shadow:var(--shadow-lg,0 24px 60px rgba(0,0,0,.6));display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateX(-6px);pointer-events:none;transition:opacity .18s var(--ease-out,ease),transform .18s var(--ease-out,ease),visibility 0s linear .18s;z-index:30}'
+        + '.lt-nav__submenu::before{content:"";position:absolute;top:0;left:-12px;width:12px;height:100%}'
+        + '.lt-nav__subwrap:hover .lt-nav__submenu{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .18s var(--ease-out,ease),transform .18s var(--ease-out,ease)}'
+        + '.lt-nav__subitem2{display:block;padding:9px 11px;border-radius:var(--r-md,8px);color:var(--text-body);text-decoration:none;font-family:var(--font-text,"Inter",sans-serif);font-size:13.5px;font-weight:500;transition:background .15s,color .15s}'
+        + '.lt-nav__subitem2:hover{background:var(--accent-glow-soft);color:var(--text-title)}';
+      document.head.appendChild(st);
+    }
+    var items = menu.querySelectorAll('.lt-nav__menuitem');
+    Array.prototype.forEach.call(items, function (a) {
+      var href = (a.getAttribute('href') || '').split('/').pop().replace(/\.html$/, '');
+      var sub = SUBS[href];
+      if (!sub) return;
+      var wrap = document.createElement('div'); wrap.className = 'lt-nav__subwrap';
+      a.parentNode.insertBefore(wrap, a);
+      a.classList.add('has-sub');
+      wrap.appendChild(a);
+      var fly = document.createElement('div'); fly.className = 'lt-nav__submenu';
+      fly.innerHTML = sub.map(function (s) {
+        return '<a class="lt-nav__subitem2" href="' + s[2] + '" data-en="' + s[1] + '">' + s[0] + '</a>';
+      }).join('');
+      wrap.appendChild(fly);
+    });
+    menu.setAttribute('data-sub', '1');
+  }
+  ltEnhanceToolsDropdown();
+
   // Init - run immediately and after checkSession completes
   window.ltRenderUserBar = ltRenderUserBar;
   ltSyncUser();
   ltRenderUserBar();
+  // La synchro complète (token + Premium + profil) est déjà lancée plus haut via
+  // ltSyncAccount() si un token est présent — elle met l'UI à jour sans rechargement.
   // Re-render after page auth logic runs (e.g. checkSession async)
   setTimeout(ltRenderUserBar, 800);
   setTimeout(ltRenderUserBar, 2000);

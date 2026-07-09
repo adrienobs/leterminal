@@ -4,8 +4,7 @@
    Polices chargées via Google Fonts CDN.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
+/* Polices auto-hébergées via fonts.css (RGPD : plus d'appel Google Fonts) */
 /* ============================================================
    COLOR TOKENS — "Cinematic Luxury"
    ============================================================ */
@@ -184,6 +183,7 @@
 .lt-nav__links > a { font-size: 13px; color: var(--text-muted); letter-spacing: 0.04em; transition: color var(--dur-fast) var(--ease-out); }
 .lt-nav__links > a:hover { color: var(--text-title); }
 .lt-nav__actions { display: flex; gap: 10px; align-items: center; }
+.lt-nav__cta-ic { display: none; }  /* icône premium : visible seulement en mobile (voir media ≤560) */
 .lt-nav__pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--text-muted); border: 1px solid var(--border-subtle); border-radius: var(--r-sm); padding: 5px 9px; cursor: pointer; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
 .lt-nav__pill:hover { color: var(--accent); border-color: var(--border); }
 
@@ -207,10 +207,27 @@
   .lt-nav, .lt-chrome.is-scrolled .lt-nav { padding: 12px 20px; }
 }
 @media (max-width: 560px) {
-  .lt-nav, .lt-chrome.is-scrolled .lt-nav { padding: 10px 14px; }
-  .lt-nav__word { letter-spacing: 0.14em; font-size: 12.5px; }
+  .lt-nav, .lt-chrome.is-scrolled .lt-nav { padding: 10px 12px; }
+  /* Mobile : on libère de la place — logo réduit au pictogramme, langue masquée */
+  .lt-nav__word { display: none; }
   .lt-nav__pill { display: none; }
   .lt-nav__actions { gap: 8px; }
+  /* Premium → bouton carré à icône (texte masqué) */
+  .lt-nav__cta { padding: 0; width: 38px; height: 38px; border-radius: var(--r-md); flex-shrink: 0; }
+  .lt-nav__cta-txt { display: none; }
+  .lt-nav__cta-ic { display: inline-flex; }
+  /* Profil → puce carrée (avatar seul, sans nom ni chevron) */
+  .lt-ub-name, .lt-ub-caret { display: none !important; }
+  .lt-ub-chip { padding: 0 !important; width: 38px; height: 38px; justify-content: center; }
+  .lt-ub-avatar { width: 26px; height: 26px; }
+  /* Connexion (déconnecté) → bouton ICÔNE carré, toujours visible en haut à droite */
+  #loginBtn { width: 38px; height: 38px; padding: 0; font-size: 0; color: transparent; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #loginBtn::before { content: ''; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23C3CAD4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") center/18px no-repeat; }
+  /* Chip profil « early » (accueil, anti-flicker) → avatar seul sur mobile, ne déborde pas */
+  #ltUbChipEarly > span { display: none !important; }
+  #ltUbChipEarly { padding: 5px !important; }
+  /* Garde-fous anti-débordement : médias et tableaux ne dépassent jamais l'écran */
+  img, canvas, video, table, iframe { max-width: 100%; }
 }
 
 /* ---------- LEFT SIDE DOCK (fixed page menu, mobile bottom bar) ---------- */
@@ -238,7 +255,7 @@
    ============================================================ */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg-base); color: var(--text-body); font-family: var(--font-text); -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--bg-base); color: var(--text-body); font-family: var(--font-text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 
 .app { display: grid; grid-template-columns: 256px 1fr; min-height: 100vh; padding-top: var(--chrome-h, 102px); }
@@ -318,3 +335,66 @@ select.calc-input { cursor: pointer; }
 .calc-result { display: flex; flex-direction: column; gap: 3px; }
 .calc-result__k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
 .calc-result__v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 500; }
+
+/* ============================================================================
+   THÈME CLAIR — activé par data-theme="light" sur <html> (voir theme.js).
+   On redéfinit les tokens sémantiques + on donne un équivalent clair aux effets
+   pensés pour le sombre (métal, ombres, verre). Le sombre reste le défaut.
+   ============================================================================ */
+:root[data-theme="light"] {
+  --bg-void: #E9EEF5;
+  --bg-base: #F4F6FA;
+  --bg-surface: #EDF1F7;
+  --bg-elevated: #FFFFFF;
+
+  --accent: #2E77C2;
+  --accent-deep: #1E5A96;
+  --accent-bright: #3D82C8; /* « bright » sert de texte accent : doit rester lisible sur blanc */
+  --accent-glow: rgba(46, 119, 194, 0.22);
+  --accent-glow-soft: rgba(46, 119, 194, 0.07);
+
+  --text-title: #0C1119;
+  --text-body: #384252;
+  --text-muted: #626E80;
+
+  --border: #C6D0DC;
+  --border-subtle: #E2E8F0;
+
+  --grain-opacity: 0.03;
+  --vignette: radial-gradient(ellipse 120% 90% at 50% 0%, transparent 45%, rgba(12, 18, 28, 0.08) 100%);
+
+  --bull: #12A66B;
+  --bear: #DA3B57;
+  --neutral: #B9822A;
+  --bull-glow: rgba(18, 166, 107, 0.14);
+  --bear-glow: rgba(218, 59, 87, 0.14);
+  --neutral-glow: rgba(185, 130, 42, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 24px 64px rgba(15, 23, 42, 0.12);
+  --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  /* Titres « métal brossé » : dégradé sombre lisible sur fond clair */
+  --metal-gradient: linear-gradient(180deg, #1a2432 0%, #0b0e13 100%);
+}
+/* Fond de page global en clair */
+:root[data-theme="light"] body { background: var(--bg-base); color: var(--text-body); }
+
+/* ── Bouton bascule de thème (pastille dans la nav) ── */
+.lt-theme-pill { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--border-subtle); border-radius: 50px; background: transparent; color: var(--text-muted); cursor: pointer; transition: color var(--dur-fast, .15s) var(--ease-out, ease), border-color var(--dur-fast, .15s) var(--ease-out, ease), background var(--dur-fast, .15s) var(--ease-out, ease); }
+.lt-theme-pill:hover { color: var(--text-title); border-color: var(--border); background: var(--accent-glow-soft); }
+.lt-theme-ic { display: inline-flex; }
+.lt-theme-ic--sun { display: none; }
+:root[data-theme="light"] .lt-theme-ic--moon { display: none; }
+:root[data-theme="light"] .lt-theme-ic--sun { display: inline-flex; }
+
+/* ── Bouton thème en bas de la barre latérale des outils (injecté par theme.js) ── */
+.lt-side-theme { margin-top: 10px; display: flex; align-items: center; gap: 9px; width: 100%; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: var(--r-md); background: transparent; color: var(--text-muted); font-family: var(--font-text); font-size: 12.5px; font-weight: 600; cursor: pointer; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
+.lt-side-theme:hover { color: var(--text-title); border-color: var(--border); background: var(--accent-glow-soft); }
+.lt-theme-lbl--dark { display: none; }
+:root[data-theme="light"] .lt-theme-lbl--light { display: none; }
+:root[data-theme="light"] .lt-theme-lbl--dark { display: inline; }
+
+/* Item « thème » injecté en bas du dock gauche (theme.js) */
+button.lt-dock__item { background: transparent; border: none; cursor: pointer; font-family: var(--font-text); padding: 0; }

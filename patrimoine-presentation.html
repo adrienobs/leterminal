@@ -2,11 +2,77 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le Terminal — Patrimoine · Présentation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Suivi de Patrimoine & allocation de portefeuille | Le Terminal</title>
+<meta name="description" content="Suivez votre patrimoine investi : performance dans le temps, allocation par classe d'actifs et 3 plans d'investissement selon votre profil de risque.">
+<link rel="canonical" href="https://www.leterminal.net/patrimoine-presentation">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Terminal">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Suivi de Patrimoine &amp; allocation de portefeuille | Le Terminal">
+<meta property="og:description" content="Suivez votre patrimoine investi : performance dans le temps, allocation par classe d&#x27;actifs et 3 plans d&#x27;investissement selon votre profil de risque.">
+<meta property="og:url" content="https://www.leterminal.net/patrimoine-presentation">
+<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Suivi de Patrimoine &amp; allocation de portefeuille | Le Terminal">
+<meta name="twitter:description" content="Suivez votre patrimoine investi : performance dans le temps, allocation par classe d&#x27;actifs et 3 plans d&#x27;investissement selon votre profil de risque.">
+<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Suivi de Patrimoine",
+      "url": "https://www.leterminal.net/patrimoine-presentation",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "fr-FR",
+      "description": "Suivez votre patrimoine investi : performance dans le temps, allocation par classe d'actifs et 3 plans d'investissement selon votre profil de risque.",
+      "isPartOf": {
+        "@id": "https://www.leterminal.net/#website"
+      },
+      "publisher": {
+        "@id": "https://www.leterminal.net/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.leterminal.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Patrimoine",
+          "item": "https://www.leterminal.net/patrimoine-presentation"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="./fonts/anton-400-latin.woff2" crossorigin>
+<link rel="stylesheet" href="./fonts.css">
 <link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <link rel="stylesheet" href="./eco.css">
 <style>
 /* ============================================================
@@ -16,6 +82,9 @@
 .pm { display: block; padding-top: 0; overflow-x: clip; position: relative; z-index: 1; min-width: 0; }
 /* Le contenu Présentation s'affiche en pleine largeur de la zone (à droite de la barre latérale) */
 body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !important; margin: 0 !important; }
+/* Coller le hero sous le fil d'Ariane : annuler le gap flex (40px) que l'appshell
+   met entre la barre (.top) et le contenu (.pm) — c'est lui qui crée le vide. */
+body.eco-page .app > main.wrap { gap: 0 !important; }
 
 .pm-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); }
 .pm-eyebrow .lt-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
@@ -172,35 +241,37 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
 <div class="glow" aria-hidden="true"></div>
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
-      <div class="lt-nav__drop">
-        <button class="lt-nav__droptrigger">Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+      <div class="lt-nav__drop" id="ltDrop">
+        <button class="lt-nav__droptrigger" aria-expanded="false" data-en="Tools <span class='lt-nav__caret'><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg></span>">
+          Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
         <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Score IA de ton setup</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Résultats vérifiés</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine · Présentation</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Suivi de patrimoine long terme</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine · Portefeuille</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Connexion · évolution · plans</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
+          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
+          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
+          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
+          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
+          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
         </div>
       </div>
-      <a href="./patrimoine-presentation.html" data-en="Wealth">Patrimoine</a>
-      <a href="./tarifs.html">Tarifs</a>
-      <a href="./index.html#method">Méthode</a>
-      <a href="./index.html#community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
-      <span class="lt-nav__pill" title="Changer de langue" onclick="window.ltToggleLang&&ltToggleLang()">FR</span>
-      <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():(window.ltToggleLang&&ltToggleLang())">Connexion</button>
+      <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
+      <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm" href="./tarifs.html">Accès Premium</a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
 </div>
@@ -217,17 +288,12 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
       <div class="pm-hero__copy">
         <div class="pm-eyebrow" data-step="1"><span class="lt-dot"></span> Nouveau · Suivi de patrimoine</div>
         <h1 class="pm-hero__title">
-          <span class="pm-line lt-metal" data-step="1">Ton patrimoine,</span>
+          <span class="pm-line lt-metal" data-step="1">Votre patrimoine,</span>
           <span class="pm-line lt-metal" data-step="2">enfin lisible.</span>
         </h1>
-        <p class="pm-hero__lede" data-step="3">Connecte ton courtier, vois ta valeur réelle évoluer en temps réel, et fais croître ton capital avec des plans pensés pour le long terme. Le luxe d'y voir clair.</p>
         <div class="pm-hero__cta" data-step="3">
-          <a class="pm-btn pm-btn--primary" href="./patrimoine.html">Ouvrir mon portefeuille <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a class="pm-btn pm-btn--primary" href="/patrimoine">Ouvrir mon portefeuille <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           <a class="pm-btn pm-btn--ghost" href="#how">Voir comment ça marche</a>
-        </div>
-        <div class="pm-hero__brokers" data-step="3">
-          <span>Compatible</span>
-          <i>Trade Republic</i><i>BoursoBank</i><i>DEGIRO</i><i>IBKR</i>
         </div>
       </div>
 
@@ -260,44 +326,20 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
     <div class="pm-hero__scroll" data-step="3"><span></span></div>
   </section>
 
-  <!-- ========== STATS BAND ========== -->
-  <section class="pm-stats" data-reveal data-stagger>
-    <div class="pm-stat"><span class="pm-stat__v"><span data-count="2.8" data-dec="1" data-suffix=" Md€">0</span></span><span class="pm-stat__l">Patrimoine suivi</span></div>
-    <div class="pm-stat"><span class="pm-stat__v"><span data-count="11.4" data-dec="1" data-prefix="+" data-suffix=" %">0</span></span><span class="pm-stat__l">Rendement annualisé moyen</span></div>
-    <div class="pm-stat"><span class="pm-stat__v"><span data-count="4">0</span></span><span class="pm-stat__l">Courtiers compatibles</span></div>
-    <div class="pm-stat"><span class="pm-stat__v"><span data-count="30" data-suffix=" s">0</span></span><span class="pm-stat__l">Pour tout connecter</span></div>
-  </section>
 
   <!-- ========== FEATURE ROWS ========== -->
   <section class="pm-feats" id="how">
     <div class="pm-feats__head" data-reveal>
       <span class="pm-eyebrow"><span class="lt-dot"></span> Comment ça marche</span>
-      <h2 class="pm-h2">Quatre étapes vers la clarté</h2>
+      <h2 class="pm-h2">Trois étapes vers la clarté</h2>
     </div>
-
-    <article class="pm-feat" data-reveal="right">
-      <div class="pm-feat__txt">
-        <span class="pm-feat__n">01</span>
-        <span class="pm-eyebrow">Connexion</span>
-        <h3 class="pm-feat__title">Tout tes comptes, réunis</h3>
-        <p class="pm-feat__desc">Lie Trade Republic, BoursoBank, DEGIRO ou Interactive Brokers en quelques secondes. Tes positions se synchronisent automatiquement, en lecture seule. Aucun ordre n'est jamais exécuté.</p>
-        <ul class="pm-feat__points"><li>Synchronisation auto</li><li>Chiffré de bout en bout</li><li>Multi-courtiers</li></ul>
-      </div>
-      <div class="pm-feat__viz">
-        <div class="pm-viz pm-viz--connect">
-          <div class="pm-connrow" style="animation-delay:0s"><span class="pm-connrow__mk">TR</span><span class="pm-connrow__nm">Trade Republic</span><span class="pm-connrow__ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-          <div class="pm-connrow" style="animation-delay:.5s"><span class="pm-connrow__mk">BB</span><span class="pm-connrow__nm">BoursoBank</span><span class="pm-connrow__ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-          <div class="pm-connrow" style="animation-delay:1s"><span class="pm-connrow__mk">DE</span><span class="pm-connrow__nm">DEGIRO</span><span class="pm-connrow__ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-        </div>
-      </div>
-    </article>
 
     <article class="pm-feat is-flip" data-reveal="left">
       <div class="pm-feat__txt">
-        <span class="pm-feat__n">02</span>
+        <span class="pm-feat__n">01</span>
         <span class="pm-eyebrow">Performance</span>
-        <h3 class="pm-feat__title">Vois ta valeur grandir</h3>
-        <p class="pm-feat__desc">Une courbe d'évolution claire, du mois écoulé à tout ton historique. Plus-value en euros et en pourcentage, rendement annualisé, dividendes — tout est lisible d'un regard.</p>
+        <h3 class="pm-feat__title">Voyez votre valeur grandir</h3>
+        <p class="pm-feat__desc">Une courbe d'évolution claire, du mois écoulé à tout votre historique. Plus-value en euros et en pourcentage, rendement annualisé, dividendes — tout est lisible d'un regard.</p>
         <ul class="pm-feat__points"><li>Sélecteur 1M / 6M / 1A / Max</li><li>Plus-value € et %</li><li>Rendement annualisé</li></ul>
       </div>
       <div class="pm-feat__viz">
@@ -315,10 +357,10 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
 
     <article class="pm-feat" data-reveal="right">
       <div class="pm-feat__txt">
-        <span class="pm-feat__n">03</span>
+        <span class="pm-feat__n">02</span>
         <span class="pm-eyebrow">Répartition</span>
-        <h3 class="pm-feat__title">Comprends ton exposition</h3>
-        <p class="pm-feat__desc">Actions, ETF, obligations, liquidités, crypto : visualise comment ton capital est réparti. Repère les déséquilibres et rééquilibre en connaissance de cause.</p>
+        <h3 class="pm-feat__title">Comprenez votre exposition</h3>
+        <p class="pm-feat__desc">Actions, ETF, obligations, liquidités, crypto : visualisez comment votre capital est réparti. Repérez les déséquilibres et rééquilibrez en connaissance de cause.</p>
         <ul class="pm-feat__points"><li>Donut par classe d'actifs</li><li>Montant et % par poche</li><li>Détection des déséquilibres</li></ul>
       </div>
       <div class="pm-feat__viz">
@@ -331,10 +373,10 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
 
     <article class="pm-feat is-flip" data-reveal="left">
       <div class="pm-feat__txt">
-        <span class="pm-feat__n">04</span>
+        <span class="pm-feat__n">03</span>
         <span class="pm-eyebrow">Stratégie</span>
         <h3 class="pm-feat__title">Trois trajectoires clés en main</h3>
-        <p class="pm-feat__desc">Prudent, Équilibré ou Dynamique : choisis l'allocation adaptée à ton profil de risque et ton horizon. Objectifs de rendement réalistes, du capital préservé à la forte croissance.</p>
+        <p class="pm-feat__desc">Prudent, Équilibré ou Dynamique : choisissez l'allocation adaptée à votre profil de risque et votre horizon. Objectifs de rendement réalistes, du capital préservé à la forte croissance.</p>
         <ul class="pm-feat__points"><li>Risque faible → élevé</li><li>+3 % à +15 % / an visés</li><li>Ajustable à tout moment</li></ul>
       </div>
       <div class="pm-feat__viz">
@@ -351,10 +393,10 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
   <section class="pm-cta" data-reveal="scale">
     <div class="pm-cta__glow"></div>
     <h2 class="pm-cta__title lt-metal">Prêt à voir clair ?</h2>
-    <p class="pm-cta__lede">Connecte ton premier compte en 30 secondes. Données de démonstration disponibles si tu veux d'abord explorer.</p>
+    <p class="pm-cta__lede">Connectez votre premier compte en 30 secondes. Données de démonstration disponibles si vous voulez d'abord explorer.</p>
     <div class="pm-cta__btns">
-      <a class="pm-btn pm-btn--primary pm-btn--lg" href="./patrimoine.html">Ouvrir mon portefeuille <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a class="pm-btn pm-btn--ghost pm-btn--lg" href="./tarifs.html">Voir les offres</a>
+      <a class="pm-btn pm-btn--primary pm-btn--lg" href="/patrimoine">Ouvrir mon portefeuille <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a class="pm-btn pm-btn--ghost pm-btn--lg" href="/tarifs">Voir les offres</a>
     </div>
   </section>
 
@@ -445,5 +487,10 @@ body.eco-page .app > main.wrap > .pm { max-width: none !important; width: auto !
   window.ecoReloadNews = function(){};
 })();
 </script>
+<script src="./cookies.js"></script>
+<script src="./onboarding.js"></script>
+<script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>

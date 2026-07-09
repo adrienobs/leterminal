@@ -42,6 +42,39 @@
   'use strict';
 
   var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  // URLs propres (cleanUrls) : /journal, /tarifs… n'ont plus de .html → on le
+  // rétablit pour le matching interne (PAGES, item actif, traceur d'usage).
+  if (path && path.indexOf('.') === -1) path += '.html';
+
+  // ── Traceur d'usage local (privé, jamais envoyé) : alimente « Où vous passez
+  // votre temps » dans l'Espace Compte. Compte les visites et le temps actif par outil.
+  (function trackUsage(){
+    try{
+      var TOOLS = {
+        'app.html':'Setup Analyzer','journal.html':'Journal','calendrier.html':'Calendrier Éco',
+        'bubble.html':'Bubble Map','calculateur.html':'Calculateur de Pips','mur-des-trades.html':'Mur des Trades',
+        'patrimoine.html':'Patrimoine','patrimoine-presentation.html':'Patrimoine','patrimoine-plan.html':'Patrimoine'
+      };
+      var tool = TOOLS[path] || (/^eco-/.test(path) ? 'Calendrier Éco' : null);
+      if(!tool) return;
+      var KEY='lt_usage';
+      function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ return {}; } }
+      var u=read(); if(!u[tool]) u[tool]={ms:0,visits:0};
+      u[tool].visits++; u[tool].last=new Date().toISOString();
+      try{ localStorage.setItem(KEY, JSON.stringify(u)); }catch(e){}
+      var t0=Date.now(), active=true;
+      function flush(){
+        var dt = active ? (Date.now()-t0) : 0; t0=Date.now();
+        if(dt<=0 || dt>1000*60*60) return; // ignore négatif / onglet laissé ouvert > 1 h
+        var uu=read(); if(!uu[tool]) uu[tool]={ms:0,visits:0};
+        uu[tool].ms=(uu[tool].ms||0)+dt;
+        try{ localStorage.setItem(KEY, JSON.stringify(uu)); }catch(e){}
+      }
+      document.addEventListener('visibilitychange', function(){ if(document.hidden){ flush(); active=false; } else { t0=Date.now(); active=true; } });
+      window.addEventListener('pagehide', flush);
+    }catch(e){}
+  })();
+
   var PAGES = {
     'journal.html':     { crumb: 'Journal de Trading',  key: 'journal' },
     'calendrier.html':  { crumb: 'Calendrier Éco',      key: 'calendrier' },
@@ -51,6 +84,9 @@
     'mur-des-trades.html': { crumb: 'Mur des Trades',   key: 'trades' },
     'patrimoine.html':            { crumb: 'Patrimoine · Portefeuille',   key: 'patrimoine' },
     'patrimoine-presentation.html': { crumb: 'Patrimoine · Présentation', key: 'patrimoine' },
+    'journal-presentation.html':    { crumb: 'Journal · Présentation',       key: 'journal' },
+    'calendrier-presentation.html': { crumb: 'Calendrier Éco · Présentation', key: 'calendrier' },
+    'analyzer-presentation.html':   { crumb: 'Setup Analyzer · Présentation', key: 'analyzer' },
     'patrimoine-plan.html':       { crumb: 'Patrimoine · Plan',           key: 'patrimoine' },
     // Pages Éco (anciennes pages d'actus) — rattachées à la branche Calendrier
     'eco-edition.html':      { crumb: 'Calendrier Éco · Présentation', key: 'calendrier' },
@@ -65,8 +101,15 @@
     'eco-calendrier.html':   { crumb: 'Calendrier Éco · Calendrier',    key: 'calendrier' },
     'eco-crypto.html':       { crumb: 'Calendrier Éco · Crypto',        key: 'calendrier' },
     'eco-archive.html':      { crumb: 'Calendrier Éco · Archive',       key: 'calendrier' },
-    'profil.html':           { crumb: 'Mon profil',                     key: 'profil' },
-    'eco-article.html':      { crumb: 'Calendrier Éco · Article',       key: 'calendrier' }
+    'profil.html':           { crumb: 'Mon compte',                     key: 'profil' },
+    'compte.html':           { crumb: 'Mon compte',                     key: 'profil' },
+    'eco-article.html':      { crumb: 'Calendrier Éco · Article',       key: 'calendrier' },
+    // Pages « marketing » : pas de barre latérale ni de fil d'ariane (on préserve
+    // leur mise en page). On n'y ajoute QUE la barre mobile (hamburger + nouveau
+    // tiroir de navigation), pour remplacer l'ancien menu « Le Terminal Hub ».
+    'index.html':            { crumb: 'Accueil', key: 'dashboard', chromeOnly: true },
+    'tarifs.html':           { crumb: 'Tarifs',  key: 'dashboard', chromeOnly: true },
+    'avis.html':             { crumb: 'Avis',    key: 'dashboard', chromeOnly: true }
   };
   var cfg = PAGES[path];
   // Repli : toute page éco non listée (eco-*.html) reçoit quand même l'AppShell,
@@ -93,9 +136,22 @@
 
   var NAV = [
     { key: 'dashboard', label: 'Accueil', href: './index.html', icon: I.dashboard },
-    { key: 'journal', label: 'Journal de Trading', href: './journal.html', icon: I.journal, pro: true },
+    { key: 'journal', label: 'Journal de Trading', href: './journal.html', icon: I.journal, pro: true, children: [
+      { label: 'Présentation', href: './journal-presentation.html', icon: I.pres },
+      { label: 'Ouvrir le journal', href: './journal.html', icon: I.journal }
+    ] },
+    { key: 'analyzer', label: 'Setup Analyzer', href: './app.html', icon: I.analyzer, pro: true, children: [
+      { label: 'Présentation', href: './analyzer-presentation.html', icon: I.pres },
+      { label: 'Historique', href: './app.html#historique', icon: I.hist },
+      { label: 'Perfs', href: './app.html#perfs', icon: I.perf }
+    ] },
+    { key: 'patrimoine', label: 'Patrimoine', href: './patrimoine-presentation.html', pro: true, icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>', children: [
+      { label: 'Présentation', href: './patrimoine-presentation.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>' },
+      { label: 'Portefeuille', href: './patrimoine.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>' }
+    ] },
     { key: 'calendrier', label: 'Calendrier Éco', href: './calendrier.html', icon: I.calendrier, pro: true, children: [
-      { label: 'Présentation', href: './eco-edition.html', icon: I.pres, children: [
+      { label: 'Présentation', href: './calendrier-presentation.html', icon: I.pres },
+      { label: 'Édition du jour', href: './eco-edition.html', icon: I.pres, children: [
         { label: 'La sélection', href: './eco-selection.html' },
         { label: 'Europe', href: './eco-europe.html' },
         { label: 'Amériques', href: './eco-ameriques.html' },
@@ -109,17 +165,9 @@
       { label: 'Crypto', href: './eco-crypto.html', icon: I.crypto },
       { label: 'Archive', href: './eco-archive.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"/><path d="M9.5 12h5"/></svg>' }
     ] },
-    { key: 'analyzer', label: 'Setup Analyzer', href: './app.html', icon: I.analyzer, pro: true, children: [
-      { label: 'Historique', href: './app.html#historique', icon: I.hist },
-      { label: 'Perfs', href: './app.html#perfs', icon: I.perf }
-    ] },
     { key: 'bubble', label: 'Bubble Map', href: './bubble.html', icon: I.bubble },
-    { key: 'trades', label: 'Mur des Trades', href: './mur-des-trades.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v1.5A3 3 0 0 0 6 10.5M19 6h2v1.5a3 3 0 0 1-3 3"/></svg>' },
-    { key: 'patrimoine', label: 'Patrimoine', href: './patrimoine-presentation.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>', children: [
-      { label: 'Présentation', href: './patrimoine-presentation.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>' },
-      { label: 'Portefeuille', href: './patrimoine.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>' }
-    ] },
-    { key: 'calculateur', label: 'Calculateur de Pips', href: './calculateur.html', icon: I.calc }
+    { key: 'calculateur', label: 'Calculateur de Pips', href: './calculateur.html', icon: I.calc },
+    { key: 'trades', label: 'Mur des Trades', href: './mur-des-trades.html', icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v1.5A3 3 0 0 0 6 10.5M19 6h2v1.5a3 3 0 0 1-3 3"/></svg>' }
   ];
 
   function subTree(items, deep) {
@@ -149,16 +197,24 @@
   }
 
   function buildFooter() {
-    var isPro = false, loggedIn = false, email = '';
+    var isPro = false, loggedIn = false, email = '', pseudo = '', avatar = '';
     try {
       isPro = localStorage.getItem('lt_pro') === '1';
       loggedIn = !!localStorage.getItem('ta_token');
       email = localStorage.getItem('ta_email') || '';
+      pseudo = localStorage.getItem('lt_pseudo') || '';
+      avatar = localStorage.getItem('lt_avatar') || '';
     } catch(e) {}
-    // Connecté (et a fortiori PRO) → on remplace la pub PRO par email + déconnexion
     if (loggedIn && isPro) {
+      var displayName = pseudo || (email ? email.split('@')[0] : 'Mon compte');
+      var initial = (displayName.charAt(0) || '?').toUpperCase();
+      var av = avatar
+        ? '<img src="' + avatar + '" alt="" style="width:34px;height:34px;border-radius:8px;object-fit:cover;flex-shrink:0">'
+        : '<span style="width:34px;height:34px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0095FF,#38B6FF);color:#fff;font-family:var(--font-display,\'Anton\',sans-serif);font-size:15px">' + initial + '</span>';
       return '<div class="side__pro side__account" id="sideFooter">'
-        + (email ? '<p class="side__account-mail" style="font-size:12px;color:var(--text2,#7E8794);word-break:break-all;margin:0 0 10px">' + email + '</p>' : '')
+        + '<a class="side__acct" href="./compte.html" title="Mon compte">' + av
+        + '<div class="side__acct-txt"><span class="side__acct-name">' + displayName + '</span>'
+        + (email ? '<span class="side__acct-mail">' + email + '</span>' : '') + '</div></a>'
         + '<button class="lt-btn lt-btn--ghost lt-btn--sm" style="width:100%" onclick="(window.ltGlobalLogout?ltGlobalLogout():(window.ltLogout?ltLogout():(localStorage.clear(),location.href=\'./index.html\')))">Déconnexion</button></div>';
     }
     return '<div class="side__pro" id="sideFooter"><h4>Accès Premium</h4><p>Analyses illimitées, journal complet et alertes macro en direct.</p>'
@@ -191,6 +247,18 @@
       }).catch(function(){});
   }
 
+  // Reconstruit le pied de la barre latérale / du tiroir À PARTIR du cache local
+  // (sans appel réseau). Appelé par menu.js après une synchro de compte pour
+  // refléter immédiatement Premium / pseudo / avatar sans recharger la page.
+  window.ltRebuildAppFooter = function () {
+    var nodes = document.querySelectorAll('#sideFooter');
+    Array.prototype.forEach.call(nodes, function (f) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = buildFooter();
+      if (tmp.firstChild) f.replaceWith(tmp.firstChild);
+    });
+  };
+
   // ── CSS additionnel (sous-menus au style du design) ──
   if (!document.getElementById('appshell-css')) {
     var st = document.createElement('style');
@@ -211,6 +279,10 @@
       + '.side__subitem:hover .side__ic{color:var(--accent)}'
       + '.side__sub--deep{margin-left:12px}'
       + '.side__subitem--deep{font-size:12.5px;padding:6px 10px}'
+      + '.side__acct{display:flex;align-items:center;gap:10px;margin-bottom:12px;min-width:0}'
+      + '.side__acct-txt{display:flex;flex-direction:column;min-width:0}'
+      + '.side__acct-name{font-family:var(--font-display,"Anton",sans-serif);text-transform:uppercase;letter-spacing:.02em;font-size:14px;color:var(--text-title,#F2F4F7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'
+      + '.side__acct-mail{font-family:var(--font-text,"Inter",sans-serif);font-size:11px;color:var(--text-muted,#7E8794);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'
       // Force la police/interligne du design dans la barre latérale (eco.css impose
       // sinon sa propre police plus large → libellés sur 2 lignes sur les pages éco)
       + '.side, .side__label, .side__item, .side__subitem, .side__pro, .side__pro *{font-family:var(--font-text,"Inter",system-ui,sans-serif);line-height:1.2}'
@@ -239,13 +311,180 @@
       + 'body.eco-page .calcard__frame{width:100%}'
       // Le fil d'ariane est « sticky » : son fond doit être opaque + flouté, sinon
       // le contenu qui défile dessous transparaît (effet de chevauchement).
-      + '.top{background:var(--bg-base,#07090C);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}';
+      + '.top{background:var(--bg-base,#07090C);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}'
+      // ── Mobile / iPad (≤880px) : hamburger + tiroir de navigation complet ──
+      + '.lt-burger{display:none}.lt-mnav,.lt-mnav__bd{display:none}'
+      + '@media (max-width:880px){'
+      +   'body{overflow-x:hidden}'
+      +   '.lt-burger{display:inline-flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;width:38px;height:38px;margin-right:10px;background:transparent;border:1px solid var(--border-subtle);border-radius:var(--r-md,6px);cursor:pointer;flex-shrink:0;padding:0}'
+      +   '.lt-burger span{display:block;width:17px;height:1.6px;background:var(--text-body);border-radius:2px}'
+      +   '.lt-mnav__bd{display:block;position:fixed;inset:0;z-index:1400;background:rgba(7,9,12,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}'
+      +   '.lt-mnav__bd.is-open{opacity:1;visibility:visible}'
+      +   '.lt-mnav{display:block;position:fixed;top:0;left:0;bottom:0;z-index:1401;width:min(84vw,300px);background:linear-gradient(180deg,var(--bg-surface),var(--bg-base));border-right:1px solid var(--border-subtle);box-shadow:0 0 60px rgba(0,0,0,.6);transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto;-webkit-overflow-scrolling:touch}'
+      +   '.lt-mnav.is-open{transform:none}'
+      +   '.lt-mnav__inner{padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}'
+      + '}'
+      // Pages marketing (.lt-nav--mobilebar) : sur mobile/iPad on ne garde QUE le
+      // logo (la marque) centré — le mot « LE TERMINAL » est masqué. Compte/connexion
+      // à droite.
+      + '@media (max-width:860px){'
+      +   '.lt-nav--mobilebar{position:relative}'
+      +   '.lt-nav--mobilebar .lt-nav__brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;z-index:1}'
+      +   '.lt-nav--mobilebar .lt-nav__word{display:none!important}'
+      +   '.lt-nav--mobilebar .lt-nav__mark svg{width:24px;height:24px}'
+      +   '.lt-nav--mobilebar .lt-nav__actions{position:relative;z-index:2}'
+      + '}';
     document.head.appendChild(st);
   }
 
   // ── Retire le ticker de prix (pricetape) des pages d'actus éco : non désiré,
   //    et il décalait l'AppShell vers le bas (mauvaise position de la barre latérale). ──
   Array.prototype.slice.call(document.querySelectorAll('.pricetape')).forEach(function (el) { el.remove(); });
+
+  // ── Statut des marchés EN DIRECT (badge cliquable du fil d'ariane) ──
+  function topRightHTML(){
+    // Avatar/initiales du compte retirés volontairement du fil d'ariane.
+    return '<div class="top__right">'
+      + '<div class="mkt" id="mktWrap">'
+      +   '<button class="top__status" id="mktStatus" type="button" aria-haspopup="true" aria-expanded="false">'
+      +     '<span class="lt-dot" id="mktDot"></span><span id="mktLbl" data-en="Market open">Marché ouvert</span>'
+      +     '<svg class="mkt__c" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>'
+      +   '</button>'
+      +   '<div class="mkt-pop" id="mktPop" hidden></div>'
+      + '</div>'
+      + '</div>';
+  }
+  function tzParts(tz){
+    try{
+      var p = new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+      var o={}; p.forEach(function(x){ o[x.type]=x.value; });
+      var wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+      return { day:wd[o.weekday], min:(parseInt(o.hour,10)%24)*60+parseInt(o.minute,10) };
+    }catch(e){ return null; }
+  }
+  function inSess(p,oH,oM,cH,cM){ if(!p||p.day<1||p.day>5) return false; var t=p.min; return t>=oH*60+oM && t<cH*60+cM; }
+  function computeMarkets(){
+    var now=new Date(), uDay=now.getUTCDay(), uMin=now.getUTCHours()*60+now.getUTCMinutes();
+    // Forex : ouvre dimanche 21:00 UTC, ferme vendredi 21:00 UTC
+    var fx = (uDay===0 && uMin>=21*60) || (uDay>=1 && uDay<=4) || (uDay===5 && uMin<21*60);
+    return {
+      open: fx, // l'état « marché » de référence suit le Forex (marché phare du trading)
+      list:[
+        { n:'Forex',          en:'Forex',         open:fx,                                      h:'Dim. 21:00 → Ven. 21:00 UTC' },
+        { n:'Actions US',     en:'US stocks',     open:inSess(tzParts('America/New_York'),9,30,16,0), h:'9:30–16:00 ET' },
+        { n:'Actions Europe', en:'EU stocks',     open:inSess(tzParts('Europe/Paris'),9,0,17,30),     h:'9:00–17:30 CET' },
+        { n:'Actions Asie',   en:'Asia stocks',   open:inSess(tzParts('Asia/Tokyo'),9,0,15,0),         h:'9:00–15:00 JST' },
+        { n:'Crypto',         en:'Crypto',        open:true,                                    h:'24h/24 · 7j/7' }
+      ]
+    };
+  }
+  function refreshMkt(){
+    var btn=document.getElementById('mktStatus'); if(!btn) return;
+    var en=(localStorage.getItem('lt_lang')==='en'), m=computeMarkets();
+    btn.classList.toggle('mkt--closed', !m.open);
+    var lbl=document.getElementById('mktLbl');
+    if(lbl){ lbl.setAttribute('data-en', m.open?'Market open':'Market closed'); lbl.textContent = en ? (m.open?'Market open':'Market closed') : (m.open?'Marché ouvert':'Marché fermé'); }
+    var pop=document.getElementById('mktPop');
+    if(pop){
+      pop.innerHTML = '<div class="mkt-pop__h" data-en="Markets status">Statut des marchés</div>'
+        + m.list.map(function(x){
+            var st = x.open ? (en?'Open':'Ouvert') : (en?'Closed':'Fermé');
+            return '<div class="mkt-row"><span class="mkt-row__dot '+(x.open?'on':'off')+'"></span>'
+              + '<span class="mkt-row__txt"><span class="mkt-row__n">'+(en?x.en:x.n)+'</span><span class="mkt-row__h">'+x.h+'</span></span>'
+              + '<span class="mkt-row__s '+(x.open?'on':'off')+'">'+st+'</span></div>';
+          }).join('')
+        + '<div class="mkt-pop__f" data-en="Local time · indicative">Heure locale · indicatif</div>';
+    }
+  }
+  function injectMktCss(){
+    if(document.getElementById('ltMktCss')) return;
+    var s=document.createElement('style'); s.id='ltMktCss';
+    s.textContent =
+      '.top__status{display:inline-flex;align-items:center;gap:7px;cursor:pointer;background:transparent;border:1px solid var(--border-subtle,#1C212A);border-radius:50px;padding:5px 11px;color:var(--text-body,#C3CAD4);font-family:var(--font-text,"Inter",sans-serif);font-size:12px;font-weight:600;letter-spacing:.02em;transition:border-color .15s,color .15s}'
+      + '.top__status:hover{border-color:var(--border,#3A414C);color:var(--text-title,#F2F4F7)}'
+      + '.top__status .mkt__c{opacity:.55}'
+      + '.top__status.mkt--closed{color:var(--text-muted,#7E8794)}'
+      + '.top__status.mkt--closed .lt-dot{background:var(--bear,#F0647A);box-shadow:0 0 0 3px rgba(240,100,122,.18)}'
+      + '.mkt{position:relative;display:inline-flex}'
+      + '.mkt-pop{position:absolute;top:calc(100% + 8px);right:0;z-index:60;width:min(252px,82vw);background:var(--bg-elevated,#161B24);border:1px solid var(--border-subtle,#1C212A);border-radius:var(--r-md,6px);box-shadow:0 18px 48px rgba(0,0,0,.55);padding:12px 13px;animation:mktPop .18s cubic-bezier(.16,1,.3,1)}'
+      + '@keyframes mktPop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}'
+      + '.mkt-pop__h{font-family:var(--font-mono,"JetBrains Mono",monospace);font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted,#7E8794);margin-bottom:8px}'
+      + '.mkt-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-top:1px solid var(--border-subtle,#1C212A)}'
+      + '.mkt-row:first-of-type{border-top:none}'
+      + '.mkt-row__dot{width:8px;height:8px;border-radius:50%;flex:none}'
+      + '.mkt-row__dot.on{background:var(--bull,#4ADE9C);box-shadow:0 0 7px rgba(74,222,156,.7)}'
+      + '.mkt-row__dot.off{background:var(--bear,#F0647A)}'
+      + '.mkt-row__txt{flex:1;min-width:0;display:flex;flex-direction:column}'
+      + '.mkt-row__n{font-size:12.5px;color:var(--text-title,#F2F4F7);font-weight:600;line-height:1.2}'
+      + '.mkt-row__h{font-size:10px;color:var(--text-muted,#7E8794);font-family:var(--font-mono,"JetBrains Mono",monospace);margin-top:2px}'
+      + '.mkt-row__s{font-family:var(--font-mono,"JetBrains Mono",monospace);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}'
+      + '.mkt-row__s.on{color:var(--bull,#4ADE9C)}.mkt-row__s.off{color:var(--bear,#F0647A)}'
+      + '.mkt-pop__f{margin-top:9px;padding-top:9px;border-top:1px solid var(--border-subtle,#1C212A);font-family:var(--font-mono,"JetBrains Mono",monospace);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted,#7E8794)}'
+      + 'a.side__acct{cursor:pointer;text-decoration:none;border-radius:var(--r-md,8px);transition:background .15s}'
+      + 'a.side__acct:hover{background:var(--bg-elevated,#161B24)}';
+    document.head.appendChild(s);
+  }
+  function initMarketStatus(){
+    injectMktCss(); refreshMkt();
+    if(window._ltMktWired) return; window._ltMktWired=true;
+    var btn=document.getElementById('mktStatus'), pop=document.getElementById('mktPop'), wrap=document.getElementById('mktWrap');
+    if(!btn||!pop) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = pop.hasAttribute('hidden');
+      if(willOpen){ refreshMkt(); pop.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+      else { pop.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+    });
+    document.addEventListener('click', function(e){ if(wrap && !wrap.contains(e.target)){ pop.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); } });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ pop.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); } });
+    setInterval(refreshMkt, 30000);
+  }
+
+  // ── Tiroir de navigation mobile (hamburger + panneau « OUTILS » + carte compte) ──
+  // Construit à partir de buildSideInner(). Utilisé tel quel sur les pages marketing
+  // (chromeOnly) et — via le clone de la barre latérale — sur les pages outils.
+  function buildMobileDrawer(navEl, innerHTML) {
+    if (!navEl || document.querySelector('.lt-mnav')) return;
+    var burger = document.createElement('button');
+    burger.className = 'lt-burger';
+    burger.type = 'button';
+    burger.setAttribute('aria-label', 'Ouvrir le menu');
+    burger.innerHTML = '<span></span><span></span><span></span>';
+    navEl.insertBefore(burger, navEl.firstChild);
+    navEl.classList.add('lt-nav--mobilebar');
+
+    var bd = document.createElement('div'); bd.className = 'lt-mnav__bd';
+    var drawer = document.createElement('aside'); drawer.className = 'lt-mnav';
+    drawer.setAttribute('aria-label', 'Navigation');
+    drawer.innerHTML = '<div class="lt-mnav__inner">' + innerHTML + '</div>';
+    document.body.appendChild(bd);
+    document.body.appendChild(drawer);
+
+    var close = function () { drawer.classList.remove('is-open'); bd.classList.remove('is-open'); };
+    burger.addEventListener('click', function () { drawer.classList.add('is-open'); bd.classList.add('is-open'); });
+    bd.addEventListener('click', close);
+    drawer.addEventListener('click', function (e) {
+      var car = e.target.closest('.side__caret');
+      if (car) {
+        e.preventDefault();
+        var sub = car.closest('.side__row').nextElementSibling;
+        if (sub && sub.classList.contains('side__sub')) { sub.classList.toggle('is-open'); car.classList.toggle('is-open'); }
+        return;
+      }
+      if (e.target.closest('a.side__item, a.side__subitem')) close();
+    });
+    return drawer;
+  }
+
+  // ── Pages marketing (accueil, tarifs, avis) : on NE touche PAS à la mise en page
+  // (pas de barre latérale ni de fil d'ariane). On injecte uniquement la barre mobile
+  // (hamburger + nouveau tiroir), qui remplace l'ancien menu « Le Terminal Hub ».
+  if (cfg.chromeOnly) {
+    injectMktCss(); // styles .side__acct (carte compte du pied)
+    buildMobileDrawer(document.querySelector('.lt-nav'), buildSideInner());
+    refreshProFooter(); // reflète le statut Premium dans le pied du tiroir
+    return;
+  }
 
   // ── PART 1 : enveloppe AppShell si absente (pages injectées) ──
   // Conteneur de contenu : .main (nouvelles pages) ou <main> (pages éco)
@@ -255,9 +494,7 @@
     try { var em = localStorage.getItem('ta_email') || ''; if (em) initials = em.slice(0, 2).toUpperCase(); } catch (e) {}
     var top = document.createElement('div');
     top.className = 'top';
-    top.innerHTML = '<div class="top__crumb"><span>Le Terminal</span><span class="sep">/</span><b>' + cfg.crumb + '</b></div>'
-      + '<div class="top__right"><span class="top__status"><span class="lt-dot"></span> Marché ouvert</span>'
-      + '<span class="top__avatar">' + initials + '</span></div>';
+    top.innerHTML = '<div class="top__crumb"><span>Le Terminal</span><span class="sep">/</span><b>' + cfg.crumb + '</b></div>' + topRightHTML(initials);
 
     var side = document.createElement('aside');
     side.className = 'side';
@@ -278,9 +515,32 @@
         el.style.display = 'none';
       }
     });
+  }
 
-    var dock = document.querySelector('nav.lt-dock:not(.lt-dock--mobile-only)');
-    if (dock) dock.classList.add('lt-dock--mobile-only');
+  // Homogénéise le fil d'ariane sur TOUTES les pages : même structure + avatar
+  // dynamique (initiales du compte). Corrige les pages à .top statique (ex.
+  // calculateur affichait « TR » en dur au lieu des initiales réelles).
+  var _topEl = document.querySelector('.top');
+  if (_topEl) {
+    var _em = ''; try { _em = localStorage.getItem('ta_email') || ''; } catch (e) {}
+    var _ini = _em ? _em.slice(0, 2).toUpperCase() : 'LT';
+    _topEl.innerHTML = '<div class="top__crumb"><span>Le Terminal</span><span class="sep">/</span><b>' + cfg.crumb + '</b></div>' + topRightHTML(_ini);
+  }
+  // Active le statut des marchés en direct (sur toute page dotée du fil d'ariane)
+  if (document.querySelector('.top')) initMarketStatus();
+
+  // Masque le dock d'icônes de l'accueil sur toute page à appshell (desktop),
+  // y compris si la coquille .app est statique (ex. calculateur).
+  var _dock = document.querySelector('nav.lt-dock:not(.lt-dock--mobile-only)');
+  if (_dock) _dock.classList.add('lt-dock--mobile-only');
+  // Si la page n'a pas de dock, on l'injecte (barre du bas mobile) pour que TOUTES
+  // les pages aient l'accès rapide aux outils (Patrimoine, Calendrier éco, etc.).
+  if (!document.querySelector('nav.lt-dock')) {
+    var _shortLbl = { dashboard:'Accueil', journal:'Journal', analyzer:'Analyzer', patrimoine:'Patrim.', calendrier:'Éco', bubble:'Bubble', calculateur:'Pips', trades:'Trades' };
+    var _dockHTML = '<nav class="lt-dock lt-dock--mobile-only" aria-label="Pages">' + NAV.map(function (p) {
+      return '<a class="lt-dock__item' + (p.key === cfg.key ? ' is-active' : '') + '" href="' + p.href + '">' + p.icon + '<span class="lt-dock__lbl">' + (_shortLbl[p.key] || p.label) + '</span></a>';
+    }).join('') + '</nav>';
+    document.body.insertAdjacentHTML('beforeend', _dockHTML);
   }
 
   // ── PART 2 : remplit la barre latérale (toutes les pages) ──
@@ -326,5 +586,40 @@
     });
     // Vérifie le PRO côté serveur et met à jour le pied (email + déconnexion)
     refreshProFooter();
+
+    // ── Mobile / iPad (≤880px) : tiroir de navigation complet ──
+    // Le menu hiérarchique (barre Outils, sous-pages éco incluses) n'est pas
+    // accessible sous 880px (sidebar masquée). On clone la navigation dans un
+    // tiroir ouvert par un hamburger placé dans le fil d'ariane.
+    var _nav = document.querySelector('.lt-nav');
+    if (_nav && !document.querySelector('.lt-mnav')) {
+      var burger = document.createElement('button');
+      burger.className = 'lt-burger';
+      burger.type = 'button';
+      burger.setAttribute('aria-label', 'Ouvrir le menu');
+      burger.innerHTML = '<span></span><span></span><span></span>';
+      _nav.insertBefore(burger, _nav.firstChild);
+
+      var bd = document.createElement('div'); bd.className = 'lt-mnav__bd';
+      var drawer = document.createElement('aside'); drawer.className = 'lt-mnav';
+      drawer.setAttribute('aria-label', 'Navigation');
+      drawer.innerHTML = '<div class="lt-mnav__inner">' + sideEl.innerHTML + '</div>';
+      document.body.appendChild(bd);
+      document.body.appendChild(drawer);
+
+      var mnavClose = function () { drawer.classList.remove('is-open'); bd.classList.remove('is-open'); };
+      burger.addEventListener('click', function () { drawer.classList.add('is-open'); bd.classList.add('is-open'); });
+      bd.addEventListener('click', mnavClose);
+      drawer.addEventListener('click', function (e) {
+        var car = e.target.closest('.side__caret');
+        if (car) {
+          e.preventDefault();
+          var sub = car.closest('.side__row').nextElementSibling;
+          if (sub && sub.classList.contains('side__sub')) { sub.classList.toggle('is-open'); car.classList.toggle('is-open'); }
+          return;
+        }
+        if (e.target.closest('a.side__item, a.side__subitem')) mnavClose();
+      });
+    }
   }
 })();

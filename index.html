@@ -3,9 +3,102 @@
 <!-- v3 — design "Le Terminal" (nouveau design system) -->
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Terminal — Hub trading propulsé par l'IA</title>
-<meta name="description" content="Le Terminal — analyse tes setups avec l'IA, tiens ton journal, suis le calendrier éco et maîtrise ton risque. Cinq outils, un seul cockpit.">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Terminal — Hub de trading IA : analyse, journal & risque</title>
+<meta name="description" content="Le cockpit du trader autonome : analysez vos setups avec l'IA, tenez votre journal P&L, suivez le calendrier éco et maîtrisez votre risque. 6 outils, un abonnement.">
+<link rel="canonical" href="https://www.leterminal.net/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Terminal">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Le Terminal — Hub de trading IA : analyse, journal &amp; risque">
+<meta property="og:description" content="Le cockpit du trader autonome : analysez vos setups avec l&#x27;IA, tenez votre journal P&amp;L, suivez le calendrier éco et maîtrisez votre risque. 6 outils, un abonnement.">
+<meta property="og:url" content="https://www.leterminal.net/">
+<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le Terminal — Hub de trading IA : analyse, journal &amp; risque">
+<meta name="twitter:description" content="Le cockpit du trader autonome : analysez vos setups avec l&#x27;IA, tenez votre journal P&amp;L, suivez le calendrier éco et maîtrisez votre risque. 6 outils, un abonnement.">
+<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.leterminal.net/#organization",
+      "name": "Le Terminal",
+      "url": "https://www.leterminal.net/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.leterminal.net/logo.png"
+      },
+      "description": "Hub de trading propulsé par l'IA : analyse de setups, journal de trading, calendrier économique et gestion du risque, réunis dans un seul cockpit.",
+      "sameAs": [
+        "https://t.me/leterminalfx"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.leterminal.net/#website",
+      "name": "Le Terminal",
+      "url": "https://www.leterminal.net/",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@id": "https://www.leterminal.net/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Le Terminal",
+      "url": "https://www.leterminal.net/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "fr-FR",
+      "description": "Le cockpit du trader autonome : analysez vos setups avec l'IA, tenez votre journal P&L, suivez le calendrier éco et maîtrisez votre risque. 6 outils, un abonnement.",
+      "publisher": {
+        "@id": "https://www.leterminal.net/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://www.leterminal.net/#website"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "lowPrice": "0",
+        "highPrice": "29.99",
+        "offerCount": "3",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Découverte",
+            "price": "0",
+            "priceCurrency": "EUR"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium mensuel",
+            "price": "29.99",
+            "priceCurrency": "EUR"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium annuel (par an)",
+            "price": "239.88",
+            "priceCurrency": "EUR"
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#07090C">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,8 +323,8 @@ body::after {
 <!-- ============ GLOBAL CHROME : NAV ============ -->
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
@@ -291,6 +384,7 @@ body::after {
       <h1 class="lt-hero__title">
         <span class="lt-metal lt-anim lt-anim--2">Le</span>
         <span class="lt-metal lt-anim lt-anim--3">Terminal</span>
+        <span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">— hub de trading IA : analyse de setup, journal de trading et gestion du risque</span>
       </h1>
     </div>
     <p class="lt-hero__subhead lt-anim lt-anim--4"><span data-i18n="hero-title-1">Ton hub trading</span>, <span class="lt-accent-text" data-i18n="hero-title-2">propulsé par l'IA.</span></p>
@@ -472,8 +566,8 @@ body::after {
 <section class="pr-band" id="pricing" data-reveal>
   <div class="pr-band__head">
     <span class="lt-eyebrow"><span class="lt-dot"></span> Tarifs</span>
-    <h2 class="pr-band__title">Choisis ton plan</h2>
-    <p class="pr-band__lede">Commence gratuitement avec 5 tokens. Passe en Premium quand tu veux toute la puissance.</p>
+    <h2 class="pr-band__title">Choisissez votre plan</h2>
+    <p class="pr-band__lede">Accédez gratuitement à nos outils essentiels. Passez en Premium pour débloquer toute la puissance.</p>
   </div>
   <div class="pr-grid pr-grid--band">
 
@@ -614,6 +708,7 @@ window.addEventListener('scroll',function(){var c=document.getElementById('ltChr
 checkSession();
 </script>
 <script src="./home-anim.js"></script>
+<script src="./appshell.js"></script>
 <script src="./menu.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}</script>
 </body>

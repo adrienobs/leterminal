@@ -8,7 +8,7 @@ function supabaseRequest(method, path, body, key, authToken) {
       'Content-Type': 'application/json',
       'apikey': key,
       'Authorization': `Bearer ${authToken || key}`,
-      'Prefer': (method === 'POST' || method === 'PATCH') ? 'return=representation' : undefined
+      'Prefer': (method === 'POST') ? 'resolution=merge-duplicates,return=representation' : (method === 'PATCH' ? 'return=representation' : undefined)
     };
     if (payload) headers['Content-Length'] = Buffer.byteLength(payload);
     Object.keys(headers).forEach(k => headers[k] === undefined && delete headers[k]);
@@ -49,7 +49,15 @@ module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
       const r = await supabaseRequest('GET', `/rest/v1/user_profiles?id=eq.${userId}&select=*`, null, SERVICE_KEY, SERVICE_KEY);
       const profile = Array.isArray(r.body) ? r.body[0] : null;
-      return res.status(200).json(Object.assign({ email: userEmail }, profile || {}));
+      // Repli sur les métadonnées du fournisseur (Google) : photo + nom, afin que
+      // l'avatar et le nom soient à jour dès la 1re connexion même si user_profiles
+      // ne les a pas encore enregistrés.
+      const meta = userRes.body.user_metadata || {};
+      return res.status(200).json(Object.assign({
+        email: userEmail,
+        auth_avatar: meta.avatar_url || meta.picture || '',
+        auth_name: meta.full_name || meta.name || ''
+      }, profile || {}));
     }
 
     if (req.method === 'PATCH') {

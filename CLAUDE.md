@@ -16,7 +16,7 @@ La référence complète (tokens, guidelines, composants, UI kits) est versionn�
 - **Palette** : 4 noirs (`#07090C` → `#161B24`) ; **un seul** accent bleu glacial `#7FB8E8`, employé avec parcimonie (CTA, liens, lueurs). Sémantique marché : haussier `#4ADE9C`, baissier `#F0647A`, neutre `#E8C268`. **Pas de violet, pas de néon, pas de dégradé bleu-mauve.**
 - **Typo** : Anton (display, CAPITALES massives, métal brossé via `background-clip:text`), Inter (texte), JetBrains Mono (TOUS les chiffres, tabulaires). Titres display en CAPITALES ; eyebrows/labels en capitales interlettrées.
 - **Icônes** : SVG trait fin (`stroke-width:1.5`, `fill:none`) uniquement. **JAMAIS d'emoji.**
-- **Copy** : français, ton direct/feutré, on tutoie le trader. Chiffres format français (`68 412,50`).
+- **Copy** : français, ton direct/feutré, on **vouvoie** le client (« vous », jamais « tu ») — partout et à chaque fois, y compris pour toute nouvelle page/texte. Chiffres format français (`68 412,50`).
 - **Rayons nets** (2/4/6/10px), bordures hairline 1px, ombres froides, conteneur 1200px, base d'espacement 4px.
 - **Animation** : ease-out cinématique `cubic-bezier(0.16,1,0.3,1)`, reveals au scroll une seule fois, toujours honorer `prefers-reduced-motion`.
 
@@ -101,3 +101,13 @@ Each file is an independent Vercel serverless function. All make raw `https.requ
 - `ta_token` — Supabase JWT auth token
 - `ta_email` — logged-in user email
 - `lt_lang` — `'fr'` or `'en'`
+
+## Bascule de langue FR/EN (`lang.js`) — NE PAS recâbler
+
+La bascule FR/EN est gérée **exclusivement** par **`lang.js`**, un module isolé et robuste, branché par **délégation d'événement** (un seul écouteur de clic sur `document` qui capte toute pastille `.lt-nav__pill` / `#ltLangPill`). Il fonctionne même si `menu.js` est cassé/absent (système `data-en` autonome), et délègue à `menu.js` la traduction riche quand il est sain.
+
+**Règles permanentes (pour ne plus jamais casser le bouton) :**
+- **Toute page** (existante ou nouvelle) doit charger `<script src="./lang.js"></script>` en dernier, avant `</body>`.
+- La pastille de langue est un simple `<span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>` — **JAMAIS** d'`onclick` ni d'`addEventListener` local dessus (sinon double déclenchement). La délégation de `lang.js` suffit.
+- Le texte traduisible reste en FR dans le HTML, l'anglais dans l'attribut `data-en` (le FR d'origine est mémorisé dans `data-fr` au 1er passage).
+- Ne pas réintroduire de wiring de langue dans `menu.js`/inline : `lang.js` est la source de vérité.
