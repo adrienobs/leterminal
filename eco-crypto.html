@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le Terminal — Crypto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./eco.css">
 </head>
 <body class="eco-page">
@@ -15,7 +15,7 @@
     <button class="lt-hamburger" onclick="ltOpenMenu()">
       <span></span><span></span><span></span>
     </button>
-    <a href="./index.html" class="lt-brand" style="text-decoration:none;color:inherit"><img src="./logo.jpg.webp" alt="logo" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(56,182,255,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Éco</span></a>
+    <div class="lt-brand"><img src="./logo.jpg.webp" alt="logo" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(56,182,255,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Éco</span></div>
   </div>
   <div style="display:flex;align-items:center;gap:14px">
     <div class="lt-status"><div class="lt-dot"></div>LIVE</div>
@@ -53,6 +53,58 @@
     </script>
   </div>
 </div>
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span class="ticker__item"><span class="ticker__tag">Analyse maison</span>Pourquoi la désinflation française résiste mieux que prévu</span>
+    <span class="ticker__item"><span class="ticker__tag">Note de veille</span>Budget 2027 : les trois arbitrages qui vont compter</span>
+    <span class="ticker__item"><span class="ticker__tag">ForexLive</span>FLASH : l&#39;inflation américaine ressort à 3,1 %, sous les attentes</span>
+    <span class="ticker__item"><span class="ticker__tag">CoinDesk</span>Bitcoin repasse au-dessus d&#39;un seuil clé porté par les entrées en ETF</span>
+    <span class="ticker__item"><span class="ticker__tag">ZeroHedge</span>La Fed pourrait ralentir la réduction de son bilan, selon une source</span>
+    <span class="ticker__item"><span class="ticker__tag">Banque centrale européenne</span>La BCE maintient ses taux et confirme une approche réunion par réunion</span>
+    <span class="ticker__item"><span class="ticker__tag">Natixis – Recherche &amp; marchés</span>Natixis : pourquoi les taux longs resteront durablement plus élevés</span>
+    <span class="ticker__item"><span class="ticker__tag">Les Échos – Économie</span>Zone euro : la croissance accélère légèrement au deuxième trimestre</span>
+    <span class="ticker__item"><span class="ticker__tag">CNBC – Economy</span>États-Unis : les créations d&#39;emplois ralentissent mais restent solides</span>
+    <span class="ticker__item"><span class="ticker__tag">Trump · marchés (live)</span>Trump menace de nouveaux droits de douane, les marchés se tendent</span>
+    <span class="ticker__item"><span class="ticker__tag">Reuters – Business</span>Les marchés mondiaux stables, entre croissance et banques centrales</span>
+    <span class="ticker__item"><span class="ticker__tag">Cointelegraph</span>Ethereum : la mise à jour réseau relance le débat sur les frais</span>
+    <span class="ticker__item"><span class="ticker__tag">Financial Times – Markets</span>Les rendements obligataires européens reculent sur fond de pari de baisse des taux</span>
+    <span class="ticker__item"><span class="ticker__tag">FXStreet – News</span>EUR/USD : cassure au-dessus de 1,09 après les chiffres américains</span>
+    <span class="ticker__item"><span class="ticker__tag">Réserve fédérale (Fed)</span>La Fed appelle à la patience avant tout mouvement sur les taux</span>
+    <span class="ticker__item"><span class="ticker__tag">MarketWatch – Top Stories</span>Wall Street finit en hausse, le Nasdaq porté par la tech à un record</span>
+    <span class="ticker__item"><span class="ticker__tag">Ostrum AM (Natixis) – Stratégie marchés</span>Ostrum (Natixis) : surpondérer le crédit de qualité, prudence sur la duration</span>
+    <span class="ticker__item"><span class="ticker__tag">La Tribune – Économie</span>Énergie : les prix de gros du gaz repartent à la baisse en Europe</span>
+    <span class="ticker__item"><span class="ticker__tag">Decrypt</span>Régulation : un nouveau cadre crypto se précise en Europe</span>
+    <span class="ticker__item"><span class="ticker__tag">Nikkei Asia – Economy</span>Japon : les exportations rebondissent grâce à un yen plus faible</span>
+    <span class="ticker__item"><span class="ticker__tag">Fonds monétaire international (FMI)</span>Le FMI relève légèrement sa prévision de croissance mondiale pour 2026</span>
+    <span class="ticker__item"><span class="ticker__tag">OCDE – Salle de presse</span>L&#39;OCDE invite les pays à investir davantage dans les compétences</span>
+    <span class="ticker__item"><span class="ticker__tag">Banque de France</span>La Banque de France confirme une inflation sous les 2 % à l&#39;horizon 2027</span>
+    <span class="ticker__item"><span class="ticker__tag">INSEE – À la une</span>Le climat des affaires se stabilise en France en juin</span>
+    <span class="ticker__item"><span class="ticker__tag">Analyse maison</span>Pourquoi la désinflation française résiste mieux que prévu</span>
+    <span class="ticker__item"><span class="ticker__tag">Note de veille</span>Budget 2027 : les trois arbitrages qui vont compter</span>
+    <span class="ticker__item"><span class="ticker__tag">ForexLive</span>FLASH : l&#39;inflation américaine ressort à 3,1 %, sous les attentes</span>
+    <span class="ticker__item"><span class="ticker__tag">CoinDesk</span>Bitcoin repasse au-dessus d&#39;un seuil clé porté par les entrées en ETF</span>
+    <span class="ticker__item"><span class="ticker__tag">ZeroHedge</span>La Fed pourrait ralentir la réduction de son bilan, selon une source</span>
+    <span class="ticker__item"><span class="ticker__tag">Banque centrale européenne</span>La BCE maintient ses taux et confirme une approche réunion par réunion</span>
+    <span class="ticker__item"><span class="ticker__tag">Natixis – Recherche &amp; marchés</span>Natixis : pourquoi les taux longs resteront durablement plus élevés</span>
+    <span class="ticker__item"><span class="ticker__tag">Les Échos – Économie</span>Zone euro : la croissance accélère légèrement au deuxième trimestre</span>
+    <span class="ticker__item"><span class="ticker__tag">CNBC – Economy</span>États-Unis : les créations d&#39;emplois ralentissent mais restent solides</span>
+    <span class="ticker__item"><span class="ticker__tag">Trump · marchés (live)</span>Trump menace de nouveaux droits de douane, les marchés se tendent</span>
+    <span class="ticker__item"><span class="ticker__tag">Reuters – Business</span>Les marchés mondiaux stables, entre croissance et banques centrales</span>
+    <span class="ticker__item"><span class="ticker__tag">Cointelegraph</span>Ethereum : la mise à jour réseau relance le débat sur les frais</span>
+    <span class="ticker__item"><span class="ticker__tag">Financial Times – Markets</span>Les rendements obligataires européens reculent sur fond de pari de baisse des taux</span>
+    <span class="ticker__item"><span class="ticker__tag">FXStreet – News</span>EUR/USD : cassure au-dessus de 1,09 après les chiffres américains</span>
+    <span class="ticker__item"><span class="ticker__tag">Réserve fédérale (Fed)</span>La Fed appelle à la patience avant tout mouvement sur les taux</span>
+    <span class="ticker__item"><span class="ticker__tag">MarketWatch – Top Stories</span>Wall Street finit en hausse, le Nasdaq porté par la tech à un record</span>
+    <span class="ticker__item"><span class="ticker__tag">Ostrum AM (Natixis) – Stratégie marchés</span>Ostrum (Natixis) : surpondérer le crédit de qualité, prudence sur la duration</span>
+    <span class="ticker__item"><span class="ticker__tag">La Tribune – Économie</span>Énergie : les prix de gros du gaz repartent à la baisse en Europe</span>
+    <span class="ticker__item"><span class="ticker__tag">Decrypt</span>Régulation : un nouveau cadre crypto se précise en Europe</span>
+    <span class="ticker__item"><span class="ticker__tag">Nikkei Asia – Economy</span>Japon : les exportations rebondissent grâce à un yen plus faible</span>
+    <span class="ticker__item"><span class="ticker__tag">Fonds monétaire international (FMI)</span>Le FMI relève légèrement sa prévision de croissance mondiale pour 2026</span>
+    <span class="ticker__item"><span class="ticker__tag">OCDE – Salle de presse</span>L&#39;OCDE invite les pays à investir davantage dans les compétences</span>
+    <span class="ticker__item"><span class="ticker__tag">Banque de France</span>La Banque de France confirme une inflation sous les 2 % à l&#39;horizon 2027</span>
+    <span class="ticker__item"><span class="ticker__tag">INSEE – À la une</span>Le climat des affaires se stabilise en France en juin</span>
+  </div>
+</div>
 <main class="wrap">
 <section class="pagehead" aria-label="Crypto">
   <p class="pagehead__eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 7.5h4.2a2.4 2.4 0 0 1 0 4.8H9.5m0 0h4.6a2.4 2.4 0 0 1 0 4.7H9.5m0-9.5V17m1.8-9.5V6m0 12.5V17m2.4-9.5V6m0 12.5V17"/></svg> <span data-en="Cryptocurrencies · Live">Crypto-monnaies · En direct</span></p>
@@ -63,7 +115,7 @@
   </p>
 </section>
 
-<section id="r-crypto" class="block" aria-label="Actualité crypto">
+<section class="block" aria-label="Actualité crypto">
   <header class="block__head">
     <h2 class="block__title"><span class="block__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 7.5h4.2a2.4 2.4 0 0 1 0 4.8H9.5m0 0h4.6a2.4 2.4 0 0 1 0 4.7H9.5m0-9.5V17m1.8-9.5V6m0 12.5V17m2.4-9.5V6m0 12.5V17"/></svg></span> <span data-en="Crypto news">Actualité crypto</span></h2>
     <span class="block__count">3</span>
@@ -75,7 +127,7 @@
       <span class="card__cat js-term">Crypto</span>
       <span class="card__sep">·</span>
       <span class="card__source">CoinDesk</span>
-<span class="card__time">08:52</span><span class="bias bias--up card__bias" data-en="Positive">Positif</span>    </p>
+<span class="card__time">08:52</span><span class="bias bias--up card__bias" data-en="Bullish (ETF flows)">Haussier (flux ETF)</span>    </p>
     <h3 class="card__title" data-en="Bitcoin tops a key level on strong ETF inflows">Bitcoin repasse au-dessus d&#39;un seuil clé porté par les entrées en ETF</h3>
     <p class="card__summary" data-en="Bitcoin rebounds, supported by record spot-ETF inflows.">Le bitcoin rebondit, soutenu par des entrées record dans les ETF au comptant.</p>
   </a>
@@ -90,7 +142,7 @@
       <span class="card__cat js-term">Crypto</span>
       <span class="card__sep">·</span>
       <span class="card__source">Cointelegraph</span>
-<span class="card__time">08:30</span><span class="bias bias--up card__bias" data-en="Positive">Positif</span>    </p>
+<span class="card__time">08:30</span><span class="bias bias--up card__bias" data-en="Constructive (ETH)">Constructif (ETH)</span>    </p>
     <h3 class="card__title" data-en="Ethereum: network upgrade reignites the fee debate">Ethereum : la mise à jour réseau relance le débat sur les frais</h3>
     <p class="card__summary" data-en="An upgrade aims to cut fees and improve Ethereum scalability.">Une mise à jour vise à réduire les frais et améliorer la scalabilité d&#39;Ethereum.</p>
   </a>
@@ -105,7 +157,7 @@
       <span class="card__cat js-term">Crypto</span>
       <span class="card__sep">·</span>
       <span class="card__source">Decrypt</span>
-<span class="card__time">07:50</span><span class="bias bias--flat card__bias" data-en="Neutral">Neutre</span>    </p>
+<span class="card__time">07:50</span><span class="bias bias--flat card__bias" data-en="Neutral to positive">Neutre à positif</span>    </p>
     <h3 class="card__title" data-en="Regulation: a new crypto framework takes shape in Europe">Régulation : un nouveau cadre crypto se précise en Europe</h3>
     <p class="card__summary" data-en="European regulators clarify rules for digital assets.">Les régulateurs européens précisent les règles applicables aux actifs numériques.</p>
   </a>
@@ -118,11 +170,9 @@
 </section>
 
 <section class="prose" aria-label="Pourquoi cette page">
-  <span class="prose__kicker" data-en="Our coverage">Notre couverture</span>
+  <span class="prose__kicker" data-en="About this page">À propos de cette page</span>
   <h2 class="prose__h" data-en="Why this page">Pourquoi cette page</h2>
-  <p data-en="This page aggregates and summarizes crypto news: Bitcoin, Ethereum, DeFi, regulation and major market moves. Specialized sources are brought together to follow a fast-moving sector that often trades outside traditional market hours.">Cette page agrège et résume l'actualité crypto : Bitcoin, Ethereum, DeFi, régulation et grands mouvements de marché. Les sources spécialisées y sont rassemblées pour suivre un secteur qui évolue vite, souvent en dehors des horaires des marchés traditionnels.</p>
-  <p data-en="The most recent announcements appear at the top, each with a short summary and a market read, and a link to the original source, always credited. Further down, the « Earlier announcements » area will keep the history of past editions, useful in a world where cycles are fast and memory short.">Les annonces les plus récentes apparaissent en haut, chacune avec un résumé court et une lecture marché, et un lien vers la source d'origine, toujours créditée. Plus bas, l'espace « Annonces précédentes » conservera l'historique des éditions passées, utile dans un univers où les cycles sont rapides et la mémoire courte.</p>
-  <p data-en="Why a « Crypto » page? Because digital assets have become an asset class in their own right, with their own drivers — ETF flows, protocol upgrades, regulatory decisions — that now spill over into traditional finance. Bringing this news together here lets you follow the trend without getting lost in the constant noise that surrounds the sector.">Pourquoi une page « Crypto » ? Parce que les actifs numériques sont devenus une classe à part entière, avec leurs propres moteurs — flux des ETF, mises à jour de protocoles, décisions de régulation — qui débordent désormais sur la finance traditionnelle. Regrouper ici cette actualité permet de suivre la tendance sans se perdre dans le bruit permanent qui entoure le secteur.</p>
+  <p data-en="This page aggregates and summarizes crypto news: Bitcoin, Ethereum, DeFi, regulation and major market moves. The newest announcements are shown first, each linked to its source.">Cette page agrège et résume l'actualité crypto : Bitcoin, Ethereum, DeFi, régulation et grands mouvements de marché. Les annonces les plus récentes sont affichées en premier, chacune reliée à sa source.</p>
 </section>
 
 <section class="block eco-archives" aria-label="Annonces précédentes">
@@ -138,7 +188,5 @@
 <div class="backdrop" id="navBackdrop" aria-hidden="true"></div>
 <script src="./eco.js"></script>
 <script src="./menu.js"></script>
-<script>window.ECO_ZONE = 'crypto';</script>
-<script src="./eco-news-loader.js"></script>
 </body>
 </html>
