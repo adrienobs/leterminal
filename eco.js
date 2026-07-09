@@ -137,27 +137,15 @@ function showTab(id){
     }
   }
 
-  // Expose la fonction pour que menu.js (ltSetLang) puisse la synchroniser
-  window.ecoApplyLang = apply;
-
-  // Lit la langue depuis les deux clés possibles (lte_lang ou lt_lang)
   var saved = "fr";
-  try {
-    saved = localStorage.getItem(KEY) || localStorage.getItem('lt_lang') || "fr";
-  } catch (e) { /* ignore */ }
+  try { saved = localStorage.getItem(KEY) || "fr"; } catch (e) { /* ignore */ }
   apply(saved === "en");
 
   if (btn) {
     btn.addEventListener("click", function () {
-      var en = document.documentElement.lang !== "en";
+      var en = document.documentElement.lang !== "en";  // bascule
       apply(en);
-      var lang = en ? "en" : "fr";
-      try {
-        localStorage.setItem(KEY, lang);
-        localStorage.setItem('lt_lang', lang); // synchro avec menu.js
-      } catch (e) { /* ignore */ }
-      // Synchro boutons sidebar
-      if (typeof window.ltSetLang === 'function') window.ltSetLang(lang);
+      try { localStorage.setItem(KEY, en ? "en" : "fr"); } catch (e) { /* ignore */ }
     });
   }
 })();

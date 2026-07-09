@@ -12,7 +12,7 @@
 <title>LE TERMINAL — Setup Analyzer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./design-system.css">
 <style>#app>.topbar{display:none!important}#app{padding-top:var(--chrome-h,64px)}@media(min-width:761px){#app .analyzer-tabs{padding-left:74px}}</style>
 <style>
@@ -1039,23 +1039,23 @@ textarea { resize: none; height: 80px; line-height: 1.6; font-size: 12px; }
             <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
             <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Score IA de ton setup</span></a>
             <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Résultats vérifiés</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine · Découvrir</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">La présentation</span></a>
             <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Position · risque · R:R</span></a>
           </div>
         </div>
-        <a href="./patrimoine-presentation.html" data-en="Wealth">Patrimoine</a>
-        <a href="./tarifs.html">Tarifs</a>
         <a href="./index.html#method">Méthode</a>
         <a href="./index.html#community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
       </nav>
       <div class="lt-nav__actions">
-        <span class="lt-nav__pill" title="Langue / Menu" onclick="window.ltToggleLang&&ltToggleLang()">FR</span>
-        <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():openAuth()">Connexion</button>
-        <div id="ltUserBar"></div>
-        <a class="lt-btn lt-btn--primary lt-btn--sm" href="./tarifs.html">Accès Premium</a>
+        <div class="lang-switch" style="display:inline-flex;gap:2px">
+          <button class="lang-btn on" onclick="setLang('fr')">FR</button>
+          <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+        <button id="themeToggle" onclick="toggleTheme()" class="lt-nav__pill" title="Thème clair/sombre">🌙</button>
+        <div class="user-chip" id="userChip" onclick="openHistory()">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <span class="user-name" id="userName">Mon compte</span>
+        </div>
+        <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="openAuth()" style="display:none">Connexion</button>
       </div>
     </header>
   </div>
