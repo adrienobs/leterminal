@@ -55,70 +55,12 @@ window.ltRefreshToken(false).then(function(tok){chk(tok||t);});
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Le Terminal">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Setup Analyzer — Application | Le Terminal</title>
-<meta name="robots" content="noindex,follow">
-<meta name="description" content="Uploadez votre graphique : l'IA évalue structure, zones clés et confluences (ICT, SMC, Price Action) et renvoie un score /100 en 30 s. Outil éducatif, pas un conseil.">
-<link rel="canonical" href="https://www.leterminal.net/app">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Le Terminal">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="Setup Analyzer IA — Notez votre setup de trading | Le Terminal">
-<meta property="og:description" content="Uploadez votre graphique : l&#x27;IA évalue structure, zones clés et confluences (ICT, SMC, Price Action) et renvoie un score /100 en 30 s. Outil éducatif, pas un conseil.">
-<meta property="og:url" content="https://www.leterminal.net/app">
-<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Setup Analyzer IA — Notez votre setup de trading | Le Terminal">
-<meta name="twitter:description" content="Uploadez votre graphique : l&#x27;IA évalue structure, zones clés et confluences (ICT, SMC, Price Action) et renvoie un score /100 en 30 s. Outil éducatif, pas un conseil.">
-<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebApplication",
-      "name": "Setup Analyzer IA",
-      "url": "https://www.leterminal.net/app",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web",
-      "inLanguage": "fr-FR",
-      "description": "Uploadez votre graphique : l'IA évalue structure, zones clés et confluences (ICT, SMC, Price Action) et renvoie un score /100 en 30 s. Outil éducatif, pas un conseil.",
-      "isPartOf": {
-        "@id": "https://www.leterminal.net/#website"
-      },
-      "publisher": {
-        "@id": "https://www.leterminal.net/#organization"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Accueil",
-          "item": "https://www.leterminal.net/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Setup Analyzer",
-          "item": "https://www.leterminal.net/app"
-        }
-      ]
-    }
-  ]
-}
-</script>
-<link rel="stylesheet" href="./fonts.css">
+<link rel="apple-touch-icon" href="./logo.jpg.webp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LE TERMINAL — Setup Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./design-system.css">
 <link rel="stylesheet" href="./theme-light.css">
 <style>#app>.topbar{display:none!important}#app{padding-top:var(--chrome-h,64px)}@media(min-width:761px){#app .analyzer-tabs{padding-left:74px}}</style>
@@ -1203,25 +1145,35 @@ textarea { resize: none; height: 80px; line-height: 1.6; font-size: 12px; }
   <!-- ============ GLOBAL CHROME : NAV ============ -->
   <div class="lt-chrome" id="ltChrome">
     <header class="lt-nav">
-    <a class="lt-nav__brand" href="/">
-      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
-      <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
-    </a>
-    <nav class="lt-nav__links">
-      <div class="lt-nav__drop" id="ltDrop">
-        <button class="lt-nav__droptrigger" aria-expanded="false" data-en="Tools <span class='lt-nav__caret'><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg></span>">
-          Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+      <a class="lt-nav__brand" href="./index.html">
+        <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+        <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
+      </a>
+      <nav class="lt-nav__links">
+        <div class="lt-nav__drop">
+          <button class="lt-nav__droptrigger">Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+          <div class="lt-nav__menu">
+            <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Calendrier · P&amp;L · IA coach</span></a>
+            <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+            <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Score IA de ton setup</span></a>
+            <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Flux de capitaux en direct</span></a>
+            <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Position · risque · R:R</span></a>
+          </div>
         </div>
+        <a href="./index.html#method">Méthode</a>
+        <a href="./index.html#community">Communauté</a>
+      </nav>
+      <div class="lt-nav__actions">
+        <div class="lang-switch" style="display:inline-flex;gap:2px">
+          <button class="lang-btn on" onclick="setLang('fr')">FR</button>
+          <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+        <button id="themeToggle" onclick="toggleTheme()" class="lt-nav__pill" title="Thème clair/sombre">🌙</button>
+        <div class="user-chip" id="userChip" onclick="openHistory()">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <span class="user-name" id="userName">Mon compte</span>
+        </div>
+        <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="openAuth()" style="display:none">Connexion</button>
       </div>
       <a href="/tarifs" data-en="Pricing">Tarifs</a>
       <a href="/#method" data-en="Method">Méthode</a>
