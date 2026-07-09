@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le Terminal — Calendrier éco</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="./eco.css">
 </head>
 <body class="eco-page">
@@ -15,7 +15,7 @@
     <button class="lt-hamburger" onclick="ltOpenMenu()">
       <span></span><span></span><span></span>
     </button>
-    <div class="lt-brand"><img src="./logo.jpg.webp" alt="logo" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(56,182,255,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Éco</span></div>
+    <a href="./index.html" class="lt-brand" style="text-decoration:none;color:inherit"><img src="./logo.jpg.webp" alt="logo" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(56,182,255,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Éco</span></a>
   </div>
   <div style="display:flex;align-items:center;gap:14px">
     <div class="lt-status"><div class="lt-dot"></div>LIVE</div>
@@ -53,58 +53,6 @@
     </script>
   </div>
 </div>
-<div class="ticker" aria-hidden="true">
-  <div class="ticker__track">
-    <span class="ticker__item"><span class="ticker__tag">Analyse maison</span>Pourquoi la désinflation française résiste mieux que prévu</span>
-    <span class="ticker__item"><span class="ticker__tag">Note de veille</span>Budget 2027 : les trois arbitrages qui vont compter</span>
-    <span class="ticker__item"><span class="ticker__tag">ForexLive</span>FLASH : l&#39;inflation américaine ressort à 3,1 %, sous les attentes</span>
-    <span class="ticker__item"><span class="ticker__tag">CoinDesk</span>Bitcoin repasse au-dessus d&#39;un seuil clé porté par les entrées en ETF</span>
-    <span class="ticker__item"><span class="ticker__tag">ZeroHedge</span>La Fed pourrait ralentir la réduction de son bilan, selon une source</span>
-    <span class="ticker__item"><span class="ticker__tag">Banque centrale européenne</span>La BCE maintient ses taux et confirme une approche réunion par réunion</span>
-    <span class="ticker__item"><span class="ticker__tag">Natixis – Recherche &amp; marchés</span>Natixis : pourquoi les taux longs resteront durablement plus élevés</span>
-    <span class="ticker__item"><span class="ticker__tag">Les Échos – Économie</span>Zone euro : la croissance accélère légèrement au deuxième trimestre</span>
-    <span class="ticker__item"><span class="ticker__tag">CNBC – Economy</span>États-Unis : les créations d&#39;emplois ralentissent mais restent solides</span>
-    <span class="ticker__item"><span class="ticker__tag">Trump · marchés (live)</span>Trump menace de nouveaux droits de douane, les marchés se tendent</span>
-    <span class="ticker__item"><span class="ticker__tag">Reuters – Business</span>Les marchés mondiaux stables, entre croissance et banques centrales</span>
-    <span class="ticker__item"><span class="ticker__tag">Cointelegraph</span>Ethereum : la mise à jour réseau relance le débat sur les frais</span>
-    <span class="ticker__item"><span class="ticker__tag">Financial Times – Markets</span>Les rendements obligataires européens reculent sur fond de pari de baisse des taux</span>
-    <span class="ticker__item"><span class="ticker__tag">FXStreet – News</span>EUR/USD : cassure au-dessus de 1,09 après les chiffres américains</span>
-    <span class="ticker__item"><span class="ticker__tag">Réserve fédérale (Fed)</span>La Fed appelle à la patience avant tout mouvement sur les taux</span>
-    <span class="ticker__item"><span class="ticker__tag">MarketWatch – Top Stories</span>Wall Street finit en hausse, le Nasdaq porté par la tech à un record</span>
-    <span class="ticker__item"><span class="ticker__tag">Ostrum AM (Natixis) – Stratégie marchés</span>Ostrum (Natixis) : surpondérer le crédit de qualité, prudence sur la duration</span>
-    <span class="ticker__item"><span class="ticker__tag">La Tribune – Économie</span>Énergie : les prix de gros du gaz repartent à la baisse en Europe</span>
-    <span class="ticker__item"><span class="ticker__tag">Decrypt</span>Régulation : un nouveau cadre crypto se précise en Europe</span>
-    <span class="ticker__item"><span class="ticker__tag">Nikkei Asia – Economy</span>Japon : les exportations rebondissent grâce à un yen plus faible</span>
-    <span class="ticker__item"><span class="ticker__tag">Fonds monétaire international (FMI)</span>Le FMI relève légèrement sa prévision de croissance mondiale pour 2026</span>
-    <span class="ticker__item"><span class="ticker__tag">OCDE – Salle de presse</span>L&#39;OCDE invite les pays à investir davantage dans les compétences</span>
-    <span class="ticker__item"><span class="ticker__tag">Banque de France</span>La Banque de France confirme une inflation sous les 2 % à l&#39;horizon 2027</span>
-    <span class="ticker__item"><span class="ticker__tag">INSEE – À la une</span>Le climat des affaires se stabilise en France en juin</span>
-    <span class="ticker__item"><span class="ticker__tag">Analyse maison</span>Pourquoi la désinflation française résiste mieux que prévu</span>
-    <span class="ticker__item"><span class="ticker__tag">Note de veille</span>Budget 2027 : les trois arbitrages qui vont compter</span>
-    <span class="ticker__item"><span class="ticker__tag">ForexLive</span>FLASH : l&#39;inflation américaine ressort à 3,1 %, sous les attentes</span>
-    <span class="ticker__item"><span class="ticker__tag">CoinDesk</span>Bitcoin repasse au-dessus d&#39;un seuil clé porté par les entrées en ETF</span>
-    <span class="ticker__item"><span class="ticker__tag">ZeroHedge</span>La Fed pourrait ralentir la réduction de son bilan, selon une source</span>
-    <span class="ticker__item"><span class="ticker__tag">Banque centrale européenne</span>La BCE maintient ses taux et confirme une approche réunion par réunion</span>
-    <span class="ticker__item"><span class="ticker__tag">Natixis – Recherche &amp; marchés</span>Natixis : pourquoi les taux longs resteront durablement plus élevés</span>
-    <span class="ticker__item"><span class="ticker__tag">Les Échos – Économie</span>Zone euro : la croissance accélère légèrement au deuxième trimestre</span>
-    <span class="ticker__item"><span class="ticker__tag">CNBC – Economy</span>États-Unis : les créations d&#39;emplois ralentissent mais restent solides</span>
-    <span class="ticker__item"><span class="ticker__tag">Trump · marchés (live)</span>Trump menace de nouveaux droits de douane, les marchés se tendent</span>
-    <span class="ticker__item"><span class="ticker__tag">Reuters – Business</span>Les marchés mondiaux stables, entre croissance et banques centrales</span>
-    <span class="ticker__item"><span class="ticker__tag">Cointelegraph</span>Ethereum : la mise à jour réseau relance le débat sur les frais</span>
-    <span class="ticker__item"><span class="ticker__tag">Financial Times – Markets</span>Les rendements obligataires européens reculent sur fond de pari de baisse des taux</span>
-    <span class="ticker__item"><span class="ticker__tag">FXStreet – News</span>EUR/USD : cassure au-dessus de 1,09 après les chiffres américains</span>
-    <span class="ticker__item"><span class="ticker__tag">Réserve fédérale (Fed)</span>La Fed appelle à la patience avant tout mouvement sur les taux</span>
-    <span class="ticker__item"><span class="ticker__tag">MarketWatch – Top Stories</span>Wall Street finit en hausse, le Nasdaq porté par la tech à un record</span>
-    <span class="ticker__item"><span class="ticker__tag">Ostrum AM (Natixis) – Stratégie marchés</span>Ostrum (Natixis) : surpondérer le crédit de qualité, prudence sur la duration</span>
-    <span class="ticker__item"><span class="ticker__tag">La Tribune – Économie</span>Énergie : les prix de gros du gaz repartent à la baisse en Europe</span>
-    <span class="ticker__item"><span class="ticker__tag">Decrypt</span>Régulation : un nouveau cadre crypto se précise en Europe</span>
-    <span class="ticker__item"><span class="ticker__tag">Nikkei Asia – Economy</span>Japon : les exportations rebondissent grâce à un yen plus faible</span>
-    <span class="ticker__item"><span class="ticker__tag">Fonds monétaire international (FMI)</span>Le FMI relève légèrement sa prévision de croissance mondiale pour 2026</span>
-    <span class="ticker__item"><span class="ticker__tag">OCDE – Salle de presse</span>L&#39;OCDE invite les pays à investir davantage dans les compétences</span>
-    <span class="ticker__item"><span class="ticker__tag">Banque de France</span>La Banque de France confirme une inflation sous les 2 % à l&#39;horizon 2027</span>
-    <span class="ticker__item"><span class="ticker__tag">INSEE – À la une</span>Le climat des affaires se stabilise en France en juin</span>
-  </div>
-</div>
 <main class="wrap">
 <section class="pagehead" aria-label="Calendrier éco">
   <p class="pagehead__eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"/></svg> <span data-en="Agenda · Week">Agenda · Semaine</span></p>
@@ -134,47 +82,15 @@
     <a href="https://fr.investing.com/" target="_blank" rel="noopener nofollow">Investing.com France</a>.
   </p>
 </div>
-        <div class="calcard" style="margin-top:24px">
-          <div class="calcard__bar">
-            <span class="calcard__legend" data-en="★★★ High importance only">★★★ Forte importance uniquement</span>
-            <a class="calcard__full" href="https://fr.investing.com/economic-calendar/" target="_blank" rel="noopener nofollow">
-              <span data-en="Full calendar on Investing.com">Calendrier complet sur Investing.com</span> <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <iframe
-            class="calcard__frame"
-            title="Calendrier économique 3 étoiles — Investing.com"
-            src="https://sslecal2.investing.com/?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&category=_employment,_economicActivity,_inflation,_credit,_centralBanks,_confidenceIndex,_balance,_Bonds&importance=3&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=58&lang=5"
-            loading="lazy" frameborder="0" allowtransparency="true">
-          </iframe>
-          <p class="calcard__credit" data-en='Real-time economic calendar provided by <a href="https://www.investing.com/" target="_blank" rel="noopener nofollow">Investing.com</a>.'>
-            Calendrier économique en temps réel fourni par
-            <a href="https://fr.investing.com/" target="_blank" rel="noopener nofollow">Investing.com France</a>.
-          </p>
-        </div>
 
-<section class="prose" aria-label="Calendrier économique">
-  <span class="prose__kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"/></svg> <span data-en="Economic calendar">Calendrier économique</span></span>
-  <h1 class="prose__h" data-en="The week's high-impact events">Les rendez-vous à fort impact de la semaine</h1>
-  <p data-en='Central bank decisions, inflation, employment, GDP… This calendar shows only the announcements rated <strong>“high importance” (3 stars ★★★)</strong> — the ones that really move the markets. Lower-importance releases are deliberately hidden to keep things essential. Data and times provided in real time by Investing.com.'>
-    Décisions de banques centrales, inflation, emploi, PIB… Ce calendrier ne
-    montre que les annonces classées <strong>« forte importance »
-    (3 étoiles ★★★)</strong> — celles qui font réellement bouger les marchés.
-    Les publications de moindre importance sont volontairement masquées pour
-    aller à l'essentiel. Données et heures fournies en temps réel par
-    Investing.com.
-  </p>
+<section class="prose" aria-label="Pourquoi cette page">
+  <span class="prose__kicker" data-en="Our coverage">Notre couverture</span>
+  <h2 class="prose__h" data-en="Why this page">Pourquoi cette page</h2>
+  <p data-en="This calendar gathers the week&#39;s high-impact economic events: central-bank decisions, inflation, employment, GDP… Only releases rated « high importance » (3 stars ★★★) appear here — the ones that really move markets. Minor publications are deliberately hidden to keep things essential.">Ce calendrier rassemble les rendez-vous économiques à fort impact de la semaine : décisions de banques centrales, inflation, emploi, PIB… Seules les annonces classées « forte importance » (3 étoiles ★★★) y figurent — celles qui font réellement bouger les marchés. Les publications mineures sont volontairement masquées pour aller à l'essentiel.</p>
+  <p data-en="The interactive calendar is shown at the top of the page, with date, country, forecast and actual in real time (data provided by Investing.com). You can filter by time zone and move from one week to the next.">Le calendrier interactif s'affiche en haut de page, avec date, pays, prévision et résultat en temps réel (données fournies par Investing.com). Vous pouvez filtrer par fuseau horaire et naviguer d'une semaine à l'autre.</p>
+  <p data-en="Why a filtered calendar? Because a full economic agenda is unreadable: dozens of releases a day, most with no effect on prices. By keeping only the three-star events, this page shows you where to look and when — the moments when volatility rises and a surprise versus consensus can move rates, currencies and equities.">Pourquoi un calendrier filtré ? Parce qu'un agenda économique complet est illisible : des dizaines de publications par jour, dont la plupart sans effet sur les cours. En ne gardant que les événements à trois étoiles, cette page vous montre où regarder et quand — les moments où la volatilité grimpe et où une surprise par rapport au consensus peut faire réagir taux, devises et actions.</p>
 </section>
 
-<section class="block eco-archives" aria-label="Annonces précédentes">
-  <header class="block__head">
-    <h2 class="block__title" data-en='<span class="block__dot">●</span> Earlier announcements'><span class="block__dot">●</span> Annonces précédentes</h2>
-    <span class="block__sub" data-en="Coming soon">Bientôt disponibles</span>
-  </header>
-  <div class="eco-empty" data-en="Older announcements will be archived here as new editions are published. Come back soon.">
-    Les annonces plus anciennes seront archivées ici au fil des prochaines éditions. Revenez bientôt.
-  </div>
-</section>
 </main>
 <div class="backdrop" id="navBackdrop" aria-hidden="true"></div>
 <script src="./eco.js"></script>
