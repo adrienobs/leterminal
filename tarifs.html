@@ -2,14 +2,101 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tarifs Le Terminal — Gratuit, Mensuel 29,99 € ou Annuel</title>
 <meta name="description" content="Les offres Le Terminal : gratuit pour commencer, ou Premium dès 19,99 €/mois (annuel) — Setup Analyzer illimité, journal + IA Coach et alertes macro.">
-<link rel="canonical" href="https://www.leterminal.net/tarifs.html">
+<link rel="canonical" href="https://www.leterminal.net/tarifs">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Terminal">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Tarifs Le Terminal — Gratuit, Mensuel 29,99 € ou Annuel">
+<meta property="og:description" content="Les offres Le Terminal : gratuit pour commencer, ou Premium dès 19,99 €/mois (annuel) — Setup Analyzer illimité, journal + IA Coach et alertes macro.">
+<meta property="og:url" content="https://www.leterminal.net/tarifs">
+<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tarifs Le Terminal — Gratuit, Mensuel 29,99 € ou Annuel">
+<meta name="twitter:description" content="Les offres Le Terminal : gratuit pour commencer, ou Premium dès 19,99 €/mois (annuel) — Setup Analyzer illimité, journal + IA Coach et alertes macro.">
+<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.leterminal.net/#organization",
+      "name": "Le Terminal",
+      "url": "https://www.leterminal.net/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.leterminal.net/logo.png"
+      },
+      "description": "Hub de trading propulsé par l'IA : analyse de setups, journal de trading, calendrier économique et gestion du risque, réunis dans un seul cockpit.",
+      "sameAs": [
+        "https://t.me/leterminalfx"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Puis-je vraiment utiliser Le Terminal gratuitement ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le plan Découverte est gratuit pour toujours — pas de carte bancaire demandée. Vous avez accès aux outils avec des limites mensuelles, de quoi vous faire un avis réel avant de passer en Premium."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je changer de plan ou annuler à tout moment ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le passage Découverte → Premium est immédiat. L'annulation se fait en deux clics depuis votre compte : vous gardez l'accès Premium jusqu'à la fin de la période payée, puis vous repassez automatiquement en Découverte. Vos données sont conservées."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels moyens de paiement acceptez-vous ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Carte bancaire (Visa, Mastercard, Amex) et PayPal. Le paiement est sécurisé et la facturation s'arrête dès l'annulation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.leterminal.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tarifs",
+          "item": "https://www.leterminal.net/tarifs"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./logo.jpg.webp">
+<link rel="preload" as="font" type="font/woff2" href="./fonts/anton-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="./fonts.css">
 <link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <link rel="stylesheet" href="./home.css">
 <link rel="stylesheet" href="./tarifs.css">
 </head>
@@ -20,8 +107,8 @@
 <!-- CHROME -->
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
@@ -30,68 +117,69 @@
           Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./index.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
+          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
+          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
+          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
+          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
+          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
         </div>
       </div>
-      <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
-      <a href="./index.html#method" data-en="Method">Méthode</a>
-      <a href="./index.html#community" data-en="Community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
       <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
       <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="./tarifs.html"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
 </div>
 
 <!-- DOCK -->
 <nav class="lt-dock" aria-label="Pages">
-  <a class="lt-dock__item" href="./index.html">
+  <a class="lt-dock__item" href="/">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
     <span class="lt-dock__lbl" data-en="Home">Accueil</span>
     <span class="lt-dock__tip" data-en="Home">Accueil</span>
   </a>
-  <a class="lt-dock__item" href="./journal.html">
+  <a class="lt-dock__item" href="/journal">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v18M13 8h3M13 12h3"/></svg>
     <span class="lt-dock__lbl">Journal</span>
     <span class="lt-dock__tip">Journal de Trading</span>
   </a>
-  <a class="lt-dock__item" href="./app.html">
+  <a class="lt-dock__item" href="/app">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 14l3-3 2 2 4-4"/></svg>
     <span class="lt-dock__lbl">Analyzer</span>
     <span class="lt-dock__tip">Setup Analyzer</span>
   </a>
-  <a class="lt-dock__item" href="./patrimoine-presentation.html">
+  <a class="lt-dock__item" href="/patrimoine-presentation">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>
     <span class="lt-dock__lbl">Patrim.</span>
     <span class="lt-dock__tip">Patrimoine</span>
   </a>
-  <a class="lt-dock__item" href="./calendrier.html">
+  <a class="lt-dock__item" href="/calendrier">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="1.5"/><path d="M4 9h16M8 3v4M16 3v4M9 14h2"/></svg>
     <span class="lt-dock__lbl">Éco</span>
     <span class="lt-dock__tip">Calendrier Éco</span>
   </a>
-  <a class="lt-dock__item" href="./bubble.html">
+  <a class="lt-dock__item" href="/bubble">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="17" cy="15" r="3"/><circle cx="16" cy="6" r="2"/></svg>
     <span class="lt-dock__lbl">Bubble</span>
     <span class="lt-dock__tip">Bubble Map</span>
   </a>
-  <a class="lt-dock__item" href="./calculateur.html">
+  <a class="lt-dock__item" href="/calculateur">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h6"/></svg>
     <span class="lt-dock__lbl">Pips</span>
     <span class="lt-dock__tip">Calculateur de Pips</span>
   </a>
-  <a class="lt-dock__item" href="./mur-des-trades.html">
+  <a class="lt-dock__item" href="/mur-des-trades">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v1.5A3 3 0 0 0 6 10.5M19 6h2v1.5a3 3 0 0 1-3 3"/></svg>
     <span class="lt-dock__lbl">Trades</span>
     <span class="lt-dock__tip">Mur des Trades</span>
@@ -102,7 +190,7 @@
 <section class="pr-hero">
   <div class="pr-hero__halo" aria-hidden="true"></div>
   <span class="lt-eyebrow" data-en="<span class='lt-dot'></span> Simple pricing, no surprises"><span class="lt-dot"></span> Tarifs simples, sans surprise</span>
-  <h1 class="pr-hero__title"><span class="lt-metal" data-en="Go Premium">Passe en Premium</span></h1>
+  <h1 class="pr-hero__title"><span class="lt-metal" data-en="Go Premium">Passez en Premium</span></h1>
   <p class="pr-hero__lede" data-en="Every tool, no limits. Pick your plan: flexible monthly, or yearly to save 33%.">Tous les outils, sans limite. Choisissez votre formule : flexible au mois, ou annuel pour économiser 33 %.</p>
 </section>
 
@@ -118,7 +206,7 @@
         <li><svg class="pr-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bull)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span data-en="Trade Wall">Mur des Trades</span></li>
         <li><svg class="pr-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bull)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span data-en="Pip Calculator">Calculateur de Pips</span></li>
       </ul>
-      <div class="pr-card__cta"><a class="lt-btn lt-btn--secondary lt-btn--lg" style="width:100%" href="./index.html" data-en="Create an account">Créer un compte</a></div>
+      <div class="pr-card__cta"><a class="lt-btn lt-btn--secondary lt-btn--lg" style="width:100%" href="/" data-en="Create an account">Créer un compte</a></div>
     </div>
     <!-- Mensuel -->
     <div class="pr-card">
@@ -148,7 +236,7 @@
         <li data-en="<svg class='pr-check' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='var(--accent)' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg> Patrimoine / plan d'investissement"><svg class="pr-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Patrimoine / plan d'investissement</li>
       </ul>
       <div class="pr-card__cta"><a class="lt-btn lt-btn--primary lt-btn--lg" style="width:100%" href="javascript:void(0)" onclick="window.ltOpenCheckout&&ltOpenCheckout('annual')" data-en="Go Premium">Passer en Premium</a></div>
-      <span class="pr-card__note" data-en="14-day money-back guarantee">Garantie 14 jours satisfait ou remboursé</span>
+      
     </div>
   </div>
 </section>
@@ -157,7 +245,7 @@
 <section class="pr-why" data-reveal>
   <div class="pr-why__item"><span class="pr-why__n">01</span><h3 data-en="One subscription, five tools">Un seul abonnement, cinq outils</h3><p data-en="Setup analysis, journal, macro calendar, capital flows and calculator — elsewhere that's three separate subscriptions. Here, a single cockpit.">Analyse de setups, journal, calendrier macro, flux de capitaux et calculateur — ailleurs, c'est trois abonnements séparés. Ici, un seul cockpit.</p></div>
   <div class="pr-why__item"><span class="pr-why__n">02</span><h3 data-en="The AI that knows your strategy">L'IA qui connaît votre stratégie</h3><p data-en="ICT, SMC, price action — the engine adapts to your method and learns from your history. The Premium plan unlocks full behavioral analysis.">ICT, SMC, price action — le moteur s'adapte à votre méthode et apprend de votre historique. Le plan Premium débloque l'analyse comportementale complète.</p></div>
-  <div class="pr-why__item"><span class="pr-why__n">03</span><h3 data-en="No commitment, truly">Sans engagement, vraiment</h3><p data-en="Free plan for life, two-click cancellation and a 14-day money-back guarantee. You only pay as long as it helps you progress.">Plan gratuit à vie, annulation en deux clics et garantie 14 jours remboursé. Vous ne payez que tant que ça vous fait progresser.</p></div>
+  <div class="pr-why__item"><span class="pr-why__n">03</span><h3 data-en="No commitment, truly">Sans engagement, vraiment</h3><p data-en="Free plan for life, cancel anytime. No refund — you only pay as long as it helps you progress.">Plan gratuit à vie, résiliation à tout moment. Aucun remboursement — vous ne payez que tant que ça vous fait progresser.</p></div>
 </section>
 
 <!-- COMPARATIF -->
@@ -208,7 +296,7 @@
   <h2 class="pr-final__title"><span class="lt-metal" data-en="Ready for takeoff?">Prêt à décoller ?</span></h2>
   <p class="pr-final__lede" data-en="Create your free account in 30 seconds. No commitment.">Créez votre compte gratuit en 30 secondes. Aucun engagement.</p>
   <div class="pr-final__cta">
-    <a class="lt-btn lt-btn--primary lt-btn--lg" href="./app.html" data-en="Create a free account">Créer un compte gratuit</a>
+    <a class="lt-btn lt-btn--primary lt-btn--lg" href="/app" data-en="Create a free account">Créer un compte gratuit</a>
     <a class="lt-btn lt-btn--ghost lt-btn--lg" href="javascript:void(0)" onclick="window.ltOpenCheckout&&ltOpenCheckout('annual')" data-en="Go Premium">Passer en Premium</a>
   </div>
 </section>
@@ -217,43 +305,43 @@
 <footer class="lt-footer ltf">
   <div class="ltf__wrap">
     <div class="ltf__brand">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </div>
 
     <div class="ltf__cols">
       <div class="ltf__col">
         <h4 class="ltf__h" data-en="Tools">Outils</h4>
-        <a href="./app.html">Setup Analyzer</a>
-        <a href="./journal.html" data-en="Trading Journal">Journal de Trading</a>
-        <a href="./calendrier.html" data-en="Economic Calendar">Calendrier Éco</a>
-        <a href="./bubble.html">Bubble Map</a>
-        <a href="./mur-des-trades.html" data-en="Trade Wall">Mur des Trades</a>
-        <a href="./patrimoine-presentation.html" data-en="Wealth tracker">Patrimoine</a>
-        <a href="./calculateur.html" data-en="Pip Calculator">Calculateur de Pips</a>
+        <a href="/analyzer-presentation">Setup Analyzer</a>
+        <a href="/journal-presentation" data-en="Trading Journal">Journal de Trading</a>
+        <a href="/calendrier-presentation" data-en="Economic Calendar">Calendrier Éco</a>
+        <a href="/bubble">Bubble Map</a>
+        <a href="/mur-des-trades" data-en="Trade Wall">Mur des Trades</a>
+        <a href="/patrimoine-presentation" data-en="Wealth tracker">Patrimoine</a>
+        <a href="/calculateur" data-en="Pip Calculator">Calculateur de Pips</a>
       </div>
       <div class="ltf__col">
         <h4 class="ltf__h" data-en="Markets">Marchés</h4>
-        <a href="./eco-calendrier.html" data-en="Overview">Présentation</a>
-        <a href="./eco-flash.html">Flash Info</a>
-        <a href="./eco-selection.html" data-en="The selection">La sélection</a>
-        <a href="./eco-crypto.html">Crypto</a>
-        <a href="./eco-archive.html" data-en="Archive">Archive</a>
+        <a href="/eco-calendrier" data-en="Overview">Présentation</a>
+        <a href="/eco-flash">Flash Info</a>
+        <a href="/eco-selection" data-en="The selection">La sélection</a>
+        <a href="/eco-crypto">Crypto</a>
+        <a href="/eco-archive" data-en="Archive">Archive</a>
       </div>
       <div class="ltf__col">
         <h4 class="ltf__h" data-en="Company">Entreprise</h4>
-        <a href="./index.html#method" data-en="Method">Méthode</a>
-        <a href="./index.html#strategies" data-en="Strategies">Stratégies</a>
-        <a href="./index.html#community" data-en="Community">Communauté</a>
-        <a href="./avis.html" data-en="Reviews">Avis</a>
-        <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
+        <a href="/#method" data-en="Method">Méthode</a>
+        <a href="/#strategies" data-en="Strategies">Stratégies</a>
+        <a href="/#community" data-en="Community">Communauté</a>
+        <a href="/avis" data-en="Reviews">Avis</a>
+        <a href="/tarifs" data-en="Pricing">Tarifs</a>
       </div>
       <div class="ltf__col">
         <h4 class="ltf__h" data-en="Legal">Infos légales</h4>
-        <a href="./legal.html#mentions" data-en="Legal notice">Mentions légales</a>
-        <a href="./legal.html#confidentialite" data-en="Privacy">Confidentialité</a>
-        <a href="./legal.html#cookies" data-en="Cookies">Cookies</a>
-        <a href="./legal.html#cgv" data-en="Terms">CGV</a>
+        <a href="/legal#mentions" data-en="Legal notice">Mentions légales</a>
+        <a href="/legal#confidentialite" data-en="Privacy">Confidentialité</a>
+        <a href="/legal#cookies" data-en="Cookies">Cookies</a>
+        <a href="/legal#cgv" data-en="Terms">CGV</a>
       </div>
     </div>
 
@@ -262,7 +350,7 @@
     <div class="ltf__mid">
       <div class="ltf__social">
         <a href="https://www.instagram.com/leterminalapp/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://t.me/letermialfx" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.3 2.9 11.4c-.9.35-.88 1.65.03 1.97l4.6 1.6 1.77 5.3c.27.66 1.13.79 1.6.25l2.5-2.7 4.45 3.28c.6.44 1.46.12 1.62-.61L22.9 5.4c.2-.92-.7-1.46-1.4-1.1z"/><path d="m7.5 15 9-7.5-6.6 8.3"/></svg></a>
+        <a href="https://t.me/leterminalfx" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.3 2.9 11.4c-.9.35-.88 1.65.03 1.97l4.6 1.6 1.77 5.3c.27.66 1.13.79 1.6.25l2.5-2.7 4.45 3.28c.6.44 1.46.12 1.62-.61L22.9 5.4c.2-.92-.7-1.46-1.4-1.1z"/><path d="m7.5 15 9-7.5-6.6 8.3"/></svg></a>
       </div>
     </div>
 
@@ -315,5 +403,7 @@
 <script src="./cookies.js"></script>
 <script src="./onboarding.js"></script>
 <script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>

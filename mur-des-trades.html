@@ -2,12 +2,105 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mur des Trades — setups partagés par la communauté | Le Terminal</title>
 <meta name="description" content="Découvrez les trades et setups partagés par la communauté Le Terminal : idées, entrées et résultats. Inspirez-vous et partagez les vôtres.">
-<link rel="canonical" href="https://www.leterminal.net/mur-des-trades.html">
+<link rel="canonical" href="https://www.leterminal.net/mur-des-trades">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Terminal">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Mur des Trades — setups partagés par la communauté | Le Terminal">
+<meta property="og:description" content="Découvrez les trades et setups partagés par la communauté Le Terminal : idées, entrées et résultats. Inspirez-vous et partagez les vôtres.">
+<meta property="og:url" content="https://www.leterminal.net/mur-des-trades">
+<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mur des Trades — setups partagés par la communauté | Le Terminal">
+<meta name="twitter:description" content="Découvrez les trades et setups partagés par la communauté Le Terminal : idées, entrées et résultats. Inspirez-vous et partagez les vôtres.">
+<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Mur des Trades",
+      "url": "https://www.leterminal.net/mur-des-trades",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "fr-FR",
+      "description": "Découvrez les trades et setups partagés par la communauté Le Terminal : idées, entrées et résultats. Inspirez-vous et partagez les vôtres.",
+      "isPartOf": {
+        "@id": "https://www.leterminal.net/#website"
+      },
+      "publisher": {
+        "@id": "https://www.leterminal.net/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.leterminal.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Mur des Trades",
+          "item": "https://www.leterminal.net/mur-des-trades"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment partager un trade ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Importez la capture de votre trade, le générateur crée une carte propre (paire, sens, résultat) que vous pouvez partager en un clic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le Mur des Trades est-il gratuit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, créer et partager une carte de trade est gratuit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les résultats affichés sont-ils vérifiés ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Les résultats sont déclarés par les membres et ne sont pas vérifiés par Le Terminal. Ils sont partagés à titre informatif, pas comme un conseil."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="stylesheet" href="./fonts.css">
 <link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <link rel="stylesheet" href="./eco.css">
 <link rel="stylesheet" href="./presentation.css">
 <style>
@@ -118,8 +211,8 @@
 <div class="glow" aria-hidden="true"></div>
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
@@ -128,26 +221,27 @@
           Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./index.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
+          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
+          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
+          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
+          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
+          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
         </div>
       </div>
-      <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
-      <a href="./index.html#method" data-en="Method">Méthode</a>
-      <a href="./index.html#community" data-en="Community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
       <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
       <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="./tarifs.html"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
 </div>
@@ -258,6 +352,34 @@
     <p class="mt-disclaim" data-en="Results are self-reported by members and are not verified by Le Terminal. Past performance does not guarantee future results. Trading involves a risk of capital loss.">Résultats auto-déclarés par les membres et non vérifiés par Le Terminal. Les performances passées ne préjugent pas des performances futures. Le trading comporte un risque de perte en capital.</p>
   </section>
 
+<style>
+  .lts{max-width:900px;margin:36px auto 64px;padding:0 24px;font-family:var(--font-text)}
+  .lts__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .lts__eyebrow .lt-dot{width:6px;height:6px;border-radius:999px;background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+  .lts h2{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.01em;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.08;color:var(--text-title);margin:44px 0 16px}
+  .lts h2:first-of-type{margin-top:8px}
+  .lts p{font-size:15px;line-height:1.75;color:var(--text-body);margin:0 0 14px}
+  .lts a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .lts a:hover{border-bottom-color:var(--accent)}
+  .lts strong{color:var(--text-title);font-weight:600}
+  .lts__qa{border-top:1px solid var(--border-subtle);padding:16px 0}
+  .lts__qa:last-of-type{border-bottom:1px solid var(--border-subtle)}
+  .lts__qa b{display:block;color:var(--text-title);font-size:15px;margin-bottom:6px}
+  .lts__cta{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+  .lts__disc{margin-top:34px;padding:14px 16px;border:1px solid rgba(232,194,104,.28);background:rgba(232,194,104,.06);border-radius:var(--r-md,8px);font-size:12.5px;line-height:1.6;color:var(--text-muted)}
+</style>
+<section class="lts" aria-label="Guide du Mur des Trades">
+  <span class="lts__eyebrow"><span class="lt-dot"></span><span data-en="Community">Communauté</span></span>
+  <h2 data-en="Trade Wall: share your setups with the community">Mur des Trades : partagez vos setups avec la communauté</h2>
+  <p data-en="The <strong>Trade Wall</strong> lets you turn a trade into a clean, shareable card in seconds. Upload a screenshot, the generator builds a card with the pair, direction and result, and you publish it to the community wall — or share it on your socials.">Le <strong>Mur des Trades</strong> vous permet de transformer un trade en une carte propre et partageable en quelques secondes. Importez une capture, le générateur crée une carte avec la paire, le sens et le résultat, et vous la publiez sur le mur communautaire — ou la partagez sur vos réseaux.</p>
+  <h2 data-en="How it works">Comment ça marche</h2>
+  <p data-en="Upload your trade, pick a background, add your handle, and generate the card. Browse the community wall sorted by likes, recency or biggest gains to discover ideas and entries — and post your own to compare approaches.">Importez votre trade, choisissez un fond, ajoutez votre pseudo et générez la carte. Parcourez le mur communautaire trié par likes, récence ou plus gros gains pour découvrir des idées et des entrées — et publiez les vôtres pour comparer les approches.</p>
+  <h2 data-en="Learn alongside the community">Apprenez avec la communauté</h2>
+  <p data-en="Sharing trades makes you accountable and helps you learn from others. Pair it with your <a href='/journal-presentation'>trading journal</a> to track your real performance and the <a href='/analyzer-presentation'>Setup Analyzer</a> to score a setup before you take it.">Partager ses trades responsabilise et aide à apprendre des autres. Associez-le à votre <a href="/journal-presentation">journal de trading</a> pour suivre votre performance réelle et au <a href="/analyzer-presentation">Setup Analyzer</a> pour noter un setup avant de le prendre.</p>
+  <h2 data-en="Frequently asked questions">Questions fréquentes</h2>
+  <div class="lts__qa"><b data-en="How do I share a trade?">Comment partager un trade ?</b><p data-en="Upload your trade screenshot, the generator creates a clean card (pair, side, result) you can share in one click.">Importez la capture de votre trade, le générateur crée une carte propre (paire, sens, résultat) que vous pouvez partager en un clic.</p></div><div class="lts__qa"><b data-en="Is the Trade Wall free?">Le Mur des Trades est-il gratuit ?</b><p data-en="Yes, creating and sharing a trade card is free.">Oui, créer et partager une carte de trade est gratuit.</p></div><div class="lts__qa"><b data-en="Are the displayed results verified?">Les résultats affichés sont-ils vérifiés ?</b><p data-en="No. Results are self-reported by members and are not verified by Le Terminal. They are shared for information only, not as advice.">Non. Les résultats sont déclarés par les membres et ne sont pas vérifiés par Le Terminal. Ils sont partagés à titre informatif, pas comme un conseil.</p></div>
+  <p class="lts__disc" data-en="Results are self-reported by members and are not verified by Le Terminal. Educational tool — not investment advice. Trading carries a high risk of capital loss.">Les résultats sont déclarés par les membres et ne sont pas vérifiés par Le Terminal. Outil éducatif — pas un conseil en investissement. Le trading comporte un risque élevé de perte en capital.</p>
+</section>
 </div>
 </main>
 <div class="backdrop" id="navBackdrop" aria-hidden="true"></div>
@@ -519,12 +641,12 @@
   document.getElementById('shX').onclick=function(){
     var c=compute();
     var text=(document.getElementById('gPair').value||'')+' '+(side==='long'?'Long':'Short')+' '+(c.pct>=0?'+':'−')+Math.abs(Math.round(c.pct))+'% · Le Terminal';
-    window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://le-terminal-analyzer.vercel.app/mur-des-trades.html'),'_blank');
+    window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://www.leterminal.net/mur-des-trades'),'_blank');
   };
   document.getElementById('shTg').onclick=function(){
     var c=compute();
     var text=(document.getElementById('gPair').value||'')+' '+(side==='long'?'Long':'Short')+' '+(c.pct>=0?'+':'−')+Math.abs(Math.round(c.pct))+'% · Le Terminal';
-    window.open('https://t.me/share/url?url='+encodeURIComponent('https://le-terminal-analyzer.vercel.app/mur-des-trades.html')+'&text='+encodeURIComponent(text),'_blank');
+    window.open('https://t.me/share/url?url='+encodeURIComponent('https://www.leterminal.net/mur-des-trades')+'&text='+encodeURIComponent(text),'_blank');
   };
   document.getElementById('shLink').onclick=publishToWall;
 
@@ -642,5 +764,7 @@
 <script src="./cookies.js"></script>
 <script src="./onboarding.js"></script>
 <script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>

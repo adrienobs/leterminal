@@ -3,18 +3,118 @@
 <!-- v3 — design "Le Terminal" (nouveau design system) -->
 <head>
 <meta charset="UTF-8">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#07090C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Le Terminal">
-<link rel="apple-touch-icon" href="./logo.jpg.webp">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculateur de Pips & taille de position forex | Le Terminal</title>
 <meta name="description" content="Calculez votre taille de lot, la valeur du pip, le risque en euros et le R:R selon votre capital et votre stop. Gratuit, sans inscription.">
-<link rel="canonical" href="https://www.leterminal.net/calculateur.html">
+<link rel="canonical" href="https://www.leterminal.net/calculateur">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Le Terminal">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calculateur de Pips &amp; taille de position forex | Le Terminal">
+<meta property="og:description" content="Calculez votre taille de lot, la valeur du pip, le risque en euros et le R:R selon votre capital et votre stop. Gratuit, sans inscription.">
+<meta property="og:url" content="https://www.leterminal.net/calculateur">
+<meta property="og:image" content="https://www.leterminal.net/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le Terminal — hub de trading IA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculateur de Pips &amp; taille de position forex | Le Terminal">
+<meta name="twitter:description" content="Calculez votre taille de lot, la valeur du pip, le risque en euros et le R:R selon votre capital et votre stop. Gratuit, sans inscription.">
+<meta name="twitter:image" content="https://www.leterminal.net/og-banner.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Calculateur de Pips",
+      "url": "https://www.leterminal.net/calculateur",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "fr-FR",
+      "description": "Calculez votre taille de lot, la valeur du pip, le risque en euros et le R:R selon votre capital et votre stop. Gratuit, sans inscription.",
+      "isPartOf": {
+        "@id": "https://www.leterminal.net/#website"
+      },
+      "publisher": {
+        "@id": "https://www.leterminal.net/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.leterminal.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calculateur de Pips",
+          "item": "https://www.leterminal.net/calculateur"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment calculer la taille de lot en forex ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divisez le montant que vous acceptez de risquer (par ex. 1 % de votre capital) par la distance de votre stop en pips multipliée par la valeur du pip de la paire. Le calculateur le fait instantanément pour plus de 30 marchés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien vaut un pip ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sur les grandes paires forex en dollar, environ 10 $ par pip et par lot standard, 1 $ par mini-lot et 0,10 $ par micro-lot. Sur les indices, l'or, le pétrole et la crypto, la valeur diffère — le calculateur applique la bonne valeur pour chaque instrument."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel risque prendre par trade ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Une règle répandue est de 1 à 2 % de votre capital par trade ; beaucoup de professionnels restent sous 1 %. C'est un choix de gestion du risque, pas une promesse de gain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le calculateur est-il gratuit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, entièrement gratuit et sans compte. Les autres outils de Le Terminal (journal, calendrier économique, Setup Analyzer) sont accessibles avec un plan gratuit et une option Premium."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="stylesheet" href="./fonts.css">
 <link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <style>
   /* Alias des anciennes variables → tokens du design system
      (pour que les styles inline générés par le JS restent cohérents). */
@@ -89,8 +189,8 @@
 <!-- ============ GLOBAL CHROME : NAV ============ -->
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
@@ -99,68 +199,69 @@
           Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./index.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
+          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
+          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
+          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
+          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
+          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
         </div>
       </div>
-      <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
-      <a href="./index.html#method" data-en="Method">Méthode</a>
-      <a href="./index.html#community" data-en="Community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
       <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
       <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="./tarifs.html"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
 </div>
 
 <!-- ============ MOBILE DOCK ============ -->
 <nav class="lt-dock" aria-label="Pages">
-  <a class="lt-dock__item" href="./index.html">
+  <a class="lt-dock__item" href="/">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
     <span class="lt-dock__lbl" data-en="Home">Accueil</span>
     <span class="lt-dock__tip" data-en="Home">Accueil</span>
   </a>
-  <a class="lt-dock__item" href="./journal.html">
+  <a class="lt-dock__item" href="/journal">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v18M13 8h3M13 12h3"/></svg>
     <span class="lt-dock__lbl">Journal</span>
     <span class="lt-dock__tip">Journal de Trading</span>
   </a>
-  <a class="lt-dock__item" href="./app.html">
+  <a class="lt-dock__item" href="/app">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 14l3-3 2 2 4-4"/></svg>
     <span class="lt-dock__lbl">Analyzer</span>
     <span class="lt-dock__tip">Setup Analyzer</span>
   </a>
-  <a class="lt-dock__item" href="./patrimoine-presentation.html">
+  <a class="lt-dock__item" href="/patrimoine-presentation">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>
     <span class="lt-dock__lbl">Patrim.</span>
     <span class="lt-dock__tip">Patrimoine</span>
   </a>
-  <a class="lt-dock__item" href="./calendrier.html">
+  <a class="lt-dock__item" href="/calendrier">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="1.5"/><path d="M4 9h16M8 3v4M16 3v4M9 14h2"/></svg>
     <span class="lt-dock__lbl">Éco</span>
     <span class="lt-dock__tip">Calendrier Éco</span>
   </a>
-  <a class="lt-dock__item" href="./bubble.html">
+  <a class="lt-dock__item" href="/bubble">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="17" cy="15" r="3"/><circle cx="16" cy="6" r="2"/></svg>
     <span class="lt-dock__lbl">Bubble</span>
     <span class="lt-dock__tip">Bubble Map</span>
   </a>
-  <a class="lt-dock__item is-active" href="./calculateur.html">
+  <a class="lt-dock__item is-active" href="/calculateur">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h6"/></svg>
     <span class="lt-dock__lbl">Pips</span>
     <span class="lt-dock__tip">Calculateur de Pips</span>
   </a>
-  <a class="lt-dock__item" href="./mur-des-trades.html">
+  <a class="lt-dock__item" href="/mur-des-trades">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v1.5A3 3 0 0 0 6 10.5M19 6h2v1.5a3 3 0 0 1-3 3"/></svg>
     <span class="lt-dock__lbl">Trades</span>
     <span class="lt-dock__tip">Mur des Trades</span>
@@ -173,16 +274,16 @@
   <!-- SIDEBAR -->
   <aside class="side">
     <span class="side__label" data-en="Tools">Outils</span>
-    <a class="side__item" href="./journal.html"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v18M13 8h3M13 12h3"/></svg></span>Journal</a>
-    <a class="side__item" href="./calendrier.html"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="1.5"/><path d="M4 9h16M8 3v4M16 3v4M9 14h2"/></svg></span>Calendrier Éco</a>
-    <a class="side__item" href="./app.html"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 14l3-3 2 2 4-4"/></svg></span>Setup Analyzer</a>
-    <a class="side__item" href="./bubble.html"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="17" cy="15" r="3"/><circle cx="16" cy="6" r="2"/></svg></span>Bubble Map</a>
-    <a class="side__item is-active" href="./calculateur.html"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h6"/></svg></span>Calculateur</a>
+    <a class="side__item" href="/journal"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v18M13 8h3M13 12h3"/></svg></span>Journal</a>
+    <a class="side__item" href="/calendrier"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="1.5"/><path d="M4 9h16M8 3v4M16 3v4M9 14h2"/></svg></span>Calendrier Éco</a>
+    <a class="side__item" href="/app"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 14l3-3 2 2 4-4"/></svg></span>Setup Analyzer</a>
+    <a class="side__item" href="/bubble"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="17" cy="15" r="3"/><circle cx="16" cy="6" r="2"/></svg></span>Bubble Map</a>
+    <a class="side__item is-active" href="/calculateur"><span class="side__ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h6"/></svg></span>Calculateur</a>
     <div class="side__spacer"></div>
     <div class="side__pro">
       <h4 data-en="Premium Access">Accès Premium</h4>
       <p data-en="Unlimited analyses, full journal and live macro alerts.">Analyses illimitées, journal complet et alertes macro en direct.</p>
-      <button class="lt-btn lt-btn--primary lt-btn--sm" style="width:100%" onclick="location.href='./tarifs.html'" data-en="Go Premium">Passer Premium</button>
+      <button class="lt-btn lt-btn--primary lt-btn--sm" style="width:100%" onclick="location.href='/tarifs'" data-en="Go Premium">Passer Premium</button>
     </div>
   </aside>
 
@@ -364,6 +465,67 @@
     </div>
   </div>
 </div>
+
+<!-- ============ CONTENU SEO (pilier : « calculateur de pips / taille de position ») ============ -->
+<style>
+  .lts{max-width:900px;margin:4px auto 72px;padding:0 24px;font-family:var(--font-text)}
+  .lts__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .lts__eyebrow .lt-dot{width:6px;height:6px;border-radius:999px;background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+  .lts h2{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.01em;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.08;color:var(--text-title);margin:48px 0 16px}
+  .lts h2:first-of-type{margin-top:8px}
+  .lts h3{font-size:1.05rem;font-weight:600;color:var(--text-title);margin:26px 0 8px}
+  .lts p{font-size:15px;line-height:1.75;color:var(--text-body);margin:0 0 14px}
+  .lts a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .lts a:hover{border-bottom-color:var(--accent)}
+  .lts strong{color:var(--text-title);font-weight:600}
+  .lts__steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 8px}
+  @media(max-width:680px){.lts__steps{grid-template-columns:1fr}}
+  .lts__step{background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:var(--r-lg,12px);padding:18px 18px 20px}
+  .lts__num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--accent-glow-soft);border:1px solid var(--accent-glow);color:var(--accent);font-family:var(--font-mono);font-weight:700;font-size:14px;margin-bottom:12px}
+  .lts__step b{display:block;color:var(--text-title);font-size:14px;margin-bottom:6px}
+  .lts__step span{font-size:13.5px;line-height:1.6;color:var(--text-muted)}
+  .lts__formula{font-family:var(--font-mono);font-size:14px;color:var(--text-title);background:var(--bg-void);border:1px solid var(--border-subtle);border-left:3px solid var(--accent);border-radius:var(--r-md,8px);padding:14px 16px;margin:8px 0 18px;line-height:1.7;overflow-x:auto}
+  .lts__faq{margin-top:8px}
+  .lts__qa{border-top:1px solid var(--border-subtle);padding:16px 0}
+  .lts__qa:last-child{border-bottom:1px solid var(--border-subtle)}
+  .lts__qa b{display:block;color:var(--text-title);font-size:15px;margin-bottom:6px}
+  .lts__cta{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+  .lts__disc{margin-top:34px;padding:14px 16px;border:1px solid rgba(232,194,104,.28);background:rgba(232,194,104,.06);border-radius:var(--r-md,8px);font-size:12.5px;line-height:1.6;color:var(--text-muted)}
+</style>
+<section class="lts" aria-label="Guide du calculateur de pips">
+  <span class="lts__eyebrow"><span class="lt-dot"></span><span data-en="Position sizing guide">Guide du dimensionnement</span></span>
+  <h2 data-en="Forex position size calculator: the #1 money-management tool">Calculateur de taille de position forex : l'outil n°1 du money management</h2>
+  <p data-en="A trade well taken starts with the right lot size. This <strong>pip calculator</strong> turns three inputs — your capital, your risk percentage and your stop-loss distance — into the exact lot size to use, the pip value and your risk-to-reward ratio. It works on 30+ pairs: forex majors, indices, gold, oil and crypto. Free and no sign-up required.">Un trade bien pris commence par la bonne taille de lot. Ce <strong>calculateur de pips</strong> transforme trois paramètres — votre capital, votre pourcentage de risque et la distance de votre stop-loss — en taille de position exacte, valeur du pip et ratio rendement/risque. Il fonctionne sur plus de 30 marchés : paires forex majeures, indices, or, pétrole et crypto. Gratuit et sans inscription.</p>
+
+  <h2 data-en="How to calculate your position size in 3 steps">Comment calculer votre taille de position en 3 étapes</h2>
+  <div class="lts__steps">
+    <div class="lts__step"><span class="lts__num">1</span><b data-en="Set your risk">Fixez votre risque</b><span data-en="Decide what share of your capital you accept to lose on this trade — generally 1 to 2%. On a €10,000 account at 1%, that is €100 at risk.">Décidez quelle part de votre capital vous acceptez de perdre sur ce trade — en général 1 à 2 %. Sur un compte de 10 000 € à 1 %, cela fait 100 € risqués.</span></div>
+    <div class="lts__step"><span class="lts__num">2</span><b data-en="Measure your stop">Mesurez votre stop</b><span data-en="Place your stop-loss at a logical level (support, resistance, swing) and read the distance in pips between your entry and your stop.">Placez votre stop-loss à un niveau logique (support, résistance, swing) et relevez la distance en pips entre votre entrée et votre stop.</span></div>
+    <div class="lts__step"><span class="lts__num">3</span><b data-en="Read your lot size">Lisez votre lot</b><span data-en="The calculator deduces the exact lot from your risk, the stop distance and the pip value of the pair. The lot follows the risk — never the reverse.">Le calculateur déduit le lot exact à partir de votre risque, de la distance du stop et de la valeur du pip de la paire. Le lot découle du risque — jamais l'inverse.</span></div>
+  </div>
+  <p class="lts__formula" data-en="Lot size = Amount at risk (€) ÷ (Stop distance in pips × Pip value per lot)">Taille de lot = Montant risqué (€) ÷ (Distance du stop en pips × Valeur du pip par lot)</p>
+
+  <h2 data-en="What is a pip and the pip value?">Qu'est-ce qu'un pip et la valeur du pip ?</h2>
+  <p data-en="A <strong>pip</strong> is the smallest standard price increment of a pair. On most forex pairs it is the 4th decimal (0.0001); on pairs quoted in yen, it is the 2nd decimal (0.01). The <strong>pip value</strong> is how much one pip is worth for your position size: roughly $10 per pip and per standard lot on the major USD pairs, and it varies on indices, metals and crypto. Knowing it is what lets you convert a stop distance into a precise amount of money — and therefore into a lot size.">Un <strong>pip</strong> est le plus petit incrément de prix standard d'une paire. Sur la plupart des paires forex, c'est la 4ᵉ décimale (0,0001) ; sur les paires en yen, c'est la 2ᵉ décimale (0,01). La <strong>valeur du pip</strong> correspond à ce que vaut un pip pour votre taille de position : environ 10 $ par pip et par lot standard sur les grandes paires en dollar, et elle varie sur les indices, les métaux et la crypto. La connaître, c'est ce qui permet de convertir une distance de stop en un montant précis — et donc en une taille de lot.</p>
+
+  <h2 data-en="Always size from the stop, never the other way around">Dimensionnez depuis le stop, jamais l'inverse</h2>
+  <p data-en="The most common beginner mistake is choosing a lot size first, then placing the stop wherever is left. Do the opposite: your stop is defined by the chart, your risk is defined by your rules, and the lot is simply the result. This single habit keeps every loss within the limit you chose in advance and protects your account from a single bad trade. Track those trades in your <a href='/journal'>trading journal</a> to verify your real risk over time, and score a setup before entering with the <a href='/app'>Setup Analyzer</a>.">L'erreur la plus fréquente du débutant est de choisir d'abord une taille de lot, puis de placer le stop là où il reste de la place. Faites l'inverse : votre stop est défini par le graphique, votre risque est défini par vos règles, et le lot n'est que le résultat. Cette seule habitude maintient chaque perte dans la limite choisie à l'avance et protège votre compte d'un trade malheureux. Suivez ces trades dans votre <a href="/journal">journal de trading</a> pour vérifier votre risque réel dans le temps, et notez un setup avant d'entrer avec le <a href="/analyzer-presentation">Setup Analyzer</a>.</p>
+
+  <h2 data-en="Frequently asked questions">Questions fréquentes</h2>
+  <div class="lts__faq">
+    <div class="lts__qa"><b data-en="How do I calculate lot size in forex?">Comment calculer la taille de lot en forex ?</b><p data-en="Divide the amount you accept to risk (e.g. 1% of your capital) by your stop distance in pips multiplied by the pip value of the pair. The calculator above does it instantly for 30+ markets.">Divisez le montant que vous acceptez de risquer (par ex. 1 % de votre capital) par la distance de votre stop en pips multipliée par la valeur du pip de la paire. Le calculateur ci-dessus le fait instantanément pour plus de 30 marchés.</p></div>
+    <div class="lts__qa"><b data-en="How much is one pip worth?">Combien vaut un pip ?</b><p data-en="On the major USD forex pairs, about $10 per pip per standard lot, $1 per mini-lot and $0.10 per micro-lot. On indices, gold, oil and crypto the value differs — the calculator uses the right value for each instrument.">Sur les grandes paires forex en dollar, environ 10 $ par pip et par lot standard, 1 $ par mini-lot et 0,10 $ par micro-lot. Sur les indices, l'or, le pétrole et la crypto, la valeur diffère — le calculateur applique la bonne valeur pour chaque instrument.</p></div>
+    <div class="lts__qa"><b data-en="What risk should I take per trade?">Quel risque prendre par trade ?</b><p data-en="A widely used rule is 1 to 2% of your capital per trade; many professionals stay below 1%. It is a risk-management choice, not a profit promise.">Une règle répandue est de 1 à 2 % de votre capital par trade ; beaucoup de professionnels restent sous 1 %. C'est un choix de gestion du risque, pas une promesse de gain.</p></div>
+    <div class="lts__qa"><b data-en="Is the calculator free?">Le calculateur est-il gratuit ?</b><p data-en="Yes, entirely free and without an account. The other Le Terminal tools (journal, economic calendar, Setup Analyzer) are available with a free plan and a Premium option.">Oui, entièrement gratuit et sans compte. Les autres outils de Le Terminal (journal, calendrier économique, Setup Analyzer) sont accessibles avec un plan gratuit et une option Premium.</p></div>
+  </div>
+
+  <div class="lts__cta">
+    <a class="lt-btn lt-btn--primary lt-btn--sm" href="/journal" data-en="Open the trading journal">Ouvrir le journal de trading</a>
+    <a class="lt-btn lt-btn--ghost lt-btn--sm" href="/tarifs" data-en="See the plans">Voir les offres</a>
+  </div>
+
+  <p class="lts__disc" data-en="Educational decision-support tool — not investment advice. Trading carries a high risk of capital loss; past or simulated results do not guarantee future performance.">Outil éducatif d'aide à la décision — pas un conseil en investissement. Le trading comporte un risque élevé de perte en capital ; des résultats passés ou simulés ne préjugent pas des performances futures.</p>
+</section>
 
 <!-- PAIR DROPDOWN (body level) -->
 <div id="pairDropdown"></div>
@@ -733,5 +895,7 @@ calculate();
 <script src="./cookies.js"></script>
 <script src="./onboarding.js"></script>
 <script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>

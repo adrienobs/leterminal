@@ -96,3 +96,5 @@ html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; }
   /* le contenu ne doit pas finir sous la barre */
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* ── Thème clair : toutes les surcharges vivent dans home/theme-light.css. ── */

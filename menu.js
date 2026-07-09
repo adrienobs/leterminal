@@ -5,6 +5,8 @@
 
   // Détecte la page active
   var page = window.location.pathname.split('/').pop() || 'index.html';
+  // URLs propres (cleanUrls) : on rétablit .html pour le matching interne.
+  if (page && page.indexOf('.') === -1) page += '.html';
 
   var ICONS = {
     dashboard: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`,
@@ -18,26 +20,21 @@
   };
 
   var PAGES = [
-    { id: 'index.html',       icon: ICONS.dashboard,  label: 'Accueil',             href: './index.html' },
-    { id: 'journal.html',     icon: ICONS.journal,    label: 'Journal de Trading',  href: './journal.html', pro: true },
-    { id: 'calendrier.html',  icon: ICONS.calendrier, label: 'Actualité',            href: './eco-calendrier.html', pro: true, children: [
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`, label: 'Présentation', href: './eco-edition.html', pro: true, children: [
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, label: 'La sélection',  href: './eco-selection.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7.2a6.3 6.3 0 1 0 0 9.6"/><path d="M4.5 10.5h9M4.5 13.5h9"/></svg>`, label: 'Europe',        href: './eco-europe.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>`, label: 'Amériques',     href: './eco-ameriques.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5l5 7 5-7"/><path d="M12 11.5V20"/><path d="M8 13.5h8"/></svg>`, label: 'Asie',          href: './eco-asie.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`, label: 'Marchés',       href: './eco-marches.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 12 4l8.5 5.5"/><path d="M5.5 10v8M9.5 10v8M14.5 10v8M18.5 10v8"/><path d="M3 20.5h18"/></svg>`, label: 'Institutions',  href: './eco-institutions.html' },
-        { icon: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`, label: 'International',  href: './eco-international.html' },
+    { id: 'index.html',       icon: ICONS.dashboard,  label: 'Dashboard',           href: './index.html' },
+    { id: 'journal.html',     icon: ICONS.journal,    label: 'Journal de Trading',  href: './journal.html' },
+    { id: 'calendrier.html',  icon: ICONS.calendrier, label: 'Calendrier Éco',      href: './eco-edition.html', children: [
+      { icon: '📰', label: 'Édition du jour', href: './eco-edition.html', children: [
+        { icon: '⭐', label: 'La sélection',  href: './eco-selection.html' },
+        { icon: '🇪🇺', label: 'Europe',        href: './eco-europe.html' },
+        { icon: '🌎', label: 'Amériques',     href: './eco-ameriques.html' },
+        { icon: '🌏', label: 'Asie',          href: './eco-asie.html' },
+        { icon: '📈', label: 'Marchés',       href: './eco-marches.html' },
+        { icon: '🏛️', label: 'Institutions',  href: './eco-institutions.html' },
+        { icon: '🌐', label: 'International',  href: './eco-international.html' },
       ] },
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, label: 'Flash Info',      href: './eco-flash.html', pro: true },
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="12" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg>`, label: 'Actualité',       href: './eco-calendrier.html' },
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 7.5h4.2a2.4 2.4 0 0 1 0 4.8H9.5m0 0h4.6a2.4 2.4 0 0 1 0 4.7H9.5m0-9.5V17m1.8-9.5V6m0 12.5V17m2.4-9.5V6m0 12.5V17"/></svg>`, label: 'Crypto',          href: './eco-crypto.html', pro: true },
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"/><path d="M9.5 12h5"/></svg>`, label: 'Archive',         href: './eco-archive.html', pro: true },
-    ] },
-    { id: 'app.html',         icon: ICONS.analyzer,   label: 'Setup Analyzer',      href: './app.html', pro: true, children: [
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>`, label: 'Historique', href: './app.html#historique' },
-      { icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`, label: 'Perfs', href: './app.html#perfs' },
+      { icon: '⚡', label: 'Flash Info',      href: './eco-flash.html' },
+      { icon: '📅', label: 'Calendrier éco',  href: './eco-calendrier.html' },
+      { icon: '🪙', label: 'Crypto',          href: './eco-crypto.html' },
     ] },
     { id: 'bubble.html',      icon: ICONS.bubble,     label: 'Bubble Map',          href: './bubble.html' },
     { id: 'patrimoine.html',  icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>`, label: 'Patrimoine', href: './patrimoine-presentation.html', pro: true, children: [
@@ -261,32 +258,26 @@
 
   // Détection de l'item courant à partir du nom de fichier du href
   function fileOf(h) { return (h || '').split('/').pop().split('#')[0]; }
-  // Un sous-item avec un # (ancre) n'est jamais marqué actif — on ne peut pas détecter la section courante côté statique
-  function selfActive(node) { return fileOf(node.href) === page && page !== '' && !(node.href || '').includes('#'); }
+  function selfActive(node) { return fileOf(node.href) === page && page !== ''; }
   function treeActive(node) {
     if(selfActive(node)) return true;
     return !!(node.children && node.children.some(treeActive));
   }
 
   // Rendu récursif d'une sous-entrée (peut elle-même avoir des enfants → 3e niveau)
-  function renderSub(c, depth, parentLocked) {
-    var locked = parentLocked || (c.pro && !isUserPro) || false;
-    var act = (!locked && selfActive(c)) ? ' active' : '';
-    var lockCls = locked ? ' pro-locked' : '';
-    var href = locked ? null : c.href;
-    var tag = locked ? 'span' : 'a';
-    var hrefAttr = href ? ' href="' + href + '"' : '';
+  function renderSub(c, depth) {
+    var act = selfActive(c) ? ' active' : '';
     if(c.children && c.children.length) {
       var inner = c.children.map(function(cc) { return renderSub(cc, 0, locked); }).join('');
       return '<div class="lt-subnav-group">' +
                '<div class="lt-subnav-row">' +
-                 '<' + tag + ' class="lt-subnav-item' + act + lockCls + '"' + hrefAttr + '><span class="lt-subnav-ic">' + c.icon + '</span>' + c.label + '</' + tag + '>' +
+                 '<a class="lt-subnav-item' + act + '" href="' + c.href + '"><span class="lt-subnav-ic">' + c.icon + '</span>' + c.label + '</a>' +
                  '<button class="lt-nav-caret lt-caret-sm open" type="button" aria-label="Déplier" onclick="ltToggleSub(event, this)">' + CARET + '</button>' +
                '</div>' +
                '<div class="lt-subnav lt-subnav--deep"><div>' + inner + '</div></div>' +
              '</div>';
     }
-    return '<' + tag + ' class="lt-subnav-item' + act + lockCls + '"' + hrefAttr + '><span class="lt-subnav-ic">' + c.icon + '</span>' + c.label + '</' + tag + '>';
+    return '<a class="lt-subnav-item' + act + '" href="' + c.href + '"><span class="lt-subnav-ic">' + c.icon + '</span>' + c.label + '</a>';
   }
 
   var isUserPro = localStorage.getItem('lt_pro') === '1';
@@ -327,6 +318,9 @@
         if (p.first_name) localStorage.setItem('lt_first_name', p.first_name);
         if (p.last_name)  localStorage.setItem('lt_last_name', p.last_name);
         if (p.email) localStorage.setItem('ta_email', p.email);
+        // Questionnaire d'onboarding : le compte l'a déjà rempli (serveur) → on
+        // mémorise pour ne plus jamais le reposer.
+        if (p.onboarded_at) { try { localStorage.setItem('lt_onboarded', '1'); } catch(e){} }
         _ltProfileFetched = true;
         // UI en place — aucune rechargement de page.
         ltSyncUser(); ltRenderUserBar();
@@ -342,16 +336,73 @@
   }
   window.ltSyncAccount = ltSyncAccount;
 
-  // Synchronisation serveur au chargement — Premium + profil toujours à jour.
+  // ── PROGRESSION DU JOUEUR RATTACHÉE AU COMPTE (dashboard/gamification) ──
+  // Temps par outil, objectifs, notes, éco, devise : stockés côté serveur
+  // (/api/stats) → la progression suit le compte, sur tous les appareils, et
+  // ne se réinitialise plus à la déconnexion.
+  function _ltMergeUsage(local, server) {
+    var out = {}, k;
+    for (k in (local || {})) out[k] = local[k];
+    for (k in (server || {})) {
+      var a = out[k] || { ms: 0, visits: 0 }, b = server[k] || {};
+      out[k] = { ms: Math.max(+a.ms || 0, +b.ms || 0), visits: Math.max(+a.visits || 0, +b.visits || 0), last: b.last || a.last || null };
+    }
+    return out;
+  }
+  // Charge la progression du serveur et la fusionne dans le cache local.
+  function ltSyncStats() {
+    var tok = localStorage.getItem('ta_token'); if (!tok) return;
+    fetch('/api/stats', { headers: { 'Authorization': 'Bearer ' + tok } })
+      .then(function (r) { return r.json(); })
+      .then(function (s) {
+        if (!s || typeof s !== 'object') return;
+        var localU = {}; try { localU = JSON.parse(localStorage.getItem('lt_usage') || '{}'); } catch (e) {}
+        try { localStorage.setItem('lt_usage', JSON.stringify(_ltMergeUsage(localU, s.usage || {}))); } catch (e) {}
+        // Clés opaques : si le cache local est vide, on restaure la valeur du compte.
+        [['goals', 'lt_goals'], ['notes', 'jnl_notes'], ['eco_unlocked', 'eco_unlocked'], ['currency', 'jnl_currency']].forEach(function (p) {
+          var sv = s[p[0]]; if (sv === undefined || sv === null) return;
+          var loc = localStorage.getItem(p[1]);
+          if (loc === null || loc === '') { try { localStorage.setItem(p[1], typeof sv === 'string' ? sv : JSON.stringify(sv)); } catch (e) {} }
+        });
+        try { document.dispatchEvent(new CustomEvent('lt:stats-synced')); } catch (e) {}
+      }).catch(function () {});
+  }
+  window.ltSyncStats = ltSyncStats;
+  // Envoie la progression locale au serveur (fusion MAX côté serveur). keepalive
+  // pour que l'envoi aboutisse même au déchargement de la page / à la déconnexion.
+  function ltFlushStats() {
+    var tok = localStorage.getItem('ta_token'); if (!tok) return;
+    var usage = {}; try { usage = JSON.parse(localStorage.getItem('lt_usage') || '{}'); } catch (e) {}
+    var body = {
+      usage: usage,
+      goals: localStorage.getItem('lt_goals'),
+      notes: localStorage.getItem('jnl_notes'),
+      eco_unlocked: localStorage.getItem('eco_unlocked'),
+      currency: localStorage.getItem('jnl_currency')
+    };
+    try {
+      fetch('/api/stats', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok }, body: JSON.stringify(body), keepalive: true })
+        .then(function (r) { return r.json(); })
+        .then(function (s) { if (s && s.usage) { try { localStorage.setItem('lt_usage', JSON.stringify(s.usage)); } catch (e) {} } })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  window.ltFlushStats = ltFlushStats;
+  // Sauvegarde en continu : au masquage/déchargement de la page + périodiquement.
+  document.addEventListener('visibilitychange', function () { if (document.hidden) ltFlushStats(); });
+  window.addEventListener('pagehide', ltFlushStats);
+  setInterval(ltFlushStats, 60000);
+
+  // Synchronisation serveur au chargement — Premium + profil + progression.
   var _verifyToken = localStorage.getItem('ta_token');
   if (_verifyToken) {
     ltSyncAccount();
+    ltSyncStats();
   }
 
   var navItems = PAGES.map(function(p) {
     var isActive = page === p.id || (page === '' && p.id === 'index.html') || treeActive(p);
-    var isLocked = p.pro && !isUserPro;
-    var cls = 'lt-nav-item' + (isActive ? ' active' : '') + (p.soon ? ' soon' : '') + (isLocked ? ' pro-locked' : '');
+    var cls = 'lt-nav-item' + (isActive ? ' active' : '') + (p.soon ? ' soon' : '');
     var soon = p.soon ? '<span class="lt-nav-soon">Bientôt</span>' : '';
     var proBadge = isLocked ? '<span class="lt-nav-pro-badge"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> PRO</span>' : '';
     var tag = isLocked ? 'span' : 'a';
@@ -377,7 +428,7 @@
     <div class="lt-menu-overlay" id="ltMenuOverlay" onclick="ltCloseMenu()"></div>
     <div class="lt-side-menu" id="ltSideMenu">
       <div class="lt-menu-header">
-        <div class="lt-menu-brand"><img src="./logo.jpg.webp" alt="Le Terminal" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(127,184,232,.3);margin-right:8px;vertical-align:middle">Le Terminal <span>Hub</span></div>
+        <div class="lt-menu-brand"><img src="./logo-nav.webp" alt="Le Terminal" style="width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid rgba(127,184,232,.3);margin-right:8px;vertical-align:middle;">Le Terminal <span>Hub</span></div>
         <button class="lt-menu-close" onclick="ltCloseMenu()">✕</button>
       </div>
       <nav class="lt-menu-nav">
@@ -461,9 +512,13 @@
   var _ltRefreshing = null;
   function ltEnsureSession() {
     var token = localStorage.getItem('ta_token') || '';
+    if(!token) return Promise.resolve('');
+    // Refresh mutualisé global (single-flight) : si le garde-fou de app.html a
+    // défini window.ltRefreshToken, on l'utilise pour qu'il n'y ait JAMAIS deux
+    // refresh concurrents sur le même refresh token Supabase (usage unique).
+    if(typeof window.ltRefreshToken === 'function') return window.ltRefreshToken(false);
     var refresh = localStorage.getItem('ta_refresh') || '';
     var exp = parseInt(localStorage.getItem('ta_exp') || '0', 10);
-    if(!token) return Promise.resolve('');
     // Marge de 60s : on rafraîchit un peu avant l'expiration réelle.
     if(!refresh || (exp && Date.now() < exp - 60000)) return Promise.resolve(token);
     if(_ltRefreshing) return _ltRefreshing;
@@ -572,6 +627,8 @@
   }
 
   function _ltClearAllAccountData() {
+    // Sauvegarde la progression sur le compte AVANT d'effacer le token (sinon perdu).
+    try { if (window.ltFlushStats) window.ltFlushStats(); } catch (e) {}
     localStorage.removeItem('ta_token');
     localStorage.removeItem('ta_refresh');
     localStorage.removeItem('ta_exp');
@@ -583,6 +640,18 @@
     localStorage.removeItem('jnl_trades');
     localStorage.removeItem('lt_pseudo');
     localStorage.removeItem('lt_avatar');
+    // Flags d'onboarding : on les efface pour qu'un AUTRE compte soit réévalué
+    // contre le serveur (un questionnaire par compte, pas par appareil).
+    localStorage.removeItem('lt_survey');
+    localStorage.removeItem('lt_onboarded');
+    // Progression (temps par outil, objectifs…) : effacée en local car rattachée
+    // au COMPTE (serveur) ; rechargée au prochain login. Évite le mélange entre
+    // deux comptes sur le même navigateur.
+    localStorage.removeItem('lt_usage');
+    localStorage.removeItem('lt_goals');
+    localStorage.removeItem('jnl_notes');
+    localStorage.removeItem('eco_unlocked');
+    localStorage.removeItem('jnl_currency');
   }
 
   window.ltGlobalLogout = function() {
@@ -964,6 +1033,51 @@
     ltApplyI18n(_currentLang);
   }
 
+  // ── Sous-menus au survol dans le menu « Outils » (chrome desktop) ──
+  // Au survol d'un outil (Journal, Setup Analyzer, Calendrier, Patrimoine), un
+  // flyout propose « Présentation » + l'accès direct à l'outil. Injecté en JS pour
+  // s'appliquer sur toutes les pages sans toucher au HTML dupliqué de la nav.
+  function ltEnhanceToolsDropdown() {
+    var menu = document.querySelector('.lt-nav__menu');
+    if (!menu || menu.getAttribute('data-sub') === '1') return;
+    // Clés par nom de page propre (sans .html) ; cibles des liens en URLs propres.
+    var SUBS = {
+      'journal-presentation':    [['Présentation','Overview','/journal-presentation'], ['Ouvrir le journal','Open the journal','/journal']],
+      'analyzer-presentation':   [['Présentation','Overview','/analyzer-presentation'], ["Ouvrir l'analyseur",'Open the analyzer','/app']],
+      'calendrier-presentation': [['Présentation','Overview','/calendrier-presentation'], ['Ouvrir le calendrier','Open the calendar','/calendrier'], ['Édition du jour','Daily edition','/eco-edition']],
+      'patrimoine-presentation': [['Présentation','Overview','/patrimoine-presentation'], ['Portefeuille','Portfolio','/patrimoine']]
+    };
+    if (!document.getElementById('ltNavSubCss')) {
+      var st = document.createElement('style'); st.id = 'ltNavSubCss';
+      st.textContent =
+        '.lt-nav__subwrap{position:relative}'
+        + '.lt-nav__menuitem.has-sub .lt-nav__menutop::after{content:"\\203A";margin-left:8px;color:var(--text-muted);font-size:15px;line-height:1}'
+        + '.lt-nav__submenu{position:absolute;top:-8px;left:100%;margin-left:6px;min-width:232px;padding:8px;background:rgba(12,15,20,0.98);border:1px solid var(--border-subtle);border-radius:var(--r-lg,12px);box-shadow:var(--shadow-lg,0 24px 60px rgba(0,0,0,.6));display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateX(-6px);pointer-events:none;transition:opacity .18s var(--ease-out,ease),transform .18s var(--ease-out,ease),visibility 0s linear .18s;z-index:30}'
+        + '.lt-nav__submenu::before{content:"";position:absolute;top:0;left:-12px;width:12px;height:100%}'
+        + '.lt-nav__subwrap:hover .lt-nav__submenu{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .18s var(--ease-out,ease),transform .18s var(--ease-out,ease)}'
+        + '.lt-nav__subitem2{display:block;padding:9px 11px;border-radius:var(--r-md,8px);color:var(--text-body);text-decoration:none;font-family:var(--font-text,"Inter",sans-serif);font-size:13.5px;font-weight:500;transition:background .15s,color .15s}'
+        + '.lt-nav__subitem2:hover{background:var(--accent-glow-soft);color:var(--text-title)}';
+      document.head.appendChild(st);
+    }
+    var items = menu.querySelectorAll('.lt-nav__menuitem');
+    Array.prototype.forEach.call(items, function (a) {
+      var href = (a.getAttribute('href') || '').split('/').pop().replace(/\.html$/, '');
+      var sub = SUBS[href];
+      if (!sub) return;
+      var wrap = document.createElement('div'); wrap.className = 'lt-nav__subwrap';
+      a.parentNode.insertBefore(wrap, a);
+      a.classList.add('has-sub');
+      wrap.appendChild(a);
+      var fly = document.createElement('div'); fly.className = 'lt-nav__submenu';
+      fly.innerHTML = sub.map(function (s) {
+        return '<a class="lt-nav__subitem2" href="' + s[2] + '" data-en="' + s[1] + '">' + s[0] + '</a>';
+      }).join('');
+      wrap.appendChild(fly);
+    });
+    menu.setAttribute('data-sub', '1');
+  }
+  ltEnhanceToolsDropdown();
+
   // Init - run immediately and after checkSession completes
   window.ltRenderUserBar = ltRenderUserBar;
   ltSyncUser();
@@ -994,11 +1108,13 @@
       // mix-blend-mode:difference → le curseur s'inverse par rapport au fond,
       // donc toujours parfaitement visible (sombre, clair, image, graphique…).
       '#lt-cur-dot {',
-        'position:fixed;top:0;left:0;z-index:2147483647;pointer-events:none;',
-        'width:9px;height:9px;border-radius:50%;',
-        'background:#ffffff;mix-blend-mode:difference;',
+        'position:fixed;top:0;left:0;z-index:99999;pointer-events:none;',
+        'width:4px;height:4px;border-radius:50%;',
+        'background:#38B6FF;',
+        'box-shadow:0 0 4px 1px #38B6FF,0 0 9px 2px rgba(56,182,255,.45);',
+        // Perf : déplacement via transform (composité GPU) — left/top forcerait un layout par frame
         'transform:translate(-50%,-50%);',
-        'transition:width .15s,height .15s;',
+        'transition:width .2s,height .2s,background .2s;',
         'will-change:transform;',
       '}',
       '#lt-cur-ring {',
@@ -1072,158 +1188,23 @@
     // (un iframe qui prend le focus déclenche un blur du parent).
     document.addEventListener('mouseleave', enterIframe);
     document.addEventListener('mouseenter', leaveIframe);
-    document.addEventListener('mousemove', leaveIframe);
-    window.addEventListener('blur', function(){
-      // Si le focus part vers un iframe de la page → on masque le curseur custom.
-      if(document.activeElement && document.activeElement.tagName === 'IFRAME') enterIframe();
-    });
-    var s=document.createElement('style');
-    s.textContent=
-      'html,body,*{cursor:none!important}'+
-      '#lt-p{position:fixed;z-index:2147483647;pointer-events:none;'+
-      'width:9px;height:9px;border-radius:50%;'+
-      'background:#7FB8E8;'+
-      'box-shadow:0 0 7px 2px rgba(127,184,232,.7),0 0 16px 4px rgba(127,184,232,.35);'+
-      'transform:translate(-50%,-50%);transition:opacity .2s;}'+
-      '#lt-p.off{opacity:0}';
-    document.head.appendChild(s);
-    var el=document.createElement('div'); el.id='lt-p';
-    function mount(){ document.body.appendChild(el); }
-    document.body ? mount() : document.addEventListener('DOMContentLoaded',mount);
-    document.addEventListener('mousemove',function(e){ el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px'; });
-    document.addEventListener('mouseleave',function(){ el.classList.add('off'); });
-    document.addEventListener('mouseenter',function(){ el.classList.remove('off'); });
-  })();
+    // Fallback polling : si pas de mousemove pendant 200ms → dans un iframe
+    var lastMove = Date.now();
+    document.addEventListener('mousemove', function(){ lastMove = Date.now(); leaveIframe(); });
+    setInterval(function(){ if(Date.now() - lastMove > 200) enterIframe(); }, 100);
 
-  // ── BANNIÈRE COOKIES (toutes les pages, conformité RGPD) ──
-  (function(){
-    var KEY = 'lt_cookie_consent';
-    var existing;
-    try { existing = localStorage.getItem(KEY); } catch(e) { existing = null; }
-    if (existing === 'accepted' || existing === 'refused') return; // choix déjà fait
-
-    function inject(){
-      if (document.getElementById('ltCookieBar')) return;
-      var st = document.createElement('style');
-      st.textContent = [
-        '#ltCookieBar{position:fixed;left:0;right:0;bottom:0;z-index:100000;display:flex;justify-content:center;padding:16px;pointer-events:none;animation:ltCookieUp .4s ease}',
-        '@keyframes ltCookieUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}',
-        '#ltCookieBox{pointer-events:auto;max-width:680px;width:100%;background:rgba(16,20,27,.97);backdrop-filter:blur(18px);border:1px solid rgba(127,184,232,.25);border-radius:16px;padding:20px 22px;box-shadow:0 24px 60px rgba(0,0,0,.6);display:flex;flex-wrap:wrap;align-items:center;gap:16px}',
-        '#ltCookieBox .ltck-txt{flex:1;min-width:220px;font-family:\'Inter\',system-ui,sans-serif;font-size:13px;line-height:1.6;color:#C3CAD4}',
-        '#ltCookieBox .ltck-txt b{color:#F2F4F7;font-family:\'Inter\',system-ui,-apple-system,sans-serif;display:block;font-size:14px;margin-bottom:4px}',
-        '#ltCookieBox .ltck-txt a{color:#BFDCF5;text-decoration:underline}',
-        '#ltCookieBox .ltck-actions{display:flex;gap:10px;flex-shrink:0}',
-        '.ltck-btn{padding:10px 20px;border-radius:50px;font-family:\'Inter\',system-ui,-apple-system,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:1px solid transparent;transition:all .2s;white-space:nowrap}',
-        '.ltck-refuse{background:transparent;border-color:rgba(255,255,255,.18);color:#C3CAD4}',
-        '.ltck-refuse:hover{border-color:rgba(255,255,255,.4);color:#fff}',
-        '.ltck-accept{background:linear-gradient(135deg,#7FB8E8,#5A9BD4);color:#fff}',
-        '.ltck-accept:hover{opacity:.9}',
-        '@media(max-width:560px){#ltCookieBox{flex-direction:column;align-items:stretch}#ltCookieBox .ltck-actions{justify-content:stretch}.ltck-btn{flex:1;text-align:center}}'
-      ].join('');
-      document.head.appendChild(st);
-
-      var bar = document.createElement('div');
-      bar.id = 'ltCookieBar';
-      bar.innerHTML =
-        '<div id="ltCookieBox">'
-        + '<div class="ltck-txt"><b><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z"/><path d="M8.5 8.5h.01M15 9.5h.01M9.5 14h.01M14.5 14.5h.01"/></svg> Nous utilisons des cookies</b>'
-        + 'Le Terminal utilise des cookies pour assurer le bon fonctionnement du site (connexion, préférences) et mesurer son audience. '
-        + 'Vous pouvez accepter ou refuser les cookies non essentiels. '
-        + '<a href="./legal.html#cookies" style="color:#BFDCF5;text-decoration:underline">En savoir plus</a></div>'
-        + '<div class="ltck-actions">'
-        + '<button type="button" class="ltck-btn ltck-refuse" id="ltCookieRefuse">Refuser</button>'
-        + '<button type="button" class="ltck-btn ltck-accept" id="ltCookieAccept">Accepter</button>'
-        + '</div></div>';
-      document.body.appendChild(bar);
-
-      function choose(val){
-        try { localStorage.setItem(KEY, val); } catch(e) {}
-        bar.style.animation = 'ltCookieUp .3s ease reverse forwards';
-        setTimeout(function(){ if(bar.parentNode) bar.parentNode.removeChild(bar); }, 300);
-      }
-      document.getElementById('ltCookieAccept').addEventListener('click', function(){ choose('accepted'); });
-      document.getElementById('ltCookieRefuse').addEventListener('click', function(){ choose('refused'); });
+    // Perf : la boucle rAF ne tourne que pendant le mouvement — quand l'anneau
+    // a rattrapé le point, elle s'arrête (zéro travail souris immobile).
+    var looping = false;
+    function wakeLoop(){ if(!looping){ looping = true; requestAnimationFrame(loop); } }
+    function loop(){
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      if(Math.abs(mx - rx) < 0.1 && Math.abs(my - ry) < 0.1){ rx = mx; ry = my; looping = false; }
+      drawRing();
+      if(looping) requestAnimationFrame(loop);
     }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject);
-    } else {
-      inject();
-    }
-  })();
-
-  // ── INTERCEPTEUR GLOBAL : pages protégées sans connexion ──
-  (function(){
-    // Pages accessibles sans compte
-    var LT_FREE = {
-      '': true, 'index.html': true, 'landing.html': true,
-      'bubble.html': true, 'calculateur.html': true, 'mur-des-trades.html': true,
-      'tarifs.html': true, 'legal.html': true, 'avis.html': true,
-    };
-
-    function ltIsLoggedIn(){ return !!localStorage.getItem('ta_token'); }
-
-    function ltPageSeg(href){
-      if(!href) return '';
-      try {
-        var u = new URL(href, location.href);
-        if(u.origin !== location.origin) return null; // externe → ne pas bloquer
-        return u.pathname.split('/').pop() || 'index.html';
-      } catch(e){ return ''; }
-    }
-
-    // Récupère le token OAuth après retour Google (hash #access_token=...)
-    (function handleOAuth(){
-      var hash = window.location.hash;
-      if(!hash || hash.indexOf('access_token') === -1) return;
-      var params = new URLSearchParams(hash.slice(1));
-      var token = params.get('access_token');
-      if(!token || params.get('token_type') !== 'bearer') return;
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-      ltStoreSession({ access_token: token, refresh_token: params.get('refresh_token'), expires_in: params.get('expires_in') });
-      // Synchronisation COMPLÈTE avant toute redirection : Premium + photo + pseudo +
-      // nom à jour dès le retour de Google, sans clic ni rechargement supplémentaire.
-      ltSyncAccount().finally(function(){
-        var dest = sessionStorage.getItem('lt_gate_redirect');
-        sessionStorage.removeItem('lt_gate_redirect');
-        if(dest) window.location.replace(dest);
-        else { ltSyncUser(); ltRenderUserBar(); }
-      });
-    })();
-
-    document.addEventListener('click', function(e){
-      if(ltIsLoggedIn()) return;
-      var a = e.target.closest('a[href]');
-      if(!a) return;
-      var href = a.getAttribute('href');
-      if(!href || href.charAt(0) === '#') return; // ancre pure → libre
-      var seg = ltPageSeg(href);
-      if(seg === null) return; // lien externe
-      if(LT_FREE[seg]) return; // page libre
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Mémorise la destination pour la redirection post-connexion
-      try {
-        var abs = new URL(href, location.href).href;
-        sessionStorage.setItem('lt_gate_redirect', abs);
-      } catch(err){}
-
-      ltInjectAuthModal();
-      var el = document.getElementById('ltAuthOverlay');
-      if(el) { el.classList.add('show'); ltSwitchAuthTab('login'); }
-    }, true);
-
-    // Après connexion par e-mail, redirige si une destination était en attente
-    var _origDoAuth = window.ltDoAuth;
-    window.ltDoAuth = async function(){
-      await _origDoAuth.apply(this, arguments);
-      if(localStorage.getItem('ta_token')){
-        var dest = sessionStorage.getItem('lt_gate_redirect');
-        if(dest){ sessionStorage.removeItem('lt_gate_redirect'); window.location.href = dest; }
-      }
-    };
+    wakeLoop();
   })();
 
 })();

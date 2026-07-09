@@ -2,7 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mentions légales, CGU &amp; Politique de confidentialité — Le Terminal</title>
 <meta name="description" content="Conditions générales d'utilisation, mentions légales, politique de confidentialité et politique cookies de Le Terminal.">
 <style>
@@ -160,7 +165,10 @@
   .lg-footer a:hover { color: var(--accent); }
   .lg-footer__copy { margin-top: 16px; font-size: 12px; color: var(--border); }
 </style>
+<link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <link rel="stylesheet" href="./fonts.css">
+  <link rel="canonical" href="https://www.leterminal.net/legal">
 </head>
 <body>
 <a id="top"></a>
@@ -169,8 +177,8 @@
 <!-- CHROME -->
 <div class="lt-chrome" id="ltChrome">
   <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+    <a class="lt-nav__brand" href="/">
+      <span class="lt-nav__mark"><img src="./logo-nav.webp" alt="Le Terminal" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block;"></span>
       <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
     </a>
     <nav class="lt-nav__links">
@@ -179,29 +187,33 @@
           Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./index.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+          <a class="lt-nav__menuitem" href="/"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
+          <a class="lt-nav__menuitem" href="/journal-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
+          <a class="lt-nav__menuitem" href="/analyzer-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
+          <a class="lt-nav__menuitem" href="/patrimoine-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
+          <a class="lt-nav__menuitem" href="/calendrier-presentation"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+          <a class="lt-nav__menuitem" href="/bubble"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
+          <a class="lt-nav__menuitem" href="/calculateur"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
+          <a class="lt-nav__menuitem" href="/mur-des-trades"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
         </div>
       </div>
-      <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
-      <a href="./index.html#method" data-en="Method">Méthode</a>
-      <a href="./index.html#community" data-en="Community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
       <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
       <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="./tarifs.html"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
+</div>
 
+<main class="lg-wrap">
+  <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">Mentions légales, CGU &amp; Politique de confidentialité — Le Terminal</h1>
   <!-- ── TOC ── -->
   <nav class="lg-toc" aria-label="Sommaire">
     <p class="lg-toc__title">Sommaire</p>
@@ -315,9 +327,9 @@
       <h4>Processeur de paiement</h4>
       <p>Les paiements sont traités exclusivement par <strong>Whop</strong> (Whop Marketplace Inc., États-Unis), plateforme tierce sécurisée. L'éditeur de Le Terminal ne stocke ni ne traite directement vos données bancaires ou de carte de crédit. Les conditions d'utilisation de Whop s'appliquent conjointement aux présentes CGU pour tout ce qui concerne les transactions financières.</p>
       <h4>Renouvellement &amp; résiliation</h4>
-      <p>Les abonnements se renouvellent automatiquement à leur échéance. Vous pouvez annuler votre abonnement à tout moment depuis votre espace Whop. La résiliation prend effet à la fin de la période en cours déjà réglée ; aucun remboursement au prorata n'est accordé pour la période restante, sauf obligation légale contraire.</p>
-      <h4>Droit de rétractation</h4>
-      <p>Conformément à la directive européenne 2011/83/UE et à la réglementation maltaise applicable, vous disposez d'un droit de rétractation de <strong>14 jours</strong> à compter de la souscription pour les abonnements numériques, sous réserve que vous n'ayez pas commencé à utiliser le service. En accédant aux fonctionnalités Pro dès la souscription, vous reconnaissez expressément renoncer à ce droit de rétractation.</p>
+      <p>Les abonnements se renouvellent automatiquement à leur échéance. Vous pouvez annuler votre abonnement à tout moment depuis votre espace Whop. La résiliation prend effet à la fin de la période en cours déjà réglée.</p>
+      <h4>Absence de remboursement</h4>
+      <p>Aucun remboursement n'est accordé, quelle que soit la durée restante de l'abonnement. En souscrivant, vous reconnaissez expressément avoir pris connaissance de cette politique. Vous avez toutefois la possibilité d'annuler votre abonnement à tout moment afin de ne pas être prélevé lors du prochain renouvellement.</p>
       <h4>Litiges de facturation</h4>
       <p>Toute contestation relative à une facturation doit être adressée à <a href="mailto:leterminalapp@outlook.com">leterminalapp@outlook.com</a> dans un délai de 30 jours suivant la date du prélèvement contesté.</p>
     </div>
@@ -664,6 +676,9 @@
 </main>
 <script src="./cookies.js"></script>
 <script src="./onboarding.js"></script>
+<script src="./menu.js"></script>
 <script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>

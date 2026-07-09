@@ -2,7 +2,54 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<script>(function(){if((window.location.hash||'').indexOf('access_token')!==-1)return;var t=localStorage.getItem('ta_token');if(!t){window.location.replace('/tarifs.html');return;}document.documentElement.style.visibility='hidden';var _to=setTimeout(function(){window.location.replace('/tarifs.html');},9000);function chk(tok){fetch('/api/check-pro',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok}}).then(function(r){return r.json();}).then(function(d){clearTimeout(_to);if(d&&d.is_pro){localStorage.setItem('lt_pro','1');document.documentElement.style.visibility='';}else{localStorage.removeItem('lt_pro');window.location.replace('/tarifs.html');}}).catch(function(){clearTimeout(_to);window.location.replace('/tarifs.html');});}var rt=localStorage.getItem('ta_refresh'),exp=parseInt(localStorage.getItem('ta_exp')||'0',10);if(rt&&exp&&Date.now()>exp-60000){fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'refresh',refresh_token:rt})}).then(function(r){return r.json();}).then(function(d){if(d&&d.access_token){localStorage.setItem('ta_token',d.access_token);if(d.refresh_token)localStorage.setItem('ta_refresh',d.refresh_token);var ttl=parseInt(d.expires_in,10)||3600;localStorage.setItem('ta_exp',String(Date.now()+ttl*1000));chk(d.access_token);}else{chk(t);}}).catch(function(){chk(t);});}else{chk(t);}})();</script>
+<script>try{if(localStorage.getItem('lt_theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<script>(function(){if((window.location.hash||'').indexOf('access_token')!==-1)return;var t=localStorage.getItem('ta_token');if(!t){window.location.replace('/tarifs.html');return;}document.documentElement.style.visibility='hidden';var _to=setTimeout(function(){window.location.replace('/tarifs.html');},9000);function chk(tok){fetch('/api/check-pro',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok}}).then(function(r){return r.json();}).then(function(d){clearTimeout(_to);if(d&&d.is_pro){var wasCached=localStorage.getItem('lt_pro')==='1';localStorage.setItem('lt_pro','1');if(!wasCached){window.location.reload();}else{document.documentElement.style.visibility='';}}else{localStorage.removeItem('lt_pro');window.location.replace('/tarifs.html');}}).catch(function(){clearTimeout(_to);window.location.replace('/tarifs.html');});}var rt=localStorage.getItem('ta_refresh'),exp=parseInt(localStorage.getItem('ta_exp')||'0',10);if(rt&&exp&&Date.now()>exp-60000){fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'refresh',refresh_token:rt})}).then(function(r){return r.json();}).then(function(d){if(d&&d.access_token){localStorage.setItem('ta_token',d.access_token);if(d.refresh_token)localStorage.setItem('ta_refresh',d.refresh_token);var ttl=parseInt(d.expires_in,10)||3600;localStorage.setItem('ta_exp',String(Date.now()+ttl*1000));chk(d.access_token);}else{chk(t);}}).catch(function(){chk(t);});}else{chk(t);}})();</script>
+<script>(function(){
+if((window.location.hash||'').indexOf('access_token')!==-1)return;
+var t=localStorage.getItem('ta_token');
+if(!t){window.location.replace('/tarifs.html');return;}
+document.documentElement.style.visibility='hidden';
+window.ltRefreshToken=function(force){
+  var rt=localStorage.getItem('ta_refresh')||'';
+  var tok=localStorage.getItem('ta_token')||'';
+  var exp=parseInt(localStorage.getItem('ta_exp')||'0',10);
+  if(!rt)return Promise.resolve(tok);
+  if(!force&&exp&&Date.now()<exp-60000)return Promise.resolve(tok);
+  if(window.__ltRefreshPromise)return window.__ltRefreshPromise;
+  window.__ltRefreshPromise=fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'refresh',refresh_token:rt})})
+    .then(function(r){return r.json();})
+    .then(function(d){if(d&&d.access_token){localStorage.setItem('ta_token',d.access_token);if(d.refresh_token)localStorage.setItem('ta_refresh',d.refresh_token);var ttl=parseInt(d.expires_in,10)||3600;localStorage.setItem('ta_exp',String(Date.now()+ttl*1000));return d.access_token;}return tok;})
+    .catch(function(){return tok;})
+    .finally(function(){window.__ltRefreshPromise=null;});
+  return window.__ltRefreshPromise;
+};
+var _to=setTimeout(function(){document.documentElement.style.visibility='';},9000);
+function chk(tok){
+  fetch('/api/check-pro',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok}}).then(function(r){return r.json();}).then(function(d){
+    clearTimeout(_to);
+    if(d&&d.is_pro){
+      var wasCached=localStorage.getItem('lt_pro')==='1';
+      localStorage.setItem('lt_pro','1');
+      if(!wasCached){window.location.reload();}else{document.documentElement.style.visibility='';}
+    }else if(d&&d.token_invalid){
+      document.documentElement.style.visibility='';
+      if(localStorage.getItem('lt_pro')!=='1'){window.location.replace('/tarifs.html');}
+    }else{
+      localStorage.removeItem('lt_pro');
+      window.location.replace('/tarifs.html');
+    }
+  }).catch(function(){
+    clearTimeout(_to);
+    document.documentElement.style.visibility='';
+    if(localStorage.getItem('lt_pro')!=='1'){window.location.replace('/tarifs.html');}
+  });
+}
+window.ltRefreshToken(false).then(function(tok){chk(tok||t);});
+})();</script>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#7FB8E8">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,11 +57,12 @@
 <meta name="apple-mobile-web-app-title" content="Le Terminal">
 <link rel="apple-touch-icon" href="./logo.jpg.webp">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Setup Analyzer IA — Notez votre setup de trading | Le Terminal</title>
-<meta name="description" content="Uploadez votre graphique : l'IA évalue structure, zones clés et confluences (ICT, SMC, Price Action) et renvoie un score /100 en 30 s. Outil éducatif, pas un conseil.">
-<link rel="canonical" href="https://www.leterminal.net/app.html">
-<link rel="stylesheet" href="./fonts.css">
+<title>LE TERMINAL — Setup Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./design-system.css">
+<link rel="stylesheet" href="./theme-light.css">
 <style>#app>.topbar{display:none!important}#app{padding-top:var(--chrome-h,64px)}@media(min-width:761px){#app .analyzer-tabs{padding-left:74px}}</style>
 <style>
 
@@ -1097,78 +1145,89 @@ textarea { resize: none; height: 80px; line-height: 1.6; font-size: 12px; }
   <!-- ============ GLOBAL CHROME : NAV ============ -->
   <div class="lt-chrome" id="ltChrome">
     <header class="lt-nav">
-    <a class="lt-nav__brand" href="./index.html">
-      <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
-      <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
-    </a>
-    <nav class="lt-nav__links">
-      <div class="lt-nav__drop" id="ltDrop">
-        <button class="lt-nav__droptrigger" aria-expanded="false" data-en="Tools <span class='lt-nav__caret'><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg></span>">
-          Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="lt-nav__menu">
-          <a class="lt-nav__menuitem" href="./index.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel" data-en="Home">Accueil</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Overview">Vue d'ensemble</span></a>
-          <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Calendar · P&amp;L · AI coach">Calendrier · P&amp;L · IA coach</span></a>
-          <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="AI score for your setup">Score IA de votre setup</span></a>
-          <a class="lt-nav__menuitem" href="./patrimoine-presentation.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Patrimoine</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Long-term portfolio">Portefeuille long terme</span></a>
-          <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
-          <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Live capital flows">Flux de capitaux en direct</span></a>
-          <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Position · risk · R:R">Position · risque · R:R</span></a>
-          <a class="lt-nav__menuitem" href="./mur-des-trades.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Mur des Trades</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc" data-en="Community-shared trades">Trades partagés par la communauté</span></a>
+      <a class="lt-nav__brand" href="./index.html">
+        <span class="lt-nav__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7v10a1 1 0 0 0 1 1h6"/><path d="m13 18 3-6 3 6"/><path d="M14.2 15.5h3.6"/></svg></span>
+        <span class="lt-nav__word">LE&nbsp;TERMINAL</span>
+      </a>
+      <nav class="lt-nav__links">
+        <div class="lt-nav__drop">
+          <button class="lt-nav__droptrigger">Outils <span class="lt-nav__caret"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+          <div class="lt-nav__menu">
+            <a class="lt-nav__menuitem" href="./journal.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Journal de Trading</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Calendrier · P&amp;L · IA coach</span></a>
+            <a class="lt-nav__menuitem" href="./calendrier.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calendrier Éco</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">NFP · CPI · FOMC</span></a>
+            <a class="lt-nav__menuitem" href="./app.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Setup Analyzer</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Score IA de ton setup</span></a>
+            <a class="lt-nav__menuitem" href="./bubble.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Bubble Map</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Flux de capitaux en direct</span></a>
+            <a class="lt-nav__menuitem" href="./calculateur.html"><span class="lt-nav__menutop"><span class="lt-nav__menulabel">Calculateur de Pips</span><span class="lt-dot"></span></span><span class="lt-nav__menudesc">Position · risque · R:R</span></a>
+          </div>
         </div>
+        <a href="./index.html#method">Méthode</a>
+        <a href="./index.html#community">Communauté</a>
+      </nav>
+      <div class="lt-nav__actions">
+        <div class="lang-switch" style="display:inline-flex;gap:2px">
+          <button class="lang-btn on" onclick="setLang('fr')">FR</button>
+          <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+        <button id="themeToggle" onclick="toggleTheme()" class="lt-nav__pill" title="Thème clair/sombre">🌙</button>
+        <div class="user-chip" id="userChip" onclick="openHistory()">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <span class="user-name" id="userName">Mon compte</span>
+        </div>
+        <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="openAuth()" style="display:none">Connexion</button>
       </div>
-      <a href="./tarifs.html" data-en="Pricing">Tarifs</a>
-      <a href="./index.html#method" data-en="Method">Méthode</a>
-      <a href="./index.html#community" data-en="Community">Communauté</a>
-      <a href="./avis.html" data-en="Reviews">Avis</a>
+      <a href="/tarifs" data-en="Pricing">Tarifs</a>
+      <a href="/#method" data-en="Method">Méthode</a>
+      <a href="/#community" data-en="Community">Communauté</a>
+      <a href="/avis" data-en="Reviews">Avis</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="lt-nav__actions">
       <span class="lt-nav__pill" id="ltLangPill" title="Changer de langue">FR</span>
       <button class="lt-btn lt-btn--ghost lt-btn--sm" id="loginBtn" onclick="window.ltOpenLogin?ltOpenLogin():void(0)" data-en="Sign in">Connexion</button>
       <div id="ltUserBar"></div>
-      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="./tarifs.html"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
+      <a class="lt-btn lt-btn--primary lt-btn--sm lt-nav__cta" href="/tarifs"><svg class="lt-nav__cta-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.6 9.5H5.6z"/></svg><span class="lt-nav__cta-txt" data-en="Premium Access">Accès Premium</span></a>
     </div>
   </header>
   </div>
 
   <!-- ============ LEFT DOCK ============ -->
   <nav class="lt-dock" aria-label="Pages">
-  <a class="lt-dock__item" href="./index.html">
+  <a class="lt-dock__item" href="/">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
     <span class="lt-dock__lbl" data-en="Home">Accueil</span>
     <span class="lt-dock__tip" data-en="Home">Accueil</span>
   </a>
-  <a class="lt-dock__item" href="./journal.html">
+  <a class="lt-dock__item" href="/journal">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v18M13 8h3M13 12h3"/></svg>
     <span class="lt-dock__lbl">Journal</span>
     <span class="lt-dock__tip">Journal de Trading</span>
   </a>
-  <a class="lt-dock__item is-active" href="./app.html">
+  <a class="lt-dock__item is-active" href="/app">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 14l3-3 2 2 4-4"/></svg>
     <span class="lt-dock__lbl">Analyzer</span>
     <span class="lt-dock__tip">Setup Analyzer</span>
   </a>
-  <a class="lt-dock__item" href="./patrimoine-presentation.html">
+  <a class="lt-dock__item" href="/patrimoine-presentation">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>
     <span class="lt-dock__lbl">Patrim.</span>
     <span class="lt-dock__tip">Patrimoine</span>
   </a>
-  <a class="lt-dock__item" href="./calendrier.html">
+  <a class="lt-dock__item" href="/calendrier">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="1.5"/><path d="M4 9h16M8 3v4M16 3v4M9 14h2"/></svg>
     <span class="lt-dock__lbl">Éco</span>
     <span class="lt-dock__tip">Calendrier Éco</span>
   </a>
-  <a class="lt-dock__item" href="./bubble.html">
+  <a class="lt-dock__item" href="/bubble">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="17" cy="15" r="3"/><circle cx="16" cy="6" r="2"/></svg>
     <span class="lt-dock__lbl">Bubble</span>
     <span class="lt-dock__tip">Bubble Map</span>
   </a>
-  <a class="lt-dock__item" href="./calculateur.html">
+  <a class="lt-dock__item" href="/calculateur">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h6"/></svg>
     <span class="lt-dock__lbl">Pips</span>
     <span class="lt-dock__tip">Calculateur de Pips</span>
   </a>
-  <a class="lt-dock__item" href="./mur-des-trades.html">
+  <a class="lt-dock__item" href="/mur-des-trades">
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v1.5A3 3 0 0 0 6 10.5M19 6h2v1.5a3 3 0 0 1-3 3"/></svg>
     <span class="lt-dock__lbl">Trades</span>
     <span class="lt-dock__tip">Mur des Trades</span>
@@ -1402,7 +1461,7 @@ textarea { resize: none; height: 80px; line-height: 1.6; font-size: 12px; }
       </div>
       <div class="actions">
         <button class="act-btn" onclick="showForm()" id="act-new">↩ Nouvelle analyse</button>
-        <button class="act-btn accent" onclick="window.location.href='./tarifs.html'" id="act-pro">★ Passer PRO</button>
+        <button class="act-btn accent" onclick="window.location.href='/tarifs'" id="act-pro">★ Passer PRO</button>
         <button class="act-btn" onclick="deleteLastAnalysis()" id="act-del" style="display:none;border-color:rgba(240,100,122,.3);color:#F0647A"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
       </div>
 
@@ -1880,8 +1939,8 @@ async function analyze(){
   const conf=document.getElementById('conf').value.trim();
   // Login not required to analyze
   if(!pair||!entry||!tp||!sl||!dir){alert(c().alertFill);return}
-  if(!canGo()){window.location.href="./index.html";return}
-  if(!authToken){ window.location.href='./index.html'; return; }
+  if(!canGo()){window.location.href="/";return}
+  if(!authToken){ window.location.href='/'; return; }
   const rrv=calcRR();
   const steps=c().steps; let si=0;
   showLoad();
@@ -1924,7 +1983,7 @@ Détecte le niveau du trader à partir de la richesse des informations fournies,
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken},
       body:JSON.stringify({system:c().sys,messages:[{role:'user',content}],kind:'analyze'})
     });
-    if(res.status===401){ clearInterval(iv); showForm(); window.location.href='./index.html'; return; }
+    if(res.status===401){ clearInterval(iv); showForm(); window.location.href='/'; return; }
     if(!res.ok){const e=await res.json().catch(()=>({}));const msg=typeof e.error==='string'?e.error:(e.error?.message||'Erreur '+res.status);throw new Error(msg);}
     clearInterval(iv);
     const data=await res.json();
@@ -2269,7 +2328,7 @@ async function doAuth(){
   try{
     var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:authMode,email,password})});
     var data=await res.json();
-    if(data.access_token){authToken=data.access_token;currentUser=data.user||{email};localStorage.setItem('ta_token',authToken);localStorage.setItem('ta_email',(data.user&&data.user.email)||email||'');closeAuth();await checkProStatus();updateUserUI();loadHistory();}
+    if(data.access_token){authToken=data.access_token;currentUser=data.user||{email};localStorage.setItem('ta_token',authToken);localStorage.setItem('ta_email',(data.user&&data.user.email)||email||'');if(data.refresh_token)localStorage.setItem('ta_refresh',data.refresh_token);if(data.expires_in)localStorage.setItem('ta_exp',String(Date.now()+parseInt(data.expires_in,10)*1000));closeAuth();await checkProStatus();updateUserUI();loadHistory();}
     else if(data.id){errEl.style.color='var(--green)';errEl.textContent='Compte créé ! Vérifiez votre email.';}
     else errEl.textContent=data.error_description||data.msg||data.message||'Erreur';
   }catch(e){errEl.textContent='Erreur réseau';}
@@ -2909,17 +2968,58 @@ window.saveRR=saveRR;
 window.saveNotes=saveNotes;
 window.requestIAFeedback=requestIAFeedback;
 
+// Refresh mutualisé : délègue au single-flight global window.ltRefreshToken
+// (défini par le garde-fou en tête de page) pour ne JAMAIS lancer deux refresh
+// concurrents sur le même refresh token Supabase (à usage unique — c'était la
+// cause de la perte de Premium au retour sur le site). Renvoie true si un
+// nouveau token a été obtenu.
+async function _refreshSession(){
+  if(!localStorage.getItem('ta_refresh')) return false;
+  var before=localStorage.getItem('ta_token');
+  var tok;
+  if(typeof window.ltRefreshToken==='function'){
+    tok=await window.ltRefreshToken(true);
+  }else{
+    try{
+      var rr=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'refresh',refresh_token:localStorage.getItem('ta_refresh')})});
+      var rd=await rr.json();
+      if(rd&&rd.access_token){
+        localStorage.setItem('ta_token',rd.access_token);
+        if(rd.refresh_token)localStorage.setItem('ta_refresh',rd.refresh_token);
+        if(rd.expires_in)localStorage.setItem('ta_exp',String(Date.now()+parseInt(rd.expires_in,10)*1000));
+        tok=rd.access_token;
+      }
+    }catch(e){}
+  }
+  authToken=localStorage.getItem('ta_token')||tok||authToken;
+  return !!tok && tok!==before;
+}
+window._refreshSession=_refreshSession;
+
 async function checkSession(){
   var token=localStorage.getItem('ta_token');
-  if(!token){window.location.href='./index.html?paywall=1';return;}
+  if(!token){window.location.href='/?paywall=1';return;}
   // Restore session optimistically from token immediately
   authToken=token;
   var savedEmail=localStorage.getItem('ta_email')||'';
   currentUser={email:savedEmail};
   updateUserUI();
+  // Rafraîchir le token de façon proactive s'il est expiré ou sur le point de l'être.
+  // Évite l'éjection en gratuit au retour sur le site après >1h (token périmé).
+  var _exp=parseInt(localStorage.getItem('ta_exp')||'0',10);
+  if(localStorage.getItem('ta_refresh') && (!_exp || Date.now() > _exp - 60000)){
+    if(await _refreshSession()) token=authToken;
+  }
   try{
-    var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'user',token})});
+    var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'user',token:token})});
     var data=await res.json();
+    // Token invalide/expiré → tenter un refresh silencieux puis réessayer UNE fois,
+    // avant toute redirection vers le gratuit.
+    if(!data.id && await _refreshSession()){
+      token=authToken;
+      res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'user',token:token})});
+      data=await res.json();
+    }
     if(data.id){
       currentUser=data;
       localStorage.setItem('ta_email', data.email||'');
@@ -2932,16 +3032,34 @@ async function checkSession(){
       document.documentElement.style.visibility='';
       updateUserUI();loadHistory();
     } else {
-      if(data.error){
-        authToken=null;currentUser=null;
-        localStorage.removeItem('ta_token');
-        localStorage.removeItem('ta_email');
-        window.location.replace('/tarifs.html');
+      // Token mort ET refresh impossible (cas le plus courant : session ouverte
+      // AVANT l'ajout du refresh token). On NE rétrograde JAMAIS un compte déjà
+      // confirmé Premium : on garde l'accès via le cache lt_pro et on retente une
+      // revérification en arrière-plan (sans bloquer ni rediriger).
+      if(localStorage.getItem('lt_pro')==='1'){
+        isPro=true;
+        document.documentElement.style.visibility='';
+        updateUserUI();loadHistory();
+        // Tentative silencieuse de remise à niveau du token, plus tard, si possible.
+        setTimeout(function(){ _refreshSession().then(function(ok){ if(ok) checkProStatus(); }); }, 1500);
         return;
       }
+      // Jamais confirmé Premium → vraie session expirée : on nettoie et on redirige.
+      authToken=null;currentUser=null;
+      localStorage.removeItem('ta_token');
+      localStorage.removeItem('ta_email');
+      window.location.replace('/tarifs.html');
+      return;
     }
   }catch(e){
-    // Network error — impossible de vérifier, rediriger par sécurité
+    // Erreur réseau — ne pas déconnecter brutalement : si le statut PRO était en cache,
+    // laisser l'utilisateur entrer (checkProStatus retentera). Sinon rediriger.
+    if(localStorage.getItem('lt_pro')==='1'){
+      isPro=true;
+      document.documentElement.style.visibility='';
+      updateUserUI();loadHistory();
+      return;
+    }
     window.location.replace('/tarifs.html');
     return;
   }
@@ -2949,21 +3067,34 @@ async function checkSession(){
 
 async function checkProStatus(){
   if(!authToken) return;
-  try{
+  async function _hit(){
     var controller=new AbortController();
     var _to=setTimeout(function(){controller.abort();},6000);
-    var res=await fetch('/api/check-pro',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken},
-      signal:controller.signal
-    });
-    clearTimeout(_to);
-    var data=await res.json();
-    if(data.is_pro){
-      isPro=true;
-      localStorage.setItem('lt_pro','1');
-    }
-  }catch(e){ }
+    try{
+      var res=await fetch('/api/check-pro',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken},
+        signal:controller.signal
+      });
+      clearTimeout(_to);
+      return await res.json();
+    }catch(e){ clearTimeout(_to); return null; }
+  }
+  var data=await _hit();
+  // Token expiré → refresh silencieux mutualisé puis nouvelle tentative.
+  if(data && data.token_invalid && await _refreshSession()){
+    data=await _hit();
+  }
+  if(data && data.is_pro){
+    isPro=true;
+    localStorage.setItem('lt_pro','1');
+  } else if(data && !data.token_invalid && data.is_pro===false){
+    // Réponse autoritaire (token valide) : l'utilisateur n'est PAS pro → MAJ du cache.
+    isPro=false;
+    localStorage.removeItem('lt_pro');
+  }
+  // Sinon (réseau KO / token toujours invalide) : on NE touche PAS au cache lt_pro,
+  // pour ne pas rétrograder un compte pro à cause d'un échec transitoire.
 }
 var historyData=[];
 var _deletedIds = new Set();
@@ -3526,6 +3657,9 @@ window.doGoogleAuth = doGoogleAuth;
   // Authenticate
   authToken = accessToken;
   localStorage.setItem('ta_token', accessToken);
+  var _rt=params.get('refresh_token');var _ei=params.get('expires_in');
+  if(_rt)localStorage.setItem('ta_refresh',_rt);
+  if(_ei)localStorage.setItem('ta_exp',String(Date.now()+parseInt(_ei,10)*1000));
   fetch('/api/auth', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -4119,23 +4253,23 @@ function quickSetResult(result){
     <button class="side-menu-close" onclick="closeSideMenu()">✕</button>
   </div>
   <nav class="side-menu-nav">
-    <a class="side-nav-item" href="./index.html" style="text-decoration:none">
+    <a class="side-nav-item" href="/" style="text-decoration:none">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg></span> Dashboard
     </a>
     <div class="side-nav-divider"></div>
-    <a class="side-nav-item" href="./journal.html" style="text-decoration:none">
+    <a class="side-nav-item" href="/journal" style="text-decoration:none">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span> Journal de Trading
     </a>
-    <a class="side-nav-item" href="./calendrier.html" style="text-decoration:none;opacity:.5">
+    <a class="side-nav-item" href="/calendrier" style="text-decoration:none;opacity:.5">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Calendrier Éco <span style="font-size:9px;color:var(--text3);margin-left:auto">Bientôt</span>
     </a>
-    <a class="side-nav-item" href="./app.html" style="text-decoration:none;background:rgba(127,184,232,.1);color:var(--v2)">
+    <a class="side-nav-item" href="/app" style="text-decoration:none;background:rgba(127,184,232,.1);color:var(--v2)">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Setup Analyzer
     </a>
-    <a class="side-nav-item" href="./bubble.html" style="text-decoration:none;opacity:.5">
+    <a class="side-nav-item" href="/bubble" style="text-decoration:none;opacity:.5">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="9" cy="13" r="6"/><circle cx="18" cy="7" r="3"/><circle cx="17.5" cy="17.5" r="2"/></svg></span> Bubble Map <span style="font-size:9px;color:var(--text3);margin-left:auto">Bientôt</span>
     </a>
-    <a class="side-nav-item" href="./calculateur.html" style="text-decoration:none;opacity:.5">
+    <a class="side-nav-item" href="/calculateur" style="text-decoration:none;opacity:.5">
       <span class="nav-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="18"/><line x1="8" y1="18" x2="12" y2="18"/></svg></span> Calculateur de Pips <span style="font-size:9px;color:var(--text3);margin-left:auto">Bientôt</span>
     </a>
   </nav>
@@ -4221,5 +4355,7 @@ function quickSetResult(result){
 <script src="./cookies.js"></script>
 <script src="./onboarding.js"></script>
 <script src="./lang.js"></script>
+<script src="./theme.js"></script>
+<script src="./tracker.js"></script>
 </body>
 </html>
